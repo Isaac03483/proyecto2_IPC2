@@ -1,0 +1,14 @@
+com/ameri/object/enums/AdsStatus.class
+com/ameri/other/Constant.class
+com/ameri/database/Connector.class
+com/ameri/object/user/Manager.class
+com/ameri/object/user/editor/Editor.class
+com/ameri/object/enums/JournalSuscription.class
+com/ameri/object/user/editor/EditorTag.class
+com/ameri/object/enums/SuscriptionStatus.class
+com/ameri/object/enums/ManagerStatus.class
+com/ameri/object/enums/JournalStatus.class
+com/ameri/object/enums/JournalLike.class
+com/ameri/object/enums/PaymentEnum.class
+com/ameri/object/enums/SuscriptionLike.class
+com/ameri/object/enums/JournalComment.class

@@ -1,0 +1,14 @@
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/user/Manager.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/SuscriptionLike.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/JournalComment.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/JournalLike.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/ManagerStatus.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/SuscriptionStatus.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/user/editor/Editor.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/PaymentEnum.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/database/Connector.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/AdsStatus.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/user/editor/EditorTag.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/JournalSuscription.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/other/Constant.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/object/enums/JournalStatus.java

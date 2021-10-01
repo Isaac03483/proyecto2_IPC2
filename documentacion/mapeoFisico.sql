@@ -21,7 +21,9 @@ CREATE TABLE etiqueta_editor (
 
     nombre_editor VARCHAR(20) NOT NULL,
     nombre_etiqueta VARCHAR(30) NOT NULL,
-    PRIMARY KEY(nombre_editor, nombre_etiqueta)
+    PRIMARY KEY(nombre_editor, nombre_etiqueta),
+    CONSTRAINT etiqueta_editor_fk FOREIGN KEY (nombre_editor)
+    REFERENCES editor(nombre_editor)
 );
 
 CREATE TABLE categoria (
@@ -44,14 +46,19 @@ CREATE TABLE revista(
     costo_suscripcion DECIMAL(7,2) NOT NULL,
     like_revista ENUM('si','no') NOT NULL,
     comentario ENUM('si','no') NOT NULL,
-    suscripcion ENUM('si','no') NOT NULL
+    suscripcion ENUM('si','no') NOT NULL,
+    CONSTRAINT revista_editor_fk FOREIGN KEY (nombre_editor)
+    REFERENCES editor(nombre_editor)
 );
 
 CREATE TABLE etiqueta_revista(
 
-    nombre_revista VARCHAR(35) NOT NULL,
+    registro revista VARCHAR(35) NOT NULL,
     nombre_etiqueta VARCHAR(30) NOT NULL,
-    PRIMARY KEY (nombre_revista, nombre_etiqueta)
+    PRIMARY KEY (registro_revista, nombre_etiqueta),
+    CONSTRAINT etiqueta_revista_fk FOREIGN KEY (registro_revista)
+    REFERENCES revista(registro_revista)
+
 );
 
 CREATE TABLE suscripcion(
@@ -64,7 +71,11 @@ CREATE TABLE suscripcion(
     fecha_registro DATE NOT NULL,
     estado_suscripcion ENUM('vigente','cancelada') NOT NULL,
     like_suscripcion ENUM('si','no') NOT NULL,
-    PRIMARY KEY(registro_suscripcion,nombre_suscriptor,registro_revista)
+    PRIMARY KEY(registro_suscripcion,nombre_suscriptor,registro_revista),
+    CONSTRAINT nombre_suscriptor_fk FOREIGN KEY (nombre_suscriptor)
+    REFERENCES editor(nombre_editor),
+    CONSTRAINT registro_revista_fk FOREIGN KEY (registro_revista)
+    REFERENCES revista(registro_revista)
 );
 
 CREATE TABLE cuenta_editor(
@@ -76,7 +87,9 @@ CREATE TABLE cuenta_editor(
     total_pagar DECIMAL(7,2) NOT NULL,
     costo_descuento DECIMAL(7,2) NOT NULL,
     ganancia DECIMAL(7,2) NOT NULL,
-    fecha_pago DATE NOT NULL
+    fecha_pago DATE NOT NULL,
+    CONSTRAINT cuenta_editor_fk FOREIGN KEY (nombre_editor)
+    REFERENCES editor(nombre_editor)
 );
 
 CREATE TABLE comentario(
@@ -84,7 +97,8 @@ CREATE TABLE comentario(
     registro_revista INT NOT NULL,
     nombre_suscriptor VARCHAR(20) NOT NULL,
     texto VARCHAR(200) NOT NULL,
-    fecha_comentario DATE NOT NULL
+    fecha_comentario DATE NOT NULL,
+    
 );
 
 CREATE TABLE administrador(
@@ -127,5 +141,7 @@ CREATE TABLE etiqueta_anuncio(
     registro_anuncio INT NOT NULL PRIMARY KEY,
     nombre_anuncio VARCHAR(30) NOT NULL,
     nombre_etiqueta VARCHAR(30) NOT NULL
+    CONSTRAINT registro_anuncio_fk FOREIGN KEY (registro_anuncio)
+    REFERENCES anuncio(registro_anuncio)
 );
 

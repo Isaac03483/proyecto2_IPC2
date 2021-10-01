@@ -5,3 +5,5 @@
 ### FASE 1:
 
 toda la información de la fase 1 se encontrará en la rama "ramaDoc"
+
+### FASE 2 ITERACIÓN 1:
