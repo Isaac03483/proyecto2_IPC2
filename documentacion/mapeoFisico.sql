@@ -6,14 +6,21 @@ GRANT ALL PRIVILEGES ON revista.* TO 'usuario1'@'localhost';
 
 USE revista;
 
-CREATE TABLE editor(
+CREATE TABLE usuario(
+    nombre_usuario VARCHAR(20) PRIMARY KEY NOT NULL,
+    password VARCHAR (20) NOT NULL,
+    tipo ENUM('user','admin')
+);
+
+CREATE TABLE perfil(
 
     nombre_editor VARCHAR(20) PRIMARY KEY NOT NULL,
-    password_editor VARCHAR(20) NOT NULL,
     foto BLOB NOT NULL,
     hobbie VARCHAR(150) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
-    gustos VARCHAR(150) NOT NULL
+    gustos VARCHAR(150) NOT NULL,
+    CONSTRAINT perfil_usuario_fk FOREIGN KEY (nombre_editor)
+    REFERENCES usuario(nombre_usuario)
 
 );
 
@@ -23,7 +30,7 @@ CREATE TABLE etiqueta_editor (
     nombre_etiqueta VARCHAR(30) NOT NULL,
     PRIMARY KEY(nombre_editor, nombre_etiqueta),
     CONSTRAINT etiqueta_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES editor(nombre_editor)
+    REFERENCES perfil(nombre_editor)
 );
 
 CREATE TABLE categoria (
@@ -38,22 +45,28 @@ CREATE TABLE revista(
     archivo MEDIUMBLOB NOT NULL,
     fecha_publicacion DATE NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
+    categoria VARCHAR(30) NOT NULL,
+    costo_suscripcion DECIMAL(7,2) NOT NULL,
+    CONSTRAINT revista_editor_fk FOREIGN KEY (nombre_editor)
+    REFERENCES perfil(nombre_editor)
+);
+
+CREATE TABLE caracteristica_revista(
+    registro_revista INT NOT NULL PRIMARY KEY,
     fecha_aceptacion DATE NOT NULL,
     estado_revista ENUM('aceptada','en espera') NOT NULL,
     costo_por_dia DECIMAL(7,2) NOT NULL,
     fecha_modificacion_cpd DATE NOT NULL,
-    categoria VARCHAR(30) NOT NULL,
-    costo_suscripcion DECIMAL(7,2) NOT NULL,
     like_revista ENUM('si','no') NOT NULL,
     comentario ENUM('si','no') NOT NULL,
     suscripcion ENUM('si','no') NOT NULL,
-    CONSTRAINT revista_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES editor(nombre_editor)
+    CONSTRAINT caracteristica_revista_fk FOREIGN KEY (registro_revista)
+    REFERENCES revista(registro_revista)
 );
 
 CREATE TABLE etiqueta_revista(
 
-    registro revista VARCHAR(35) NOT NULL,
+    registro_revista INT NOT NULL,
     nombre_etiqueta VARCHAR(30) NOT NULL,
     PRIMARY KEY (registro_revista, nombre_etiqueta),
     CONSTRAINT etiqueta_revista_fk FOREIGN KEY (registro_revista)
@@ -73,7 +86,7 @@ CREATE TABLE suscripcion(
     like_suscripcion ENUM('si','no') NOT NULL,
     PRIMARY KEY(registro_suscripcion,nombre_suscriptor,registro_revista),
     CONSTRAINT nombre_suscriptor_fk FOREIGN KEY (nombre_suscriptor)
-    REFERENCES editor(nombre_editor),
+    REFERENCES perfil(nombre_editor),
     CONSTRAINT registro_revista_fk FOREIGN KEY (registro_revista)
     REFERENCES revista(registro_revista)
 );
@@ -89,7 +102,7 @@ CREATE TABLE cuenta_editor(
     ganancia DECIMAL(7,2) NOT NULL,
     fecha_pago DATE NOT NULL,
     CONSTRAINT cuenta_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES editor(nombre_editor)
+    REFERENCES perfil(nombre_editor)
 );
 
 CREATE TABLE comentario(
@@ -97,15 +110,16 @@ CREATE TABLE comentario(
     registro_revista INT NOT NULL,
     nombre_suscriptor VARCHAR(20) NOT NULL,
     texto VARCHAR(200) NOT NULL,
-    fecha_comentario DATE NOT NULL,
+    fecha_comentario DATE NOT NULL
     
 );
 
 CREATE TABLE administrador(
 
-    nombre_administrador VARCHAR(30) NOT NULL PRIMARY KEY,
-    password_administrador VARCHAR(20) NOT NULL,
-    estado_administrador ENUM('vigente', 'cancelado') NOT NULL
+    nombre_usuario VARCHAR(30) NOT NULL PRIMARY KEY,
+    estado_administrador ENUM('vigente', 'cancelado') NOT NULL,
+    CONSTRAINT usuario_administrador_fk FOREIGN KEY (nombre_usuario)
+    REFERENCES usuario(nombre_usuario)
 );
 
 CREATE TABLE porcentaje_impuesto(
@@ -127,20 +141,22 @@ CREATE TABLE anuncio(
     nombre_anuncio VARCHAR(30) NOT NULL,
     nombre_anunciante VARCHAR(30) NOT NULL,
     texto_anuncio  VARCHAR(50) NOT NULL,
-    contenido_anuncio VARCHAR(50) NOT NULL,
+    contenido_anuncio VARCHAR(50),
     cantidad_apariciones INT DEFAULT 0,
     total_pagar DECIMAL(7,2) NOT NULL,
     estado_anuncio ENUM('activo', 'inactivo') NOT NULL,
     url_anuncio VARCHAR(100) DEFAULT ' ',
     fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL
+    fecha_fin DATE NOT NULL,
+    CONSTRAINT tipo_anuncio_fk FOREIGN KEY (tipo_anuncio)
+    REFERENCES tipo_anuncio(nombre_tipo)
 );
 
 CREATE TABLE etiqueta_anuncio(
 
     registro_anuncio INT NOT NULL PRIMARY KEY,
     nombre_anuncio VARCHAR(30) NOT NULL,
-    nombre_etiqueta VARCHAR(30) NOT NULL
+    nombre_etiqueta VARCHAR(30) NOT NULL,
     CONSTRAINT registro_anuncio_fk FOREIGN KEY (registro_anuncio)
     REFERENCES anuncio(registro_anuncio)
 );

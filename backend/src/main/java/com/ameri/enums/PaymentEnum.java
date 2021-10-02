@@ -1,4 +1,4 @@
-package com.ameri.object.enums;
+package com.ameri.enums;
 
 public enum PaymentEnum {
 

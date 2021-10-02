@@ -1,28 +1,24 @@
 package com.ameri.object.user.manager;
 
-import com.ameri.object.enums.ManagerStatus;
+import com.ameri.enums.ManagerStatus;
 
 public class Manager {
 
-    private String managerName;
-    private String managerPassword;
-    private ManagerStatus managerStatus;
+    private final String managerName;
+    private final ManagerStatus managerStatus;
 
-    public Manager(String managerName, String managerPassword) {
+    public Manager(String managerName) {
         this.managerName = managerName;
-        this.managerPassword = managerPassword;
         managerStatus = ManagerStatus.VIGENTE;
+    }
+
+    public Manager(String managerName, ManagerStatus managerStatus) {
+        this.managerName = managerName;
+        this.managerStatus = managerStatus;
     }
 
     public String getManagerName() {return managerName;}
 
-    public String getManagerPassword() {return managerPassword;}
-
     public ManagerStatus getManagerStatus() {return managerStatus;}
 
-    public void setManagerName(String managerName) {this.managerName = managerName;}
-
-    public void setManagerPassword(String managerPassword) {this.managerPassword = managerPassword;}
-
-    public void setManagerStatus(ManagerStatus managerStatus) {this.managerStatus = managerStatus;}
 }

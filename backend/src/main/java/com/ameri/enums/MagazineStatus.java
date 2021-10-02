@@ -1,19 +1,19 @@
-package com.ameri.object.enums;
+package com.ameri.enums;
 
-public enum JournalStatus {
+public enum MagazineStatus {
 
     ACEPTADA("aceptada"),
     ENESPERA("en espera");
 
     private final String status;
 
-    JournalStatus(String status){
+    MagazineStatus(String status){
         this.status = status;
     }
 
     public String getStatus(){return this.status;}
 
-    public static JournalStatus value(String string){
+    public static MagazineStatus value(String string){
         if(string.equalsIgnoreCase(ACEPTADA.getStatus())){
             return ACEPTADA;
         } else if(string.equalsIgnoreCase(ENESPERA.getStatus())){

@@ -1,19 +1,19 @@
-package com.ameri.object.enums;
+package com.ameri.enums;
 
-public enum SubscriptionLike {
+public enum MagazineSubscription {
 
     SI("si"),
     NO("no");
 
     private final String status;
 
-    SubscriptionLike(String status){
+    MagazineSubscription(String status){
         this.status = status;
     }
 
     public String getStatus(){return this.status;}
 
-    public static SubscriptionLike value(String string){
+    public static MagazineSubscription value(String string){
         if(string.equalsIgnoreCase(SI.getStatus())){
             return SI;
         } else if(string.equalsIgnoreCase(NO.getStatus())){
