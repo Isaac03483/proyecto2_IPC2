@@ -14,7 +14,7 @@ public class DAOCategoryImpl implements DAOCategory {
     private final String UPDATE_CATEGORY="UPDATE categoria SET nombre_categoria WHERE registro_categoria=?";
 
     public DAOCategoryImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class DAOEditorTagImpl implements DAOEditorTag {
     private final String DELETE_TAG ="DELETE FROM etiqueta_editor WHERE nombre_editor=?";
 
     public DAOEditorTagImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

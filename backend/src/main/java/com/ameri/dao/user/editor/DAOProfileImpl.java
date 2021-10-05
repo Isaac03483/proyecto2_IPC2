@@ -15,7 +15,7 @@ public class DAOProfileImpl implements DAOProfile {
     private final String UPDATE_PROFILE = "UPDATE perfil SET foto= ?, hobby=?, descripcion=?, gustos=? WHERE nombre_editor=?";
 
     public DAOProfileImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

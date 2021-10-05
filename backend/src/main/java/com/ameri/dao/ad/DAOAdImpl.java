@@ -20,14 +20,14 @@ public class DAOAdImpl implements DAOAd {
     public void insert(Ad ad) throws SQLException {
 
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_AD);
-        query.setString(1, ad.getAdsType().getTypeName());
+        query.setString(1, ad.getAdType().getTypeName());
         query.setString(2,ad.getAdName());
         query.setString(3,ad.getClientName());
         query.setString(4,ad.getAdText());
         query.setString(5, ad.getAdContent());
         query.setInt(6, ad.getViews());
         query.setBigDecimal(7,ad.getTotalCost());
-        query.setString(8,ad.getAdsStatus().getStatus());
+        query.setString(8,ad.getAdStatus().getStatus());
         query.setDate(9,ad.getStartDate());
         query.setDate(10, ad.getEndDate());
         query.executeUpdate();

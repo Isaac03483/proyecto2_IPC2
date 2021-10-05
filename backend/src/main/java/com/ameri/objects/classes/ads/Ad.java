@@ -8,44 +8,44 @@ import java.time.LocalDate;
 public class Ad {
 
     private final int adRecord;
-    private final AdsType adsType;
+    private final AdType adType;
     private final String adName;
     private final String clientName;
     private final String adText;
     private final String adContent;
     private final int views;
     private final BigDecimal totalCost;
-    private final AdStatus adsStatus;
+    private final AdStatus adStatus;
     private final String url;
     private final LocalDate startDate;
     private final LocalDate endDate;
 
 
-    public Ad(AdsType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, LocalDate startDate, LocalDate endDate) {
+    public Ad(AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, LocalDate startDate, LocalDate endDate) {
         this.adRecord = 0;
-        this.adsType = adsType;
+        this.adType = adsType;
         this.adName = adName;
         this.clientName = clientName;
         this.adText = adText;
         this.adContent = adContent;
         this.views = views;
         this.totalCost = totalCost;
-        this.adsStatus = adsStatus;
+        this.adStatus = adsStatus;
         this.url = url;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Ad(int adRecord, AdsType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, LocalDate startDate, LocalDate endDate) {
+    public Ad(int adRecord, AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, LocalDate startDate, LocalDate endDate) {
         this.adRecord = adRecord;
-        this.adsType = adsType;
+        this.adType = adsType;
         this.adName = adName;
         this.clientName = clientName;
         this.adText = adText;
         this.adContent = adContent;
         this.views = views;
         this.totalCost = totalCost;
-        this.adsStatus = adsStatus;
+        this.adStatus = adsStatus;
         this.url = url;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -53,7 +53,7 @@ public class Ad {
 
     public int getAdRecord() {return adRecord;}
 
-    public AdsType getAdsType() {return adsType;}
+    public AdType getAdType() {return adType;}
 
     public String getAdName() {return adName;}
 
@@ -67,7 +67,7 @@ public class Ad {
 
     public BigDecimal getTotalCost() {return totalCost;}
 
-    public AdStatus getAdsStatus() {return adsStatus;}
+    public AdStatus getAdStatus() {return adStatus;}
 
     public String getUrl() {return url;}
 

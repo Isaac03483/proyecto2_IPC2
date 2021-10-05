@@ -20,7 +20,7 @@ import com.ameri.objects.enums.user.UserType;
 import com.google.gson.annotations.SerializedName;
 
 
-@WebServlet(name="UserServlet", urlPatterns = {"/user"})
+@WebServlet("/user")
 public class UserServlet extends HttpServlet{
 
     @Override

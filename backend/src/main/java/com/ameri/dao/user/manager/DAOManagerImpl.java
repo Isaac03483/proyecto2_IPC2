@@ -15,7 +15,7 @@ public class DAOManagerImpl implements DAOManager {
     private final String UPDATE_MANAGER = "UPDATE administrador SET estado_administrador=? WHERE nombre_usuario=?";
 
     public DAOManagerImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

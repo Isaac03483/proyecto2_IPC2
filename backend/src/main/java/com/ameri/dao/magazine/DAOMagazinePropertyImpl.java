@@ -12,8 +12,9 @@ public class DAOMagazinePropertyImpl implements DAOMagazineProperty {
 
     private final String INSERT_MAGAZINE_PROPERTY="INSERT INTO caracteristica_revista (registro_revista,fecha_aceptacion,estado_revista,costo_por_dia,fecha_modificacion_cpd, like_revista, comentario,suscripcion) VALUES (?,?,?,?,?,?,?,?)";
     private final String UPDATE_MAGAZINE_PROPERTY="UPDATE caracteristica_revista SET fecha_aceptacion=?,estado_revista=?,costo_por_dia=?,fecha_modificacion_cpd=?,like_revista=?,comentario=?,suscripcion=? WHERE registro_revista=?";
+
     public DAOMagazinePropertyImpl(){
-        Connector connector = new Connector();
+         new Connector();
     }
 
     @Override

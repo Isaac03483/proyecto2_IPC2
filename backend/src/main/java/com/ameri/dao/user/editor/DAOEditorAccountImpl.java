@@ -14,7 +14,7 @@ public class DAOEditorAccountImpl implements DAOEditorAccount {
     private final String INSERT_ACCOUNT = "INSERT INTO cuenta_editor (nombre_editor, nombre_suscriptor,nombre_revista, total_pagar, costo_descuento, ganancia, fecha_pago) VALUES (?,?,?,?,?,?,?)";
 
     public DAOEditorAccountImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

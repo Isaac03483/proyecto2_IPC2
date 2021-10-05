@@ -15,7 +15,7 @@ public class DAOSubscriptionImpl implements DAOSubscription {
     private final String UPDATE_SUBSCRIPTION = "UPDATE suscripcion SET total_pago=?, intervalo_pago=?,estado_suscripcion=?,like_suscripcion=? WHERE registro_suscripcion=?";
 
     public DAOSubscriptionImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

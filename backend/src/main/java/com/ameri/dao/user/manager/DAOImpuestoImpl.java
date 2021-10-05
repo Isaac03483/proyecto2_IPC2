@@ -12,7 +12,7 @@ public class DAOImpuestoImpl implements DAOImpuesto {
     private final String UPDATE_IMPUESTO = "UPDATE porcentaje_impuesto SET porcentaje=?, fecha_actualizacion=?";
 
     public DAOImpuestoImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

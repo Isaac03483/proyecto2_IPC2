@@ -15,7 +15,7 @@ public class DAOCommentImpl implements DAOComment {
     private final String DELETE_COMMENT="DELETE FROM comentario WHERE registro_revista=?";
 
     public DAOCommentImpl(){
-        Connector connector = new Connector();
+        new Connector();
     }
 
     @Override

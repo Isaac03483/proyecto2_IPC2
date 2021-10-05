@@ -16,7 +16,7 @@ public class DAOMagazineImpl implements DAOMagazine {
     private final String UPDATE_MAGAZINE = "UPDATE revista SET nombre_revista=?,archivo=?,fecha_publicacion=?,descripcion=?, categoria=?, costo_publicacion=? WHERE registro_revista=?";
 
     public DAOMagazineImpl(){
-        Connector connector= new Connector();
+        new Connector();
     }
 
     @Override
