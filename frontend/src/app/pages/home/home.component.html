@@ -1,0 +1,9 @@
+<app-header></app-header>
+
+<div class="container center" *ngIf="getOption() == 2">
+    <app-login-control></app-login-control>
+</div>
+
+<div class="container center" *ngIf="getOption() == 1">
+    <app-signin-control></app-signin-control>
+</div>

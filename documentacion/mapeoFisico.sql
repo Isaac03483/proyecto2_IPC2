@@ -1,24 +1,24 @@
-CREATE DATABASE revista;
+CREATE DATABASE revista_app;
 
 CREATE USER 'usuario1'@'localhost' IDENTIFIED BY 'ConTr@.34';
 
-GRANT ALL PRIVILEGES ON revista.* TO 'usuario1'@'localhost';
+GRANT ALL PRIVILEGES ON revista_app.* TO 'usuario1'@'localhost';
 
-USE revista;
+USE revista_app;
 
 CREATE TABLE usuario(
     nombre_usuario VARCHAR(20) PRIMARY KEY NOT NULL,
     password VARCHAR (20) NOT NULL,
-    tipo ENUM('user','admin')
+    tipo ENUM('EDITOR','ADMIN')
 );
 
 CREATE TABLE perfil(
 
     nombre_editor VARCHAR(20) PRIMARY KEY NOT NULL,
-    foto BLOB NOT NULL,
-    hobbie VARCHAR(150) NOT NULL,
-    descripcion VARCHAR(200) NOT NULL,
-    gustos VARCHAR(150) NOT NULL,
+    foto BLOB,
+    hobby VARCHAR(300) DEFAULT '',
+    descripcion VARCHAR(300) DEFAULT '',
+    gustos VARCHAR(300) DEFAULT '',
     CONSTRAINT perfil_usuario_fk FOREIGN KEY (nombre_editor)
     REFERENCES usuario(nombre_usuario)
 
@@ -34,7 +34,8 @@ CREATE TABLE etiqueta_editor (
 );
 
 CREATE TABLE categoria (
-    nombre_categoria VARCHAR(30) NOT NULL PRIMARY KEY
+    registro_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre_categoria VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE revista(
@@ -53,13 +54,13 @@ CREATE TABLE revista(
 
 CREATE TABLE caracteristica_revista(
     registro_revista INT NOT NULL PRIMARY KEY,
-    fecha_aceptacion DATE NOT NULL,
-    estado_revista ENUM('aceptada','en espera') NOT NULL,
-    costo_por_dia DECIMAL(7,2) NOT NULL,
-    fecha_modificacion_cpd DATE NOT NULL,
-    like_revista ENUM('si','no') NOT NULL,
-    comentario ENUM('si','no') NOT NULL,
-    suscripcion ENUM('si','no') NOT NULL,
+    fecha_aceptacion DATE,
+    estado_revista ENUM('ACEPTADA','EN ESPERA') NOT NULL,
+    costo_por_dia DECIMAL(7,2),
+    fecha_modificacion_cpd DATE,
+    like_revista ENUM('SI','NO') NOT NULL,
+    comentario ENUM('SI','NO') NOT NULL,
+    suscripcion ENUM('SI','NO') NOT NULL,
     CONSTRAINT caracteristica_revista_fk FOREIGN KEY (registro_revista)
     REFERENCES revista(registro_revista)
 );
@@ -80,10 +81,10 @@ CREATE TABLE suscripcion(
     nombre_suscriptor VARCHAR(20) NOT NULL,
     registro_revista INT NOT NULL,
     total_pago DECIMAL(7,2),
-    intervalo_pago ENUM('mensual','anual') NOT NULL,
+    intervalo_pago ENUM('MENSUAL','ANUAL') NOT NULL,
     fecha_registro DATE NOT NULL,
-    estado_suscripcion ENUM('vigente','cancelada') NOT NULL,
-    like_suscripcion ENUM('si','no') NOT NULL,
+    estado_suscripcion ENUM('VIGENTE','CANCELADO') NOT NULL,
+    like_suscripcion ENUM('SI','NO') NOT NULL,
     PRIMARY KEY(registro_suscripcion,nombre_suscriptor,registro_revista),
     CONSTRAINT nombre_suscriptor_fk FOREIGN KEY (nombre_suscriptor)
     REFERENCES perfil(nombre_editor),
@@ -117,7 +118,7 @@ CREATE TABLE comentario(
 CREATE TABLE administrador(
 
     nombre_usuario VARCHAR(30) NOT NULL PRIMARY KEY,
-    estado_administrador ENUM('vigente', 'cancelado') NOT NULL,
+    estado_administrador ENUM('VIGENTE', 'CANCELADO') NOT NULL,
     CONSTRAINT usuario_administrador_fk FOREIGN KEY (nombre_usuario)
     REFERENCES usuario(nombre_usuario)
 );
@@ -144,7 +145,7 @@ CREATE TABLE anuncio(
     contenido_anuncio VARCHAR(50),
     cantidad_apariciones INT DEFAULT 0,
     total_pagar DECIMAL(7,2) NOT NULL,
-    estado_anuncio ENUM('activo', 'inactivo') NOT NULL,
+    estado_anuncio ENUM('ACTIVO', 'INACTIVO') NOT NULL,
     url_anuncio VARCHAR(100) DEFAULT ' ',
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,

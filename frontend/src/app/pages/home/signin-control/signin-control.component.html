@@ -1,0 +1,28 @@
+<strong><label>INICIO DE SESIÓN</label></strong>
+<br>
+<br>
+<form [formGroup]="formSign">
+    <div class="mb-3">
+        <label for="userName">Ingrese su Usuario:</label>
+        <input id="userName" [ngClass]="{'border border-danger': formSign.controls.userName.invalid && !formSign.controls.userName.pristine,
+            'form-control': true}" class="form-control" required placeholder="User name" formControlName="userName">
+    </div>
+    <div [hidden]="formSign.controls.userName.valid || formSign.controls.userName.pristine"
+        class="alert alert-danger">
+        Usuario requerido
+    </div>
+    <div class="mb-3">
+        <label for="passUser">Ingrese Contraseña:</label>
+        <input id="passUser" [ngClass]="{'border border-danger': formSign.controls.passUser.invalid && !formSign.controls.passUser.pristine,
+            'form-control': true}" required type="password" class="form-control" placeholder="Password"
+            formControlName="passUser">
+    </div>
+    <div [hidden]="formSign.controls.passUser.valid || formSign.controls.passUser.pristine"
+        class="alert alert-danger">
+        Contraseña requerida
+    </div>
+    <hr class="mb-4">
+    <div class="d-grid gap-2">
+        <button type="submit" [disabled]="formSign.invalid" class="btn btn-outline-dark btn-lg">Ingresar</button>
+    </div>
+</form>
