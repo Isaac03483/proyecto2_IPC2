@@ -7,11 +7,6 @@ public class Manager {
     private final String managerName;
     private final ManagerStatus managerStatus;
 
-    public Manager(String managerName) {
-        this.managerName = managerName;
-        managerStatus = ManagerStatus.VIGENTE;
-    }
-
     public Manager(String managerName, ManagerStatus managerStatus) {
         this.managerName = managerName;
         this.managerStatus = managerStatus;

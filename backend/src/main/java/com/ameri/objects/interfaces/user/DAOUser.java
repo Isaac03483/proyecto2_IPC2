@@ -15,5 +15,5 @@ public interface DAOUser {
 
     List<User> list() throws  SQLException;
 
-    User getUser(String userName) throws SQLException;
+    User getUser(User user) throws SQLException;
 }

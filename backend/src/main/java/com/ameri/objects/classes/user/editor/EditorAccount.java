@@ -14,9 +14,9 @@ public class EditorAccount {
     private final BigDecimal totalPay;
     private final BigDecimal descuento;
     private final BigDecimal ganancia;
-    private final LocalDate fechaPago;
+    private final LocalDate payDate;
 
-    public EditorAccount(int accountRecord, String editorName, String subscriberName, String magazineName, BigDecimal totalPay, BigDecimal descuento, BigDecimal ganancia, LocalDate fechaPago) {
+    public EditorAccount(int accountRecord, String editorName, String subscriberName, String magazineName, BigDecimal totalPay, BigDecimal descuento, BigDecimal ganancia, LocalDate payDate) {
         this.accountRecord = accountRecord;
         this.editorName = editorName;
         this.subscriberName = subscriberName;
@@ -24,7 +24,7 @@ public class EditorAccount {
         this.totalPay = totalPay;
         this.descuento = descuento;
         this.ganancia = ganancia;
-        this.fechaPago = fechaPago;
+        this.payDate = payDate;
     }
 
     public int getAccountRecord() {return accountRecord;}
@@ -41,5 +41,5 @@ public class EditorAccount {
 
     public BigDecimal getGanancia() {return ganancia;}
 
-    public Date getPayDate() {return Date.valueOf(fechaPago);}
+    public Date getPayDate() {return Date.valueOf(payDate);}
 }

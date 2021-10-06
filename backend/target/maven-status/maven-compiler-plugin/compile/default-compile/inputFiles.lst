@@ -1,7 +1,6 @@
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/user/editor/PaymentEnum.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/ad/AdStatus.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/user/editor/Profile.java
-/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/ads/AdsType.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/user/editor/DAOEditorTag.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/editor/ProfileConverter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/user/editor/DAOProfile.java
@@ -16,10 +15,12 @@
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/editor/EditorTagConverter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/user/manager/DAOManager.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/manager/ManagerConverter.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/user/UserSignServlet.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/user/editor/DAOSubscriptionImpl.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/user/editor/DAOCommentImpl.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/magazine/MagazineComment.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/magazine/MagazineConverter.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/user/UserLogServlet.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/manager/ImpuestoConverter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/ads/Ad.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/user/manager/DAOImpuesto.java
@@ -30,6 +31,8 @@
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/magazine/DAOMagazineProperty.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/user/manager/ManagerStatus.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/user/User.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/admin/AdminLog.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/operation/Reader.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/magazine/Magazine.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/user/manager/Impuesto.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/user/editor/SubscriptionLike.java
@@ -53,13 +56,13 @@
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/user/DAOUserImpl.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/magazine/MagazineTagConverter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/magazine/DAOMagazinePropertyImpl.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/ads/AdType.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/user/editor/DAOEditorAccount.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/magazine/MagazineProperty.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/magazine/MagazineLike.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/magazine/MagazineStatus.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/user/manager/Manager.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/user/editor/DAOProfileImpl.java
-/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/User/UserServlet.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/magazine/DAOMagazine.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/user/editor/DAOEditorAccountImpl.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/editor/EditorAccountConverter.java

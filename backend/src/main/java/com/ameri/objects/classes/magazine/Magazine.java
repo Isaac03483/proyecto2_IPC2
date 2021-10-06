@@ -11,13 +11,13 @@ public class Magazine {
     private final int magazineRecord;
     private final String editorName;
     private final String magazineName;
-    private final Byte file;
+    private final byte[] file;
     private final LocalDate publicationDate;
     private final String description;
     private final Category category;
     private final BigDecimal subscriptionCost;
 
-    public Magazine(int magazineRecord, String editorName, String magazineName, Byte file, LocalDate publicationDate, String description, Category category, BigDecimal subscriptionCost) {
+    public Magazine(int magazineRecord, String editorName, String magazineName, byte[] file, LocalDate publicationDate, String description, Category category, BigDecimal subscriptionCost) {
         this.magazineRecord = magazineRecord;
         this.editorName = editorName;
         this.magazineName = magazineName;
@@ -34,7 +34,7 @@ public class Magazine {
 
     public String getMagazineName() {return magazineName;}
 
-    public Byte getFile() {return file;}
+    public byte[] getFile() {return file;}
 
     public Date getPublicationDate() {return Date.valueOf(publicationDate);}
 

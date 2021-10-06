@@ -28,7 +28,7 @@ public class DAOProfileImpl implements DAOProfile {
     @Override
     public void update(Profile profile) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_PROFILE);
-        query.setByte(1, profile.getImage());
+        query.setBytes(1, profile.getImage());
         query.setString(2,profile.getHobby());
         query.setString(3, profile.getDescription());
         query.setString(4, profile.getLikes());

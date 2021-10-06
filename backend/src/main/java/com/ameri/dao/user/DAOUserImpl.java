@@ -52,9 +52,9 @@ public class DAOUserImpl implements DAOUser {
     }
 
     @Override
-    public User getUser(String userName) throws SQLException {
+    public User getUser(User user) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(GET_USER);
-        query.setString(1,userName);
+        query.setString(1,user.getUserName());
         ResultSet result = query.executeQuery();
 
         if(result.next()){

@@ -24,7 +24,7 @@ public class DAOMagazineImpl implements DAOMagazine {
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_MAGAZINE);
         query.setString(1,magazine.getEditorName());
         query.setString(2,magazine.getMagazineName());
-        query.setByte(3,magazine.getFile());
+        query.setBytes(3,magazine.getFile());
         query.setDate(4,magazine.getPublicationDate());
         query.setString(5,magazine.getDescription());
         query.setString(6,magazine.getCategory().getCategoryName());
@@ -36,7 +36,7 @@ public class DAOMagazineImpl implements DAOMagazine {
     public void update(Magazine magazine) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_MAGAZINE);
         query.setString(1,magazine.getMagazineName());
-        query.setByte(2,magazine.getFile());
+        query.setBytes(2,magazine.getFile());
         query.setDate(3,magazine.getPublicationDate());
         query.setString(4,magazine.getDescription());
         query.setString(5,magazine.getCategory().getCategoryName());

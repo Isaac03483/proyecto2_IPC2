@@ -15,5 +15,5 @@ public interface DAOManager {
 
     List<Manager> list() throws SQLException;
 
-    Manager selectManager(User user) throws SQLException;
+    Manager selectManager(Manager manager) throws SQLException;
 }
