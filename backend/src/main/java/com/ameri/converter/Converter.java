@@ -3,6 +3,9 @@ package com.ameri.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+
+import java.util.List;
 
 public abstract class Converter<T> {
 
@@ -22,6 +25,17 @@ public abstract class Converter<T> {
     public String toJson(T object) {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(object, typeConverter);
+    }
+
+    public String toJson(List<T> object){
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        String string = "[";
+        for(T data: object){
+            string+=gson.toJson(data, typeConverter)+",";
+        }
+        string= string.substring(0, string.length()-1)+"]";
+
+        return string;
     }
 
 }

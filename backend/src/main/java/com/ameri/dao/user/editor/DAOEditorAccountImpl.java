@@ -22,7 +22,7 @@ public class DAOEditorAccountImpl implements DAOEditorAccount {
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_ACCOUNT);
         query.setString(1,editorAccount.getEditorName());
         query.setString(2,editorAccount.getSubscriberName());
-        query.setString(3,editorAccount.getMagazineName());
+        query.setInt(3,editorAccount.getMagazineRecord());
         query.setBigDecimal(4,editorAccount.getTotalPay());
         query.setBigDecimal(5,editorAccount.getDescuento());
         query.setBigDecimal(6,editorAccount.getGanancia());

@@ -10,9 +10,11 @@
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/database/Connector.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/UserConverter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/dao/magazine/DAOMagazineImpl.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/category/AddCategoryServlet.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/user/editor/Comment.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/Converter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/editor/EditorTagConverter.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/category/UpdateCategory.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/user/manager/DAOManager.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/converter/user/manager/ManagerConverter.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/user/UserSignServlet.java
@@ -30,6 +32,7 @@
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/ad/DAOAdType.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/interfaces/magazine/DAOMagazineProperty.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/enums/user/manager/ManagerStatus.java
+/home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/category/DeleteCategory.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/user/User.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/servlets/admin/AdminLog.java
 /home/ameri/Escritorio/2021/proyecto2_IPC2/backend/src/main/java/com/ameri/objects/classes/operation/Reader.java

@@ -10,17 +10,17 @@ public class EditorAccount {
     private final int accountRecord;
     private final String editorName;
     private final String subscriberName;
-    private final String magazineName;
+    private final int magazineRecord;
     private final BigDecimal totalPay;
     private final BigDecimal descuento;
     private final BigDecimal ganancia;
     private final LocalDate payDate;
 
-    public EditorAccount(int accountRecord, String editorName, String subscriberName, String magazineName, BigDecimal totalPay, BigDecimal descuento, BigDecimal ganancia, LocalDate payDate) {
+    public EditorAccount(int accountRecord, String editorName, String subscriberName, int magazineRecord, BigDecimal totalPay, BigDecimal descuento, BigDecimal ganancia, LocalDate payDate) {
         this.accountRecord = accountRecord;
         this.editorName = editorName;
         this.subscriberName = subscriberName;
-        this.magazineName = magazineName;
+        this.magazineRecord = magazineRecord;
         this.totalPay = totalPay;
         this.descuento = descuento;
         this.ganancia = ganancia;
@@ -33,7 +33,7 @@ public class EditorAccount {
 
     public String getSubscriberName() {return subscriberName;}
 
-    public String getMagazineName() {return magazineName;}
+    public int getMagazineRecord() {return magazineRecord;}
 
     public BigDecimal getTotalPay() {return totalPay;}
 

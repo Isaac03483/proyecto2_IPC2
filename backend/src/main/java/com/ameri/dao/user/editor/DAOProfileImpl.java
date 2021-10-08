@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DAOProfileImpl implements DAOProfile {
 
-    private final String INSERT_PROFILE = "INSERT INTO perfil (nombre_editor) VALUES (?)";
+    private final String INSERT_PROFILE = "INSERT INTO perfil (nombre_editor, foto) VALUES (?,?)";
     private final String UPDATE_PROFILE = "UPDATE perfil SET foto= ?, hobby=?, descripcion=?, gustos=? WHERE nombre_editor=?";
 
     public DAOProfileImpl(){
@@ -22,13 +22,14 @@ public class DAOProfileImpl implements DAOProfile {
     public void insert(Profile profile) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_PROFILE);
         query.setString(1, profile.getEditorName());
+        query.setBlob(2, profile.getImage());
         query.executeUpdate();
     }
 
     @Override
     public void update(Profile profile) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_PROFILE);
-        query.setBytes(1, profile.getImage());
+        query.setBlob(1, profile.getImage());
         query.setString(2,profile.getHobby());
         query.setString(3, profile.getDescription());
         query.setString(4, profile.getLikes());

@@ -14,4 +14,6 @@ public interface DAOCategory {
     void delete(Category category) throws SQLException;
 
     List<Category> list() throws SQLException;
+
+    Category getCategory(Category category) throws SQLException;
 }
