@@ -1,10 +1,9 @@
-package com.ameri.servlets.category;
+package com.ameri.servlets.manager.category;
 
 import com.ameri.converter.user.manager.CategoryConverter;
 import com.ameri.dao.user.manager.DAOCategoryImpl;
 import com.ameri.objects.classes.operation.Reader;
 import com.ameri.objects.classes.user.manager.Category;
-import com.ameri.objects.interfaces.user.manager.DAOCategory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

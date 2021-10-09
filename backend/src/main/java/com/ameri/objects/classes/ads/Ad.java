@@ -17,26 +17,10 @@ public class Ad {
     private final BigDecimal totalCost;
     private final AdStatus adStatus;
     private final String url;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private final Date startDate;
+    private final Date endDate;
 
-
-    public Ad(AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, LocalDate startDate, LocalDate endDate) {
-        this.adRecord = 0;
-        this.adType = adsType;
-        this.adName = adName;
-        this.clientName = clientName;
-        this.adText = adText;
-        this.adContent = adContent;
-        this.views = views;
-        this.totalCost = totalCost;
-        this.adStatus = adsStatus;
-        this.url = url;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    public Ad(int adRecord, AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, LocalDate startDate, LocalDate endDate) {
+    public Ad(int adRecord, AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, Date startDate, Date endDate) {
         this.adRecord = adRecord;
         this.adType = adsType;
         this.adName = adName;
@@ -71,8 +55,8 @@ public class Ad {
 
     public String getUrl() {return url;}
 
-    public Date getStartDate() {return Date.valueOf(startDate);}
+    public Date getStartDate() {return startDate;}
 
-    public Date getEndDate() {return Date.valueOf(endDate);}
+    public Date getEndDate() {return endDate;}
 
 }

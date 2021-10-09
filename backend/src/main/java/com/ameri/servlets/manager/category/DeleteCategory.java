@@ -1,4 +1,4 @@
-package com.ameri.servlets.category;
+package com.ameri.servlets.manager.category;
 
 import com.ameri.converter.user.manager.CategoryConverter;
 import com.ameri.dao.user.manager.DAOCategoryImpl;

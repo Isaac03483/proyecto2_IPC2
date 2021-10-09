@@ -1,4 +1,4 @@
-package com.ameri.servlets.category;
+package com.ameri.servlets.manager.category;
 
 import com.ameri.converter.user.manager.CategoryConverter;
 import com.ameri.dao.user.manager.DAOCategoryImpl;
@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 @WebServlet("/add-category")
 public class AddCategoryServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

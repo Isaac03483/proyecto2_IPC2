@@ -12,15 +12,15 @@ import java.time.LocalDate;
 public class MagazineProperty {
 
     private final int magazineRecord;
-    private final LocalDate acceptDate;
+    private final Date acceptDate;
     private final MagazineStatus status;
     private final BigDecimal dayCost;
-    private final LocalDate updateDate;
+    private final Date updateDate;
     private final MagazineLike like;
     private final MagazineComment comment;
     private final MagazineSubscription subscription;
 
-    public MagazineProperty(int magazineRecord, LocalDate acceptDate, MagazineStatus status, BigDecimal dayCost, LocalDate updateDate, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
+    public MagazineProperty(int magazineRecord, Date acceptDate, MagazineStatus status, BigDecimal dayCost, Date updateDate, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
         this.magazineRecord = magazineRecord;
         this.acceptDate = acceptDate;
         this.status = status;
@@ -33,13 +33,13 @@ public class MagazineProperty {
 
     public int getMagazineRecord() {return magazineRecord;}
 
-    public Date getAcceptDate() {return Date.valueOf(acceptDate);}
+    public Date getAcceptDate() {return acceptDate;}
 
     public MagazineStatus getMagazineStatus(){return this.status;}
 
     public BigDecimal getDayCost() {return dayCost;}
 
-    public Date getUpdateDate() {return Date.valueOf(updateDate);}
+    public Date getUpdateDate() {return updateDate;}
 
     public MagazineLike getLike() {return like;}
 

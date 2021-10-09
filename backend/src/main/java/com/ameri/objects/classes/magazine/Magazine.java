@@ -13,12 +13,12 @@ public class Magazine {
     private final String editorName;
     private final String magazineName;
     private final Blob file;
-    private final LocalDate publicationDate;
+    private final Date publicationDate;
     private final String description;
     private final Category category;
     private final BigDecimal subscriptionCost;
 
-    public Magazine(int magazineRecord, String editorName, String magazineName, Blob file, LocalDate publicationDate, String description, Category category, BigDecimal subscriptionCost) {
+    public Magazine(int magazineRecord, String editorName, String magazineName, Blob file, Date publicationDate, String description, Category category, BigDecimal subscriptionCost) {
         this.magazineRecord = magazineRecord;
         this.editorName = editorName;
         this.magazineName = magazineName;
@@ -37,7 +37,7 @@ public class Magazine {
 
     public Blob getFile() {return file;}
 
-    public Date getPublicationDate() {return Date.valueOf(publicationDate);}
+    public Date getPublicationDate() {return publicationDate;}
 
     public String getDescription() {return description;}
 

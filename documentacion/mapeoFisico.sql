@@ -97,7 +97,7 @@ CREATE TABLE cuenta_editor(
     registro_cuenta INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre_editor VARCHAR(20) NOT NULL,
     nombre_suscriptor VARCHAR(20) NOT NULL,
-    nombre_revista VARCHAR(35) NOT NULL,
+    registro_revista VARCHAR(35) NOT NULL,
     total_pagar DECIMAL(7,2) NOT NULL,
     costo_descuento DECIMAL(7,2) NOT NULL,
     ganancia DECIMAL(7,2) NOT NULL,

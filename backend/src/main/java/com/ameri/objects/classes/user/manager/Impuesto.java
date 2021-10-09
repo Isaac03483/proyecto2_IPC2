@@ -8,11 +8,11 @@ public class Impuesto {
 
     private final int registroImpuesto;
     private final BigDecimal percentage;
-    private final LocalDate updateDate;
+    private final String updateDate;
 
-    public Impuesto(int registroImpuesto, BigDecimal percentage, LocalDate updateDate) {
+    public Impuesto(int registroImpuesto, double percentage, String updateDate) {
         this.registroImpuesto = registroImpuesto;
-        this.percentage = percentage;
+        this.percentage = new BigDecimal(percentage);
         this.updateDate = updateDate;
     }
 

@@ -17,7 +17,9 @@ com/ameri/objects/classes/user/manager/Category.class
 com/ameri/objects/classes/user/editor/EditorAccount.class
 com/ameri/converter/user/editor/SubscriptionConverter.class
 com/ameri/objects/interfaces/user/manager/DAOManager.class
+com/ameri/servlets/manager/impuesto/ImpServlet.class
 com/ameri/objects/interfaces/user/editor/DAOEditorAccount.class
+com/ameri/servlets/manager/category/AddCategoryServlet.class
 com/ameri/objects/interfaces/user/manager/DAOCategory.class
 com/ameri/objects/enums/ad/AdStatus.class
 com/ameri/dao/ad/DAOAdImpl.class
@@ -27,6 +29,7 @@ com/ameri/database/Connector.class
 com/ameri/dao/user/manager/DAOImpuestoImpl.class
 com/ameri/objects/enums/magazine/MagazineSubscription.class
 com/ameri/objects/interfaces/ad/DAOAd.class
+com/ameri/servlets/manager/category/DeleteCategory.class
 com/ameri/objects/enums/user/UserType.class
 com/ameri/objects/interfaces/user/manager/DAOImpuesto.class
 com/ameri/converter/magazine/MagazineTagConverter.class
@@ -39,7 +42,7 @@ com/ameri/objects/interfaces/user/editor/DAOProfile.class
 com/ameri/servlets/user/UserLogServlet.class
 com/ameri/dao/user/editor/DAOCommentImpl.class
 com/ameri/objects/enums/user/editor/SubscriptionLike.class
-com/ameri/servlets/category/AddCategoryServlet.class
+com/ameri/servlets/manager/ManagerLog.class
 com/ameri/objects/classes/user/editor/Subscription.class
 com/ameri/objects/enums/magazine/MagazineLike.class
 com/ameri/converter/user/editor/EditorTagConverter.class
@@ -49,18 +52,17 @@ com/ameri/objects/classes/operation/Reader.class
 com/ameri/converter/ads/AdsTypeConverter.class
 com/ameri/converter/user/manager/CategoryConverter.class
 com/ameri/objects/classes/magazine/Magazine.class
+com/ameri/servlets/manager/category/UpdateCategory.class
 com/ameri/objects/interfaces/ad/DAOAdType.class
 com/ameri/objects/interfaces/user/editor/DAOEditorTag.class
 com/ameri/objects/interfaces/user/editor/DAOComment.class
 com/ameri/servlets/user/UserSignServlet.class
 com/ameri/converter/user/editor/ProfileConverter.class
 com/ameri/converter/user/editor/EditorAccountConverter.class
-com/ameri/servlets/admin/AdminLog.class
 com/ameri/objects/classes/user/manager/Impuesto.class
 com/ameri/converter/ads/AdConverter.class
 com/ameri/objects/enums/magazine/MagazineStatus.class
 com/ameri/converter/magazine/MagazineConverter.class
-com/ameri/servlets/category/UpdateCategory.class
 com/ameri/dao/user/editor/DAOSubscriptionImpl.class
 com/ameri/objects/interfaces/magazine/DAOMagazineProperty.class
 com/ameri/dao/user/manager/DAOManagerImpl.class
@@ -68,6 +70,5 @@ com/ameri/converter/user/UserConverter.class
 com/ameri/objects/classes/user/editor/EditorTag.class
 com/ameri/objects/classes/user/editor/Comment.class
 com/ameri/objects/enums/user/manager/ManagerStatus.class
-com/ameri/servlets/category/DeleteCategory.class
 com/ameri/converter/user/manager/ImpuestoConverter.class
 com/ameri/converter/magazine/MagazinePropertyConverter.class
