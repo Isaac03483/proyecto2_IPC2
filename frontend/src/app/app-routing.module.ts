@@ -1,3 +1,4 @@
+import { HomeAdminComponent } from './pages/user/home-admin/home-admin.component';
 import { HomeUserComponent } from './pages/user/home-user/home-user.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path:'editor-home/:user',
     component:HomeUserComponent
+  },
+  {
+    path:'admin-home/:user',
+    component:HomeAdminComponent
   }
   
 ];

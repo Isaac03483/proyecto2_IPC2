@@ -1,1 +1,14 @@
-<p>home-admin works!</p>
+<app-header-admin></app-header-admin>
+
+<div class="container" *ngIf="getOption() == 1">
+    <app-profile-admin></app-profile-admin>
+</div>
+<div class="container" *ngIf="getOption() == 2">
+    <app-admins></app-admins>
+</div>
+<div class="container" *ngIf="getOption() == 3">
+    <app-magazines-admin></app-magazines-admin>
+</div>
+<div class="container" *ngIf="getOption() == 4">
+    <app-report-admin></app-report-admin>
+</div>

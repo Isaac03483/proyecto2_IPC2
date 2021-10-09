@@ -1,0 +1,108 @@
+<div class="container">
+    <nav class="navbar-center navbar-expand-md navbar-light bg-light" role="navigation" >
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="btn nav-link active" (click)="setOption(1)">AGREGAR NUEVA CATEGORIA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn nav-link active" (click)="setOption(2)">MODIFICAR CATEGORIA EXISTENTE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn nav-link active" (click)="setOption(3)">ELIMINAR CATEGORIA</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<br>
+<br>
+<div *ngIf="optionCategory == 1">
+    <form [formGroup] ="categoryForm" (ngSubmit)="addCategory()">
+        <div class="form-group">
+          <div class="form-group">
+              <label for="newCategory">NOMBRE DE LA CATEGORIA:</label>
+              <input type="text" class="form-control" [ngClass]="{'border border-danger': categoryForm.controls.categoryName.invalid && !categoryForm.controls.categoryName.pristine,
+              'form-control': true}" id="newCategory" placeholder="nombre de categoria" formControlName="categoryName">
+          </div>
+          <hr class="mb-4">
+          <div class="d-grid gap-2">
+              <button type="submit"  [disabled]="categoryForm.invalid"  class="btn btn-outline-dark btn-lg">AGREGAR CATEGORIA</button>
+          </div>
+        </div>
+    </form>
+</div>
+<div *ngIf="optionCategory == 2">
+
+  <form [formGroup]="upForm" (ngSubmit)="updateCategory()">
+      <div class="form-group">
+        <div class="form-group">
+          <label for="categoryRecord">REGISTRO DE LA CATEGORIA:</label>
+          <input type="text" class="form-control" [ngClass]="{'border border-danger': upForm.controls.categoryName.invalid && !upForm.controls.categoryName.pristine,
+              'form-control': true}" id="categoryRecord" readonly placeholder="nombre de categoria" formControlName="categoryRecord" [(ngModel)]="categoryRecord">
+          <!--
+          <select class="form-control">
+            <option *ngFor="let categoryRecord of categoryList" (click)="updateInf(categoryRecord.categoryRecord)">{{categoryRecord.categoryRecord}}</option>
+          </select>-->
+        </div>
+        <div class="form-group">
+            <label for="updateCategory">NOMBRE DE LA CATEGORIA:</label>
+            <input type="text" class="form-control" [ngClass]="{'border border-danger': upForm.controls.categoryName.invalid && !upForm.controls.categoryName.pristine,
+              'form-control': true}" id="updateCategory" placeholder="nombre de categoria" formControlName="categoryName" [(ngModel)]="categoryName">
+        </div>
+        <hr class="mb-4">
+        <div class="d-grid gap-2">
+            <button type="submit" [disabled]="upForm.invalid"  class="btn btn-outline-dark btn-lg">MODIFICAR CATEGORIA</button>
+        </div>
+      </div>
+  </form>
+</div>
+<div *ngIf="optionCategory == 3">
+    <form [formGroup]="delForm" (ngSubmit)="deleteCategory()">
+        <div class="form-group">
+
+          <div class="form-group">
+            <label for="delCategoryRecord">REGISTRO DE LA CATEGORIA:</label>
+            <input type="text" class="form-control" [ngClass]="{'border border-danger': delForm.controls.categoryName.invalid && !delForm.controls.categoryName.pristine,
+              'form-control': true}" id="delCategoryRecord" readonly placeholder="nombre de categoria" formControlName="categoryRecord" [(ngModel)]="categoryRecord">
+          </div>
+          <div class="form-group">
+            <label for="deleteCategory">NOMBRE DE LA CATEGORIA:</label>
+            <input type="text" class="form-control" readonly id="deleteCategory" placeholder="nombre de categoria" formControlName="categoryName" [(ngModel)]="categoryName">
+          </div>
+            <hr class="mb-4">
+            <div class="d-grid gap-2">
+                <button type="submit" [disabled]="delForm.invalid" class="btn btn-outline-dark btn-lg">ELIMINAR CATEGORIA</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br>
+<hr class="mb-4">
+
+<div class=" container">
+  <table class="table-bordered" style="width:100%">
+    <tr>
+      <th>REGISTRO</th>
+      <th>NOMBRE</th>
+      <th>ACTUALIZAR</th>
+      <th>ELIMINAR</th>
+    </tr>
+
+    <tr *ngFor="let category of categoryList">
+      <td>{{category.categoryRecord}}</td>
+      <td>{{category.categoryName}}</td>
+      <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2,category.categoryRecord, category.categoryName)">ACTUALIZAR</button></td>
+      <td><button type="button" class="btn btn-outline-danger" (click)="selectInf(3,category.categoryRecord, category.categoryName)">ELIMINAR</button></td>
+    </tr>
+  </table>
+</div>
+<br>
+<br>
+
+
+
+
+

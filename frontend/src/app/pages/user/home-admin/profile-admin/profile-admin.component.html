@@ -1,0 +1,24 @@
+<div class="container">
+    <nav class="navbar-center navbar-expand-md navbar-light bg-light" role="navigation" >
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="btn nav-link active" (click)="setOption(1)">CATEGORIAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn nav-link active" (click)="setOption(2)">IMPUESTO</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container" *ngIf="getOption() == 1">
+  <app-category></app-category>
+</div>
+<div class="container" *ngIf="getOption() == 2">
+
+    <app-impuesto></app-impuesto>
+</div>

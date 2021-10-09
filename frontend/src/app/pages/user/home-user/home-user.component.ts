@@ -1,4 +1,4 @@
-import { HomeEditorService } from './../../../services/user/home-editor.service';
+import { HomeEditorService } from '../../../services/user/home-editor.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

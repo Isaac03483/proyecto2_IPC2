@@ -1,7 +1,7 @@
 <strong><label>INICIO DE SESIÓN</label></strong>
 <br>
 <br>
-<form [formGroup]="formSign">
+<form [formGroup]="formSign" (submit)="getUser()">
     <div class="mb-3">
         <label for="userName">Ingrese su Usuario:</label>
         <input id="userName" [ngClass]="{'border border-danger': formSign.controls.userName.invalid && !formSign.controls.userName.pristine,

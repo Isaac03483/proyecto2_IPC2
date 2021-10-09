@@ -1,0 +1,28 @@
+<br>
+<div class="container">
+  <strong><label>IMPUESTO ACTUAL:</label></strong>
+  <label>{{impValue.percentage}}%</label>
+  <br>
+  <strong><label>ÚLTIMA FECHA DE MODIFICACIÓN:</label></strong>
+  <label>{{impValue.updateDate}}</label>
+</div>
+<hr class="mb-4">
+<div>
+    <form [formGroup]="impForm" (ngSubmit)="updateImp()">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="valor">VALOR DEL IMPUESTO (%):</label>
+                <input type="number" class="form-control" id="valor" placeholder="valor del impuesto" formControlName="impData">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="fechaImpuesto">FECHA:</label>
+                <input type="date" class="form-control" id="fechaImpuesto" formControlName="updateDate">
+            </div>
+            <hr class="mb-4">
+            <div class="d-grid gap-2">
+                <button type="submit" [disabled]="impForm.invalid" class="btn btn-outline-dark btn-lg">CAMBIAR IMPUESTO</button>
+            </div>
+        </div>
+    </form>
+</div>

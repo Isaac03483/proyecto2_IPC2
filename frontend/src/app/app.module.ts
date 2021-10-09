@@ -14,6 +14,13 @@ import { ProfileComponent } from './pages/user/home-user/profile/profile.compone
 import { HeaderEditorComponent } from './pages/user/home-user/header-editor/header-editor.component';
 import { HomeAdminComponent } from './pages/user/home-admin/home-admin.component';
 import { HeaderAdminComponent } from './pages/user/home-admin/header-admin/header-admin.component';
+import { ProfileAdminComponent } from './pages/user/home-admin/profile-admin/profile-admin.component';
+import { AdminsComponent } from './pages/user/home-admin/admins/admins.component';
+import { MagazinesAdminComponent } from './pages/user/home-admin/magazines-admin/magazines-admin.component';
+import { ReportAdminComponent } from './pages/user/home-admin/report-admin/report-admin.component';
+import { CategoryComponent } from './pages/user/home-admin/profile-admin/category/category.component';
+import { ImpuestoComponent } from './pages/user/home-admin/profile-admin/impuesto/impuesto.component';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 @NgModule({
   declarations: [
@@ -27,16 +34,22 @@ import { HeaderAdminComponent } from './pages/user/home-admin/header-admin/heade
     HeaderEditorComponent,
     SearchMagazineComponent,
     HomeAdminComponent,
-    HeaderAdminComponent
-    
+    HeaderAdminComponent,
+    ProfileAdminComponent,
+    AdminsComponent,
+    MagazinesAdminComponent,
+    ReportAdminComponent,
+    CategoryComponent,
+    ImpuestoComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgxDatatableModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

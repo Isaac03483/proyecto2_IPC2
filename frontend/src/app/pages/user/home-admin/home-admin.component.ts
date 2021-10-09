@@ -1,3 +1,4 @@
+import { HomeAdminService } from './../../../services/user/home-admin.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: HomeAdminService) { }
 
   ngOnInit(): void {
   }
 
+  getOption(){
+    return this.service.option;
+  }
 }

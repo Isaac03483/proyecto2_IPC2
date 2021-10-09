@@ -1,8 +1,11 @@
-import { UserType } from 'src/objects/enums/user/UserType';
+import { Router } from '@angular/router';
+import { UserType } from '../../../../objects/enums/user/UserType';
 import { UsrService } from 'src/app/services/user/usr.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/objects/classes/usuario/User';
+import { Manager } from 'src/objects/classes/usuario/administrador/Manager';
+import { ManagerStatus } from 'src/objects/enums/user/manager/ManagerStatus';
 
 @Component({
   selector: 'app-signin-control',
@@ -13,7 +16,7 @@ import { User } from 'src/objects/classes/usuario/User';
 export class SigninControlComponent implements OnInit {
 
   formSign!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private service: UsrService) { }
+  constructor(private formBuilder: FormBuilder, private service: UsrService, private router: Router) { }
 
   ngOnInit(): void {
     this.formSign = this.formBuilder.group({
@@ -24,17 +27,36 @@ export class SigninControlComponent implements OnInit {
 
   getUser(){
     if(this.formSign.valid){
-      this.service.getUser(new User(this.formSign.value.userName, "", UserType.ADMIN))
+      this.service.getUser(new User(this.formSign.value.userName, this.formSign.value.passUser, UserType.ADMIN))
       .subscribe((created: User) => {
         console.log(created);
-        if(created.getUserType == UserType.ADMIN){
+        if(created != null){
+          if(created.userType == UserType.EDITOR){
+            localStorage.setItem("editor", JSON.stringify(created));
+            this.router.navigate(['/editor-home', created.userName]);
+          } else if(created.userType == UserType.ADMIN){
 
+            this.service.getManager(new Manager(created.userName, ManagerStatus.VIGENTE))
+            .subscribe((manager: Manager) =>{
+              if(manager != null){
+
+                  localStorage.setItem("manager", JSON.stringify(manager));
+                  this.router.navigate(['/admin-home', manager.managerName]);
+
+              } else {
+                alert("ESTE ADMINISTRADOR HA SIDO CANCELADO.");
+              }
+            }, (error: any) => {
+
+              alert("LA CONTRASEÑA ES INCORRECTA.");
+            });
+          }
         } else {
-          alert("El usuario ingresado no es un administrador.");
+          alert("LA CONTRASEÑA ES INCORRECTA.");
         }
       }, (error: any) => {
 
-        alert("Parece que hubo un error al guardar la información. Pruebe con otro usuario.");
+        alert("USUARIO NO ENCONTRADO.");
       });
     }
   }
