@@ -12,6 +12,7 @@ CREATE TABLE usuario(
     tipo ENUM('EDITOR','ADMIN')
 );
 
+
 CREATE TABLE perfil(
 
     nombre_editor VARCHAR(20) PRIMARY KEY NOT NULL,
@@ -20,8 +21,12 @@ CREATE TABLE perfil(
     descripcion VARCHAR(300) DEFAULT '',
     gustos VARCHAR(300) DEFAULT '',
     CONSTRAINT perfil_usuario_fk FOREIGN KEY (nombre_editor)
-    REFERENCES usuario(nombre_usuario)
+    REFERENCES usuario(nombre_usuario) ON UPDATE CASCADE ON DELETE CASCADE
 
+);
+
+CREATE TABLE etiqueta (
+    nombre_etiqueta VARCHAR(30) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE etiqueta_editor (
@@ -30,13 +35,16 @@ CREATE TABLE etiqueta_editor (
     nombre_etiqueta VARCHAR(30) NOT NULL,
     PRIMARY KEY(nombre_editor, nombre_etiqueta),
     CONSTRAINT etiqueta_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES perfil(nombre_editor)
+    REFERENCES perfil(nombre_editor),
+    CONSTRAINT etiqueta_nombre_fk FOREIGN KEY (nombre_etiqueta)
+    REFERENCES etiqueta(nombre_etiqueta) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE categoria (
     registro_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre_categoria VARCHAR(30) NOT NULL
 );
+
 
 CREATE TABLE revista(
 
@@ -46,10 +54,10 @@ CREATE TABLE revista(
     archivo MEDIUMBLOB NOT NULL,
     fecha_publicacion DATE NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
-    categoria VARCHAR(30) NOT NULL,
+    nombre_categoria VARCHAR(30) NOT NULL,
     costo_suscripcion DECIMAL(7,2) NOT NULL,
     CONSTRAINT revista_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES perfil(nombre_editor)
+    REFERENCES perfil(nombre_editor) ON UPDATE CASCADE
 );
 
 CREATE TABLE caracteristica_revista(
@@ -71,7 +79,9 @@ CREATE TABLE etiqueta_revista(
     nombre_etiqueta VARCHAR(30) NOT NULL,
     PRIMARY KEY (registro_revista, nombre_etiqueta),
     CONSTRAINT etiqueta_revista_fk FOREIGN KEY (registro_revista)
-    REFERENCES revista(registro_revista)
+    REFERENCES revista(registro_revista),
+    CONSTRAINT nombre_etiqueta_fk FOREIGN KEY (nombre_etiqueta)
+    REFERENCES etiqueta(nombre_etiqueta) ON UPDATE CASCADE ON DELETE CASCADE
 
 );
 
@@ -87,7 +97,7 @@ CREATE TABLE suscripcion(
     like_suscripcion ENUM('SI','NO') NOT NULL,
     PRIMARY KEY(registro_suscripcion,nombre_suscriptor,registro_revista),
     CONSTRAINT nombre_suscriptor_fk FOREIGN KEY (nombre_suscriptor)
-    REFERENCES perfil(nombre_editor),
+    REFERENCES perfil(nombre_editor) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT registro_revista_fk FOREIGN KEY (registro_revista)
     REFERENCES revista(registro_revista)
 );
@@ -103,7 +113,7 @@ CREATE TABLE cuenta_editor(
     ganancia DECIMAL(7,2) NOT NULL,
     fecha_pago DATE NOT NULL,
     CONSTRAINT cuenta_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES perfil(nombre_editor)
+    REFERENCES perfil(nombre_editor) ON UPDATE CASCADE
 );
 
 CREATE TABLE comentario(
@@ -111,7 +121,9 @@ CREATE TABLE comentario(
     registro_revista INT NOT NULL,
     nombre_suscriptor VARCHAR(20) NOT NULL,
     texto VARCHAR(200) NOT NULL,
-    fecha_comentario DATE NOT NULL
+    fecha_comentario DATE NOT NULL,
+    CONSTRAINT comentario_suscriptor_fk FOREIGN KEY (nombre_suscriptor)
+    REFERENCES suscripcion(nombre_suscriptor) ON UPDATE CASCADE
     
 );
 
@@ -120,8 +132,11 @@ CREATE TABLE administrador(
     nombre_usuario VARCHAR(30) NOT NULL PRIMARY KEY,
     estado_administrador ENUM('VIGENTE', 'CANCELADO') NOT NULL,
     CONSTRAINT usuario_administrador_fk FOREIGN KEY (nombre_usuario)
-    REFERENCES usuario(nombre_usuario)
+    REFERENCES usuario(nombre_usuario) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+INSERT INTO usuario (nombre_usuario, password, tipo) VALUES ('admin','admin','ADMIN');
+INSERT INTO administrador (nombre_usuario, estado_administrador) VALUES ('admin', 'VIGENTE');
 
 CREATE TABLE porcentaje_impuesto(
     registro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -150,7 +165,7 @@ CREATE TABLE anuncio(
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     CONSTRAINT tipo_anuncio_fk FOREIGN KEY (tipo_anuncio)
-    REFERENCES tipo_anuncio(nombre_tipo)
+    REFERENCES tipo_anuncio(nombre_tipo) ON UPDATE CASCADE
 );
 
 CREATE TABLE etiqueta_anuncio(
@@ -159,6 +174,8 @@ CREATE TABLE etiqueta_anuncio(
     nombre_anuncio VARCHAR(30) NOT NULL,
     nombre_etiqueta VARCHAR(30) NOT NULL,
     CONSTRAINT registro_anuncio_fk FOREIGN KEY (registro_anuncio)
-    REFERENCES anuncio(registro_anuncio)
+    REFERENCES anuncio(registro_anuncio),
+    CONSTRAINT registro_etiqueta_anuncio_fk FOREIGN KEY (nombre_etiqueta)
+    REFERENCES etiqueta(nombre_etiqueta) ON UPDATE CASCADE ON DELETE CASCADE
 );
 

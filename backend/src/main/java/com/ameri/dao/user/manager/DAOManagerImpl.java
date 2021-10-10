@@ -9,13 +9,16 @@ import com.ameri.objects.interfaces.user.manager.DAOManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOManagerImpl implements DAOManager {
 
     private final String INSERT_MANAGER = "INSERT INTO administrador(nombre_usuario,estado_administrador) VALUES (?,?)";
-    private final String UPDATE_MANAGER = "UPDATE administrador SET estado_administrador=? WHERE nombre_usuario=?";
+    private final String UPDATE_MANAGER = "UPDATE administrador SET nombre_usuario=? WHERE nombre_usuario=?";
+    private final String DELETE_MANAGER = "UPDATE administrador SET estado_administrador =? WHERE nombre_usuario =?";
     private final String GET_MANAGER = "SELECT * FROM administrador WHERE nombre_usuario=?";
+    private final String GET_ALL = "SELECT * FROM administrador";
 
     public DAOManagerImpl(){
         new Connector();
@@ -32,19 +35,30 @@ public class DAOManagerImpl implements DAOManager {
     @Override
     public void update(Manager manager) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_MANAGER);
-        query.setString(1, manager.getManagerStatus().getStatus());
+        query.setString(1, manager.getOldManagerName());
         query.setString(2,manager.getManagerName());
         query.executeUpdate();
     }
 
     @Override
     public void delete(Manager manager) throws SQLException {
-
+        PreparedStatement query = Connector.getConnection().prepareStatement(DELETE_MANAGER);
+        query.setString(1, manager.getManagerStatus().getStatus());
+        query.setString(2,manager.getManagerName());
+        query.executeUpdate();
     }
 
     @Override
     public List<Manager> list() throws SQLException {
-        return null;
+        List<Manager> allManagers = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_ALL);
+        ResultSet resultSet = query.executeQuery();
+
+        while (resultSet.next()){
+            allManagers.add(new Manager(resultSet.getString("nombre_usuario"), ManagerStatus.value(resultSet.getString("estado_administrador"))));
+        }
+
+        return allManagers;
     }
 
     @Override

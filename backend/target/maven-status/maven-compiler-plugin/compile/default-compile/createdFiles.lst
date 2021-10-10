@@ -12,6 +12,7 @@ com/ameri/objects/enums/user/editor/PaymentEnum.class
 com/ameri/converter/user/editor/CommentConverter.class
 com/ameri/dao/user/DAOUserImpl.class
 com/ameri/objects/classes/user/manager/Manager.class
+com/ameri/objects/interfaces/user/manager/DAOTag.class
 com/ameri/dao/user/editor/DAOEditorTagImpl.class
 com/ameri/objects/classes/user/manager/Category.class
 com/ameri/objects/classes/user/editor/EditorAccount.class
@@ -19,6 +20,7 @@ com/ameri/converter/user/editor/SubscriptionConverter.class
 com/ameri/objects/interfaces/user/manager/DAOManager.class
 com/ameri/servlets/manager/impuesto/ImpServlet.class
 com/ameri/objects/interfaces/user/editor/DAOEditorAccount.class
+com/ameri/servlets/user/UpdateUser.class
 com/ameri/servlets/manager/category/AddCategoryServlet.class
 com/ameri/objects/interfaces/user/manager/DAOCategory.class
 com/ameri/objects/enums/ad/AdStatus.class
@@ -37,9 +39,11 @@ com/ameri/objects/interfaces/user/editor/DAOSubscription.class
 com/ameri/dao/magazine/DAOMagazineImpl.class
 com/ameri/dao/user/editor/DAOProfileImpl.class
 com/ameri/dao/user/editor/DAOEditorAccountImpl.class
+com/ameri/servlets/manager/AddManager.class
 com/ameri/converter/user/manager/ManagerConverter.class
 com/ameri/objects/interfaces/user/editor/DAOProfile.class
 com/ameri/servlets/user/UserLogServlet.class
+com/ameri/dao/user/manager/DAOTagImpl.class
 com/ameri/dao/user/editor/DAOCommentImpl.class
 com/ameri/objects/enums/user/editor/SubscriptionLike.class
 com/ameri/servlets/manager/ManagerLog.class
@@ -47,6 +51,7 @@ com/ameri/objects/classes/user/editor/Subscription.class
 com/ameri/objects/enums/magazine/MagazineLike.class
 com/ameri/converter/user/editor/EditorTagConverter.class
 com/ameri/objects/classes/magazine/MagazineTag.class
+com/ameri/objects/classes/user/manager/Tag.class
 com/ameri/objects/classes/user/editor/Profile.class
 com/ameri/objects/classes/operation/Reader.class
 com/ameri/converter/ads/AdsTypeConverter.class
@@ -59,7 +64,9 @@ com/ameri/objects/interfaces/user/editor/DAOComment.class
 com/ameri/servlets/user/UserSignServlet.class
 com/ameri/converter/user/editor/ProfileConverter.class
 com/ameri/converter/user/editor/EditorAccountConverter.class
+com/ameri/servlets/manager/DeteleManager.class
 com/ameri/objects/classes/user/manager/Impuesto.class
+com/ameri/servlets/manager/UpdateManager.class
 com/ameri/converter/ads/AdConverter.class
 com/ameri/objects/enums/magazine/MagazineStatus.class
 com/ameri/converter/magazine/MagazineConverter.class

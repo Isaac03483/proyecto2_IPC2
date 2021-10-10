@@ -13,7 +13,8 @@ import java.util.List;
 public class DAOUserImpl implements DAOUser {
 
     private final String INSERT_USER = "INSERT INTO usuario (nombre_usuario, password, tipo) VALUES(?,?,?)";
-    private final String UPDATE_USER = "UPDATE usuario SET password = ? WHERE usuario = ?";
+    private final String UPDATE_USER_PASSWORD = "UPDATE usuario SET password = ? WHERE nombre_usuario = ?";
+    private final String UPDATE_USER_NAME = "UPDATE usuario SET nombre_usuario = ? WHERE nombre_usuario =?";
     private final String GET_USER = "SELECT * FROM usuario WHERE nombre_usuario =?";
 
     public DAOUserImpl(){
@@ -32,9 +33,17 @@ public class DAOUserImpl implements DAOUser {
     }
 
     @Override
-    public void update(User user) throws SQLException {
+    public void updateUserName(User user) throws SQLException {
+        PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_USER_NAME);
+        query.setString(1, user.getUserName());
+        query.setString(2, user.getOldUserName());
+        query.executeUpdate();
+    }
 
-        PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_USER);
+    @Override
+    public void updateUserPass(User user) throws SQLException {
+
+        PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_USER_PASSWORD);
         query.setString(1, user.getUserPassword());
         query.setString(2, user.getUserName());
         query.executeUpdate();

@@ -9,7 +9,9 @@ public interface DAOUser {
 
     void insert(User user) throws SQLException;
 
-    void update(User user) throws SQLException;
+    void updateUserName(User user) throws SQLException;
+
+    void updateUserPass(User user) throws  SQLException;
 
     void delete(User user) throws SQLException;
 

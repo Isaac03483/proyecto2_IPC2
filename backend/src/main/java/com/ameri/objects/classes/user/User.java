@@ -6,17 +6,20 @@ public class User {
 
     private final String userName;
     private final String userPassword;
+    private final String oldUserName;
     private final UserType userType;
 
     public User(String userName, String userPassword, UserType userType) {
         this.userName = userName;
         this.userPassword = userPassword;
+        this.oldUserName=null;
         this.userType =userType;
     }
 
-    public User(String userName){
+    public User(String userName, String oldUserName){
         this.userName = userName;
-        this.userPassword="";
+        this.oldUserName = oldUserName;
+        this.userPassword = null;
         this.userType = null;
     }
 
@@ -25,5 +28,7 @@ public class User {
     public String getUserPassword() {return this.userPassword;}
 
     public UserType getUserType(){return this.userType;}
+
+    public String getOldUserName(){return this.oldUserName;}
 
 }

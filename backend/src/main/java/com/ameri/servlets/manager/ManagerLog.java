@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/get-manager")
 public class ManagerLog extends HttpServlet {
@@ -21,11 +22,20 @@ public class ManagerLog extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        try {
+            List<Manager> allManager = new DAOManagerImpl().list();
+            response.getWriter().write(new ManagerConverter(Manager.class).toJson(allManager));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
         BufferedReader reader = request.getReader();
         String body = new Reader(reader).getInformation();
 

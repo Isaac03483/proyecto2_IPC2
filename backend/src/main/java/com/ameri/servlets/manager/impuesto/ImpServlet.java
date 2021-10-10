@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class ImpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("UTF-8");
         ImpuestoConverter converter = new ImpuestoConverter(Impuesto.class);
         try {
             Impuesto imp = new DAOImpuestoImpl().selectImpuesto();
@@ -30,7 +30,7 @@ public class ImpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("UTF-8");
         BufferedReader reader = req.getReader();
         System.out.println("ESTA ENTRANDO EN LA MODIFICACIÓN DEL IMPUESTO.");
         String body = new Reader(reader).getInformation();

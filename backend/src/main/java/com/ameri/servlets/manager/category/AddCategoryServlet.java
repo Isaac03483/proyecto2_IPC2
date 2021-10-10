@@ -18,7 +18,7 @@ public class AddCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setCharacterEncoding("UTF-8");
         try {
             String data = new CategoryConverter(Category.class).toJson(new DAOCategoryImpl().list());
             System.out.println(data);
@@ -30,6 +30,7 @@ public class AddCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         BufferedReader reader = req.getReader();
 
         String body = new Reader(reader).getInformation();
