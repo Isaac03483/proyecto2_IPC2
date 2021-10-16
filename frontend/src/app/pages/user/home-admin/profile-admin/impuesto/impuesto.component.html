@@ -1,5 +1,5 @@
 <br>
-<div class="container">
+<div class="container" *ngIf="impValue != null">
   <strong><label>IMPUESTO ACTUAL:</label></strong>
   <label>{{impValue.percentage}}%</label>
   <br>
@@ -21,7 +21,7 @@
             </div>
             <hr class="mb-4">
             <div class="d-grid gap-2">
-                <button type="submit" [disabled]="impForm.invalid" class="btn btn-outline-dark btn-lg">CAMBIAR IMPUESTO</button>
+                <button type="submit"  class="btn btn-outline-dark btn-lg">CAMBIAR IMPUESTO</button>
             </div>
         </div>
     </form>

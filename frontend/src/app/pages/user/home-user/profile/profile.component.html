@@ -5,44 +5,44 @@
 </header>
 <br>
 <br>
-<form>
-    <div class="text-right">
-        <div class="text-center">
-            <img class="img-fluid" src="https://picsum.photos/id/237/200/200" />
-            <br><br>
-            <input type="file" accept="image/*">
-        </div>
-    </div>
+<div>
+  <div class="text-center">
+    <img *ngIf="image"  class="img-fluid" src="{{image}}" alt="tu foto"/>
+    <br><br>
+    <input class="form-control" (change)="fileUploadInAngular($event)" type="file" accept="image/*">
+    <br>
+
+  </div>
+  <div class="d-grid gap-2">
+    <button class="btn btn-outline-dark btn-lg" (click)="updateImage()">cambiar imagen</button>
+  </div>
+</div>
+<form [formGroup]="formGroup" (submit)="updateProfile()">
     <div class="text-left">
         <div>
             <br>
             <hr class="mb-3">
             <div class="col-lg-6 ">
-                <label for="userNameProfile">NOMBRE DE USUARIO</label>
-                <br>
-                <input type="text" id="userNameProfile">
+                <strong><label for="userNameProfile">NOMBRE DE USUARIO</label></strong>
+                <label id="userNameProfile">{{editorName}}</label>
             </div>
             <br>
             <br>
             <div class="col-lg-6 ">
                 <label for="userDescription">TUS DESCRIPCION</label>
-                <textarea id="userDescription" rows="4" cols="45" maxlength="300">
-    
-                </textarea>
+                <textarea id="userDescription" rows="4" cols="45" maxlength="300" [value]="description" formControlName="userDescription"></textarea>
             </div>
             <br>
             <br>
             <div class="col-lg-6 ">
                 <label for="userHobby">TUS PASATIEMPOS</label>
-                <textarea id="userHobby" rows="4" cols="45" maxlength="300">
-    
-                </textarea>
+                <textarea id="userHobby" rows="4" cols="45" maxlength="300" [value]="hobbies" formControlName="userHobbies"></textarea>
             </div>
             <br>
             <br>
             <div class="col-lg-6">
                 <label for="userLikes">TUS GUSTOS</label>
-                <textarea id="userLikes" rows="4" cols="50" maxlength="300"></textarea>
+                <textarea id="userLikes" rows="4" cols="50" maxlength="300" [value]="likes" formControlName="userLikes"></textarea>
             </div>
         </div>
         <br>

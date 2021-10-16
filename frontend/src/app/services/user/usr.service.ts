@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/objects/classes/usuario/User';
+import {UserUpdate} from "../../../objects/classes/usuario/UserUpdate";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class UsrService {
 
   public getManager(manager: Manager): Observable<Manager> {
     return this.httpClient.post<Manager>(this.API_URL+"get-manager", manager);
+  }
+
+  public updateUser(userUpdate: UserUpdate | User): Observable<User | UserUpdate>{
+    return this.httpClient.post<User | UserUpdate>(this.API_URL+"update-user", userUpdate);
   }
 }

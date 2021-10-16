@@ -3,33 +3,21 @@
 <br>
 <form [formGroup]="formLog" (ngSubmit)="saveUser()">
     <div class="mb-3">
-        <label for="userName">Ingrese su Usuario:</label>
+        <label for="userName">INGRESE EL NOMBRE DE USUARIO:</label>
         <input id="userName" [ngClass]="{'border border-danger': formLog.controls.userName.invalid && !formLog.controls.userName.pristine,
             'form-control': true}" class="form-control" required placeholder="User name" formControlName="userName">
     </div>
-    <div [hidden]="formLog.controls.userName.valid || formLog.controls.userName.pristine"
-        class="alert alert-danger">
-        Usuario requerido
-    </div>
     <div class="mb-3">
-        <label for="passUser">Ingrese Contraseña nueva:</label>
+        <label for="passUser">INGRESE LA CONTRASEÑA:</label>
         <input id="passUser" [ngClass]="{'border border-danger': formLog.controls.passUser.invalid && !formLog.controls.passUser.pristine,
             'form-control': true}" required type="password" class="form-control" placeholder="Password"
             formControlName="passUser">
     </div>
-    <div [hidden]="formLog.controls.passUser.valid || formLog.controls.passUser.pristine"
-        class="alert alert-danger">
-        Contraseña requerida
-    </div>
     <div class="mb-3">
-        <label for="verificacionPass">Escriba nuevamente su contraseña:</label>
+        <label for="verificacionPass">ESCRIBA NUEVAMENTE SU CONTRASEÑA:</label>
         <input id="verificacionPass" [ngClass]="{'border border-danger': formLog.controls.verificacionPass.invalid && !formLog.controls.verificacionPass.pristine,
             'form-control': true}" required type="password" class="form-control" placeholder="Password"
             formControlName="verificacionPass">
-    </div>
-    <div [hidden]="formLog.controls.verificacionPass.valid || formLog.controls.verificacionPass.pristine"
-        class="alert alert-danger">
-        Contraseña requerida
     </div>
     <hr class="mb-4">
     <div class="d-grid gap-2">

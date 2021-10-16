@@ -32,7 +32,8 @@ export class SigninControlComponent implements OnInit {
         console.log(created);
         if(created != null){
           if(created.userType == UserType.EDITOR){
-            localStorage.setItem("editor", JSON.stringify(created));
+            localStorage.setItem("editor", JSON.stringify(created.userName));
+
             this.router.navigate(['/editor-home', created.userName]);
           } else if(created.userType == UserType.ADMIN){
 
@@ -40,7 +41,7 @@ export class SigninControlComponent implements OnInit {
             .subscribe((manager: Manager) =>{
               if(manager != null){
 
-                  localStorage.setItem("manager", JSON.stringify(manager));
+                  localStorage.setItem("manager", JSON.stringify(manager.managerName));
                   this.router.navigate(['/admin-home', manager.managerName]);
 
               } else {

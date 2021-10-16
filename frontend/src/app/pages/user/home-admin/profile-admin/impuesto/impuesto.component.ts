@@ -14,7 +14,6 @@ export class ImpuestoComponent implements OnInit {
   impForm!: FormGroup;
   impValue: Impuesto = new Impuesto(1,0,"");
   constructor(private formBuilder: FormBuilder, private service: ProfileAdminService) {
-    this.upload();
   }
 
   ngOnInit(): void {
@@ -23,7 +22,7 @@ export class ImpuestoComponent implements OnInit {
       updateDate: [null, Validators.required]
     });
 
-
+    this.upload();
 
   }
 
@@ -45,9 +44,11 @@ export class ImpuestoComponent implements OnInit {
   upload(){
     this.service.getImp()
       .subscribe((created:Impuesto) =>{
-        console.log(created);
-        this.impValue = created;
-        console.log(this.impValue.updateDate);
+        if(created != null){
+          console.log(created);
+          this.impValue = created;
+          console.log(this.impValue.updateDate);
+        }
       })
   }
 

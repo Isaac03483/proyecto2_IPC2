@@ -1,4 +1,4 @@
-import { UserType } from './../../enums/user/UserType';
+import { UserType } from '../../enums/user/UserType';
 
 export class User{
 

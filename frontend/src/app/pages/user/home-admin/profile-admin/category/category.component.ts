@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProfileAdminService} from "../../../../../services/user/profile-admin.service";
 import {Category} from "../../../../../../objects/classes/usuario/administrador/Category";
 import {ColumnMode} from "@swimlane/ngx-datatable";
+import {CategoryUpdate} from "../../../../../../objects/classes/usuario/administrador/CategoryUpdate";
 
 @Component({
   selector: 'app-category',
@@ -13,11 +14,9 @@ export class CategoryComponent implements OnInit {
 
   categoryForm!: FormGroup;
   upForm!: FormGroup;
-  delForm!: FormGroup;
-  categoryRecord: number = 0;
   categoryName: string="";
   categoryList: Array<Category> = [];
-  optionCategory: number =0;
+  optionCategory: number =1;
 
   constructor(private formBuilder: FormBuilder, private service: ProfileAdminService) { }
 
@@ -28,14 +27,7 @@ export class CategoryComponent implements OnInit {
     });
 
     this.upForm = this.formBuilder.group({
-      categoryRecord: [null],
       categoryName: [null, Validators.required]
-    });
-
-    this.delForm = this.formBuilder.group({
-      categoryRecord: [null],
-      categoryName:[null]
-
     });
   }
 
@@ -45,11 +37,14 @@ export class CategoryComponent implements OnInit {
 
   addCategory(){
     if(this.categoryForm.valid){
-      this.service.addCategory(new Category(this.categoryForm.value.categoryName, 0))
+      this.service.addCategory(new Category(this.categoryForm.value.categoryName))
         .subscribe((created: Category) =>{
           if(created != null){
             console.log(created);
             window.alert("CATEGORIA AGREGADA CON ÉXITO.");
+            this.categoryForm.reset({
+              "categoryName": null
+            })
             this.setReload();
           } else {
             window.alert("ALGO SALIÓ MAL, PARECE QUE ESTA CATEGORIA YA EXISTE.")
@@ -60,15 +55,7 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  updateInf(record: number){
-    for(var i = 0; i < this.categoryList.length; i++){
-      if(this.categoryList[i].categoryRecord == record){
-        this.categoryRecord = record;
-        this.categoryName= this.categoryList[i].categoryName;
-        return;
-      }
-    }
-  }
+
 
   setReload(){
     this.service.listCategories()
@@ -80,31 +67,40 @@ export class CategoryComponent implements OnInit {
 
   updateCategory(){
     //console.log(this.categoryName);
-    if(this.upForm.valid){
-      this.service.updateCategory(new Category(this.categoryName, this.categoryRecord))
-        .subscribe((created: Category) =>{
-          //console.log(this.categoryRecord);
-          if(created != null){
-            console.log(created);
-            window.alert("CATEGORIA ACTUALIZADA CON ÉXITO.");
-            this.setReload();
-          } else {
-            window.alert("ALGO SALIÓ MAL, PARECE QUE ESTA CATEGORIA YA EXISTE.")
-          }
-        }, (error: any) =>{
-          window.alert("EL REGISTRO DE LA CATEGORÍA NO FUE ENCONTRADO.")
-        });
+    if(this.categoryName !== ""){
+      if(this.upForm.valid){
+        this.service.updateCategory(new CategoryUpdate(this.upForm.value.categoryName, this.categoryName))
+          .subscribe((created: Category | CategoryUpdate) =>{
+            //console.log(this.categoryRecord);
+            if(created != null){
+              console.log(created);
+              window.alert("CATEGORIA ACTUALIZADA CON ÉXITO.");
+              this.upForm.reset({
+                "categoryName": null
+              });
+              this.categoryName = "";
+              this.setReload();
+            } else {
+              window.alert("ALGO SALIÓ MAL, PARECE QUE ESTA CATEGORIA YA EXISTE.")
+            }
+          }, (error: any) =>{
+            window.alert("EL REGISTRO DE LA CATEGORÍA NO FUE ENCONTRADO.")
+          });
+      }
+    } else {
+      window.alert("NO SE HA SELECCIONADO UNA CATEGORÍA.");
     }
   }
   deleteCategory(){
     //console.log(this.delForm.value.categoryName);
-    if(this.delForm.value.categoryName != null){
-      this.service.deleteCategory(new Category(this.categoryName, this.categoryRecord))
+    if(this.categoryName !== ""){
+      this.service.deleteCategory(new Category(this.categoryName))
         .subscribe((created: Category) =>{
           //console.log(this.delForm.value.categoryRecord);
           if(created != null){
             console.log(created);
             window.alert("CATEGORIA ELIMINADA CON ÉXITO.");
+            this.categoryName = "";
             this.setReload();
           } else {
             window.alert("ALGO SALIÓ MAL, PARECE QUE ESTA CATEGORIA NO EXISTE.")
@@ -118,9 +114,8 @@ export class CategoryComponent implements OnInit {
 
   }
 
-  selectInf(option: number, record: number, name:string){
+  selectInf(option: number, name:string){
     this.setOption(option);
-    this.categoryRecord = record;
     this.categoryName = name;
   }
 }

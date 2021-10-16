@@ -34,6 +34,7 @@ export class LoginControlComponent implements OnInit {
           .subscribe((created: User) => {
             console.log(created);
             if(created != null){
+              localStorage.setItem("editor", JSON.stringify(created.userName));
               this.router.navigate(['/editor-home', created.userName]);
             } else{
               alert("Error. este usuario ya existe en la base de datos.");

@@ -1,5 +1,6 @@
-import { HomeEditorService } from './../../../../services/user/home-editor.service';
+import { HomeEditorService } from '../../../../services/user/home-editor.service';
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header-editor',
@@ -8,12 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderEditorComponent implements OnInit {
 
-  constructor(private service: HomeEditorService) { }
+  constructor(private service: HomeEditorService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   setOption(option: number){
     this.service.opcion= option;
+  }
+
+  close(){
+    localStorage.removeItem("editor");
+    this.router.navigate(["/"]);
   }
 }

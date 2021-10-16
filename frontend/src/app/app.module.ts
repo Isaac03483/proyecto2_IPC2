@@ -20,7 +20,10 @@ import { MagazinesAdminComponent } from './pages/user/home-admin/magazines-admin
 import { ReportAdminComponent } from './pages/user/home-admin/report-admin/report-admin.component';
 import { CategoryComponent } from './pages/user/home-admin/profile-admin/category/category.component';
 import { ImpuestoComponent } from './pages/user/home-admin/profile-admin/impuesto/impuesto.component';
-import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import { TagComponent } from './pages/user/home-admin/profile-admin/tag/tag.component';
+import {PdfViewerModule} from "ng2-pdf-viewer";
+import { MyMagazinesComponent } from './pages/user/home-user/my-magazines/my-magazines.component';
+import {AlifeFileToBase64Module} from "alife-file-to-base64";
 
 @NgModule({
   declarations: [
@@ -41,14 +44,17 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
     ReportAdminComponent,
     CategoryComponent,
     ImpuestoComponent,
+    TagComponent,
+    MyMagazinesComponent,
   ],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        NgxDatatableModule
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      PdfViewerModule,
+      AlifeFileToBase64Module
     ],
   providers: [],
   bootstrap: [AppComponent]

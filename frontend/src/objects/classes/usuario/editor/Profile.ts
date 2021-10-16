@@ -3,12 +3,12 @@ import { Byte } from "@angular/compiler/src/util";
 export class Profile{
 
     editorName: string;
-    image: Byte[];
+    image: any;
     hobby: string;
     description: string;
     likes: string;
-    
-    constructor(editorName: string, image: Byte[], hobby: string, description: string, likes: string){
+
+    constructor(editorName: string, image: File | null, hobby: string, description: string, likes: string){
 
         this.editorName=editorName;
         this.image=image;
@@ -16,5 +16,5 @@ export class Profile{
         this.description=description;
         this.likes=likes;
     }
-    
+
 }

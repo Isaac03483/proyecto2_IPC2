@@ -14,7 +14,7 @@ import {UsrService} from "../../../../services/user/usr.service";
 export class HeaderAdminComponent implements OnInit {
 
   manager!: Manager;
-  managerLog: Manager = JSON.parse(<string>localStorage.getItem("manager"));
+  managerLog: Manager = new Manager(JSON.parse(<string>localStorage.getItem("manager")),  ManagerStatus.VIGENTE);
   constructor(private userService: UsrService, private router: Router, private route: ActivatedRoute, private profileAdminService: ProfileAdminService, private service: HomeAdminService) { }
 
   ngOnInit(): void {
