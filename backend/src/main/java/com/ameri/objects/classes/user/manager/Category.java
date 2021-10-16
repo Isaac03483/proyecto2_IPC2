@@ -3,15 +3,19 @@ package com.ameri.objects.classes.user.manager;
 public class Category {
 
     private final String categoryName;
-    private final int categoryRecord;
+    private final String categoryOldName;
 
-    public Category(String categoryName, int categoryRecord){
+    public Category(String categoryName, String categoryOldName){
 
         this.categoryName = categoryName;
-        this.categoryRecord = categoryRecord;
+        this.categoryOldName = categoryOldName;
     }
 
+    public Category(String categoryName){
+        this.categoryName = categoryName;
+        this.categoryOldName=null;
+    }
     public String getCategoryName(){return this.categoryName;}
 
-    public int getCategoryRecord() {return categoryRecord;}
+    public String getCategoryOldName() {return this.categoryOldName;}
 }

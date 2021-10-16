@@ -1,23 +1,28 @@
 package com.ameri.objects.classes.user.editor;
 
-import java.awt.*;
-import java.sql.Blob;
-import java.util.List;
-
+import java.io.InputStream;
 public class Profile {
 
     private final String editorName;
-    private final Blob image;
+    private final byte[] image;
     private final String hobby;
     private final String description;
     private final String likes;
 
-    public Profile(String editorName, Blob image, String hobby, String description, String likes) {
+    public Profile(String editorName, byte[] image, String hobby, String description, String likes) {
         this.editorName = editorName;
         this.image = image;
         this.hobby = hobby;
         this.description = description;
         this.likes = likes;
+    }
+
+    public Profile(String editorName, byte[] image){
+        this.editorName = editorName;
+        this.image = image;
+        this.hobby = "";
+        this.description = "";
+        this.likes = "";
     }
 
     public Profile(String editorName){
@@ -30,7 +35,7 @@ public class Profile {
 
     public String getEditorName() {return editorName;}
 
-    public Blob getImage() {return image;}
+    public byte[] getImage() {return image;}
 
     public String getHobby() {return hobby;}
 

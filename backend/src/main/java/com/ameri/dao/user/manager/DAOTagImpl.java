@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DAOTagImpl implements DAOTag {
 
@@ -25,7 +26,7 @@ public class DAOTagImpl implements DAOTag {
     @Override
     public void insert(Tag tag) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_TAG);
-        query.setString(1, tag.getTagName());
+        query.setString(1, tag.getTagName().toLowerCase());
         query.executeUpdate();
 
     }
@@ -33,20 +34,20 @@ public class DAOTagImpl implements DAOTag {
     @Override
     public void update(Tag tag) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_TAG);
-        query.setString(1, tag.getTagName());
-        query.setString(2, tag.getOldTagName());
+        query.setString(1, tag.getTagName().toLowerCase());
+        query.setString(2, tag.getOldTagName().toLowerCase());
         query.executeUpdate();
     }
 
     @Override
     public void delete(Tag tag) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(DELETE_TAG);
-        query.setString(1, tag.getTagName());
+        query.setString(1, tag.getTagName().toLowerCase());
         query.executeUpdate();
     }
 
     @Override
-    public List<Tag> list(Tag tag) throws SQLException {
+    public List<Tag> list() throws SQLException {
         List<Tag> tags = new ArrayList<>();
         PreparedStatement query = Connector.getConnection().prepareStatement(GET_ALL_TAGS);
         ResultSet result = query.executeQuery();

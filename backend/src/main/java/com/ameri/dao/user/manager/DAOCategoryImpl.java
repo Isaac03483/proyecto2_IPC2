@@ -13,8 +13,8 @@ import java.util.List;
 public class DAOCategoryImpl implements DAOCategory {
 
     private final String INSERT_CATEGORY="INSERT INTO categoria (nombre_categoria) VALUES (?)";
-    private final String UPDATE_CATEGORY="UPDATE categoria SET nombre_categoria=? WHERE registro_categoria=?";
-    private final String DELETE_CATEGORY ="DELETE FROM categoria WHERE registro_categoria=?";
+    private final String UPDATE_CATEGORY="UPDATE categoria SET nombre_categoria=? WHERE nombre_categoria=?";
+    private final String DELETE_CATEGORY ="DELETE FROM categoria WHERE nombre_categoria=?";
     private final String GET_CATEGORY ="SELECT * FROM categoria WHERE nombre_categoria=?";
     private final String ALL = "SELECT * FROM categoria";
 
@@ -25,22 +25,22 @@ public class DAOCategoryImpl implements DAOCategory {
     @Override
     public void insert(Category category) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_CATEGORY);
-        query.setString(1,category.getCategoryName());
+        query.setString(1,category.getCategoryName().toLowerCase());
         query.executeUpdate();
     }
 
     @Override
     public void update(Category category) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_CATEGORY);
-        query.setString(1,category.getCategoryName());
-        query.setInt(2,category.getCategoryRecord());
+        query.setString(1,category.getCategoryName().toLowerCase());
+        query.setString(2,category.getCategoryOldName());
         query.executeUpdate();
     }
 
     @Override
     public void delete(Category category) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(DELETE_CATEGORY);
-        query.setInt(1,category.getCategoryRecord());
+        query.setString(1,category.getCategoryName());
         query.executeUpdate();
     }
 
@@ -51,7 +51,7 @@ public class DAOCategoryImpl implements DAOCategory {
         List<Category> categories = new ArrayList<>();
 
         while(result.next()){
-            categories.add(new Category(result.getString("nombre_categoria"), result.getInt("registro_categoria")));
+            categories.add(new Category(result.getString("nombre_categoria")));
         }
 
         return categories;
@@ -64,7 +64,7 @@ public class DAOCategoryImpl implements DAOCategory {
         ResultSet result = query.executeQuery();
 
         if(result.next()){
-            return new Category(result.getString("nombre_categoria"), result.getInt("registro_categoria"));
+            return new Category(result.getString("nombre_categoria"));
         }
 
         return null;

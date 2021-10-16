@@ -13,6 +13,8 @@ public interface DAOMagazine {
 
     void update(Magazine magazine) throws SQLException;
 
+    void updateInf(Magazine magazine) throws SQLException;
+
     void delete(Magazine magazine) throws SQLException;
 
     List<Magazine> listAllMagazines() throws SQLException;
@@ -22,4 +24,6 @@ public interface DAOMagazine {
     List<Magazine> listMagazinesWhereName(Magazine magazine) throws SQLException;
 
     List<Magazine> listMagazinesWhereCategory(Category category) throws SQLException;
+
+    Magazine getMagazine(Magazine magazine) throws SQLException;
 }

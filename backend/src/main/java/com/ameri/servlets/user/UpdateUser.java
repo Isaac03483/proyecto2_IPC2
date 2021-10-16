@@ -18,12 +18,12 @@ import java.sql.SQLException;
 public class UpdateUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+
         BufferedReader reader = req.getReader();
 
         String body = new Reader(reader).getInformation();

@@ -10,7 +10,9 @@ public interface DAOProfile {
 
     void insert(Profile profile) throws SQLException;
 
-    void update(Profile profile) throws  SQLException;
+    void updateImage(Profile profile) throws SQLException;
+
+    void updateInf(Profile profile) throws  SQLException;
 
     void delete(Profile profile) throws SQLException;
 

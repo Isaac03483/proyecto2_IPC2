@@ -13,7 +13,7 @@ public interface DAOTag {
 
     void delete(Tag tag) throws SQLException;
 
-    List<Tag> list(Tag tag) throws SQLException;
+    List<Tag> list() throws SQLException;
 
     Tag getTag(Tag tag) throws SQLException;
 }

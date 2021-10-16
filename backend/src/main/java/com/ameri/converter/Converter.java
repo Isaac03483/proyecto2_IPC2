@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Converter<T> {
@@ -33,7 +34,11 @@ public abstract class Converter<T> {
         for(T data: object){
             string+=gson.toJson(data, typeConverter)+",";
         }
-        string= string.substring(0, string.length()-1)+"]";
+        if(string.length() > 1){
+            string= string.substring(0, string.length()-1)+"]";
+        } else {
+            string+="]";
+        }
 
         return string;
     }

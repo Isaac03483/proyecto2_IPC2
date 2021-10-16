@@ -23,14 +23,14 @@ public class DAOEditorTagImpl implements DAOEditorTag {
     public void insert(EditorTag editorTag) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(INSERT_TAG);
         query.setString(1,editorTag.getEditorName());
-        query.setString(2,editorTag.getTagName());
+        query.setString(2,editorTag.getTagName().toLowerCase());
         query.executeUpdate();
     }
 
     @Override
     public void update(EditorTag editorTag) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_TAG);
-        query.setString(1,editorTag.getTagName());
+        query.setString(1,editorTag.getTagName().toLowerCase());
         query.setString(2,editorTag.getEditorName());
         query.executeUpdate();
     }

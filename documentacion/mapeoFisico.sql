@@ -16,7 +16,7 @@ CREATE TABLE usuario(
 CREATE TABLE perfil(
 
     nombre_editor VARCHAR(20) PRIMARY KEY NOT NULL,
-    foto BLOB,
+    foto MEDIUMBLOB,
     hobby VARCHAR(300) DEFAULT '',
     descripcion VARCHAR(300) DEFAULT '',
     gustos VARCHAR(300) DEFAULT '',
@@ -41,8 +41,8 @@ CREATE TABLE etiqueta_editor (
 );
 
 CREATE TABLE categoria (
-    registro_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombre_categoria VARCHAR(30) NOT NULL
+   
+    nombre_categoria VARCHAR(30) NOT NULL PRIMARY KEY
 );
 
 
@@ -56,22 +56,19 @@ CREATE TABLE revista(
     descripcion VARCHAR(100) NOT NULL,
     nombre_categoria VARCHAR(30) NOT NULL,
     costo_suscripcion DECIMAL(7,2) NOT NULL,
-    CONSTRAINT revista_editor_fk FOREIGN KEY (nombre_editor)
-    REFERENCES perfil(nombre_editor) ON UPDATE CASCADE
-);
-
-CREATE TABLE caracteristica_revista(
-    registro_revista INT NOT NULL PRIMARY KEY,
-    fecha_aceptacion DATE,
+    fecha_aceptacion DATE DEFAULT '2021-01-01',
     estado_revista ENUM('ACEPTADA','EN ESPERA') NOT NULL,
-    costo_por_dia DECIMAL(7,2),
-    fecha_modificacion_cpd DATE,
+    costo_por_dia DECIMAL(7,2) DEFAULT 0,
+    fecha_modificacion_cpd DATE DEFAULT '2021-01-01',
     like_revista ENUM('SI','NO') NOT NULL,
     comentario ENUM('SI','NO') NOT NULL,
     suscripcion ENUM('SI','NO') NOT NULL,
-    CONSTRAINT caracteristica_revista_fk FOREIGN KEY (registro_revista)
-    REFERENCES revista(registro_revista)
+    CONSTRAINT revista_editor_fk FOREIGN KEY (nombre_editor)
+    REFERENCES perfil(nombre_editor) ON UPDATE CASCADE,
+    CONSTRAINT categoria_revista_fk FOREIGN KEY (nombre_categoria)
+    REFERENCES categoria(nombre_categoria) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 
 CREATE TABLE etiqueta_revista(
 
