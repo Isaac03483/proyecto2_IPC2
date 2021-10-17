@@ -1,0 +1,97 @@
+<div class="container">
+  <nav class="navbar-center navbar-expand-md navbar-light bg-light" role="navigation" >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(1)">AGREGAR NUEVA ETIQUETA</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<hr class="mb-4">
+<div *ngIf="optionTag == 1">
+
+  <h2>AGREGAR NUEVA ETIQUETA</h2>
+  <hr class="mb-4">
+
+  <div>
+    <form [formGroup]="tagForm" (submit)="addTag()">
+
+      <div class="form-group">
+        <div class="form-group">
+          <label for="newTag">NOMBRE DE LA ETIQUETA:</label>
+          <input type="text" class="form-control" [ngClass]="{'border border-danger': tagForm.controls.tagName.invalid && !tagForm.controls.tagName.pristine,
+            'form-control': true}" id="newTag" placeholder="nombre de la etiqueta" formControlName="tagName">
+        </div>
+        <hr class="mb-4">
+        <div class="d-grid gap-2">
+          <button type="submit"  [disabled]="tagForm.invalid"  class="btn btn-outline-dark btn-lg">AGREGAR ETIQUETA</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="optionTag == 2">
+
+  <h2>MODIFICAR ETIQUETA</h2>
+  <hr class="mb-4">
+
+  <div>
+    <form [formGroup]="tagForm" (submit)="updateTagName()">
+
+      <div class="form-group">
+        <div class="form-group">
+          <label for="oldTagName">NOMBRE DE LA ETIQUETA:</label>
+          <input type="text" class="form-control" readonly id="oldTagName" [value]="tagName">
+        </div>
+        <div class="form-group">
+          <label for="newTagName">NUEVO NOMBRE DE LA ETIQUETA:</label>
+          <input type="text" class="form-control" id="newTagName" placeholder="nuevo nombre de la etiqueta" formControlName="tagName">
+        </div>
+        <hr class="mb-4">
+        <div class="d-grid gap-2">
+          <button type="submit"  [disabled]="tagForm.invalid"  class="btn btn-outline-dark btn-lg">MODIFICAR ETIQUETA</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="optionTag == 3">
+
+  <h2>ELIMINAR ETIQUETA</h2>
+  <hr class="mb-4">
+  <div>
+    <label for="deleteTagName">NOMBRE DE LA ETIQUETA:</label>
+    <input type="text" class="form-control" readonly id="deleteTagName" [value]="tagName">
+  </div>
+  <hr class="mb-4">
+  <div class="d-grid gap-2">
+    <button type="submit" (click)="deleteTag()" class="btn btn-outline-dark btn-lg">ELIMINAR ETIQUETA</button>
+  </div>
+</div>
+<br>
+<hr class="mb-4">
+<div class="container col-lg-12">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">ACTUALIZAR</th>
+      <th scope="col">ELIMINAR</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let tag of tagsList">
+      <td>{{tag.tagName}}</td>
+      <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2,tag.tagName)">ACTUALIZAR</button></td>
+      <td><button type="button" class="btn btn-outline-danger" (click)="selectInf(3,tag.tagName)">ELIMINAR</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<br>

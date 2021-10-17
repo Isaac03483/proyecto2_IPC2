@@ -1,0 +1,138 @@
+<div class="container">
+  <nav class="navbar-center navbar-expand-md navbar-light bg-light" role="navigation" >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(1)">AGREGAR NUEVA REVISTA</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(4)">VER LISTA DE REVISTAS PUBLICADAS</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<hr class="mb-4">
+<div *ngIf="option == 1">
+  <h2>AGREGAR UNA REVISTA</h2>
+  <hr class="mb-4">
+  <div>
+    <form [formGroup]="magazineForm" (submit)="addMagazine()">
+      <div>
+        <label for="magazineName">NOMBRE DE LA REVISTA:</label>
+        <input type="text" id="magazineName" class="form-control" placeholder="Ingrese un nombre." formControlName="magazineName">
+      </div>
+      <div>
+        <label for="magazineFile">ARCHIVO:</label>
+        <input type="file" id="magazineFile" (change)="changeFile($event)" class="form-control" placeholder="Suba un archivo PDF.">
+        <br>
+        <div class="container" *ngIf="fileView">
+          <pdf-viewer class="ng2-pdf-viewer-container" [src]="fileView" [show-borders]="true" [zoom]="0.5"></pdf-viewer>
+        </div>
+      </div>
+      <div>
+        <label for="description">DESCRIPCIÓN:</label><br>
+        <textarea class="form-control-lg" id="description" rows="4" cols="45" maxlength="300" formControlName="mDescription"></textarea>
+      </div>
+      <div>
+        <br>
+        <label for="publicationDate">FECHA DE PUBLICACIÓN:</label>
+        <input type="date" id="publicationDate" class="form-control input-size" formControlName="mDate">
+      </div>
+      <div>
+        <br>
+        <label for="magazineCategory">CATEGORÍA:</label>
+        <select id="magazineCategory" class="form-control input-size" formControlName="mCategory">
+          <option>seleccione una categoría.</option>
+          <option *ngFor="let category of categories">{{category.categoryName}}</option>
+        </select>
+      </div>
+      <br>
+      <div>
+        <label for="magazineTags">ETIQUETAS: (seleccione para agregar)</label>
+        <select id="magazineTags" class="form-control input-size">
+          <option>seleccione una etiqueta.</option>
+          <option *ngFor="let tag of tags" value="{{tag.tagName}}" (click)="addTag(tag.tagName)">{{tag.tagName}}</option>
+        </select>
+      </div>
+      <div *ngIf="magazineTagsSelected.length > 0">
+        <br>
+        <label for="magazineTagsSelected">ETIQUETAS SELECCIONADAS: (seleccione para remover)</label>
+        <select id="magazineTagsSelected" class="form-control input-size">
+          <option *ngFor="let tag of magazineTagsSelected" (click)="removeTag(tag.tagName)">{{tag.tagName}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="cost">COSTO POR SUSCRIPCIÓN:</label>
+        <input type="number" id="cost" class="form-control input-size" placeholder="Ingrese el costo." formControlName="mCost">
+      </div>
+      <div>
+        <br>
+        <label for="magazineLike">ACEPTA ME GUSTA:</label>
+        <select id="magazineLike" class="form-control input-size" formControlName="mLike">
+          <option [ngValue]="null">seleccione una opción.</option>
+          <option *ngFor="let like of magazineLikeEnum | keyvalue" [ngValue]="like.key">{{like.value}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="magazineComment">ACEPTA COMENTARIOS:</label>
+        <select id="magazineComment" class="form-control input-size" formControlName="mComment">
+          <option [ngValue]="null">seleccione una opción.</option>
+          <option *ngFor="let comment of magazineCommentEnum | keyvalue" [ngValue]="comment.key">{{comment.value}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="magazineSubscription">ACEPTA SUSCRIPCIONES:</label>
+        <select id="magazineSubscription" class="form-control input-size" formControlName="mSubs">
+          <option [ngValue]="null">seleccione una opción.</option>
+          <option *ngFor="let subs of magazineSubscriptionEnum | keyvalue" [ngValue]="subs.key">{{subs.value}}</option>
+        </select>
+      </div>
+      <hr class="mb-4 input-size">
+      <div class="d-grid gap-2 input-size">
+        <button type="submit" [disabled]="magazineForm.invalid || selectedFile == null" class="btn btn-outline-dark btn-lg">PUBLICAR REVISTA</button>
+      </div>
+    </form>
+  </div>
+</div>
+<br>
+<div *ngIf="option == 2">
+
+  <h2>MODIFICAR INFORMACIÓN DE REVISTA EXISTENTE</h2>
+</div>
+<div *ngIf="option == 3">
+
+  <h2>ELIMINAR REVISTA EXISTENTE</h2>
+</div>
+<div *ngIf="option != 1">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">REGISTRO</th>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">FECHA DE PUBLICACIÓN</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">MODIFICAR</th>
+      <th scope="col">ELIMINAR</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let magazine of editorMagazines">
+      <td>{{magazine.magazineRecord}}</td>
+      <td>{{magazine.magazineName}}</td>
+      <td>{{magazine.publicationDate}}</td>
+      <td>{{magazine.status}}</td>
+      <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2, magazine)">ACTUALIZAR</button></td>
+      <td><button type="button" class="btn btn-outline-danger" (click)="selectInf(3, magazine)">ELIMINAR</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
