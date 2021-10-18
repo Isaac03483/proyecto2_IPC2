@@ -6,11 +6,17 @@ import com.ameri.objects.classes.magazine.MagazineTag;
 import com.ameri.objects.interfaces.magazine.DAOMagazineTag;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAOMagazineTagImpl implements DAOMagazineTag {
 
     private final String INSERT_MAGAZINE_TAG = "INSERT INTO etiqueta_revista (registro_revista, nombre_etiqueta) VALUES (?,?)";
+    private final String DELETE_MAGAZINE_TAG = "DELETE FROM etiqueta_revista WHERE registro_revista=?";
+    private final String GET_MAGAZINE_TAGS = "SELECT * FROM etiqueta_revista WHERE registro_revista=?";
+
     public DAOMagazineTagImpl() {
         new Connector();
     }
@@ -31,12 +37,25 @@ public class DAOMagazineTagImpl implements DAOMagazineTag {
     }
 
     @Override
-    public void delete(MagazineTag tag) throws SQLException {
+    public void delete(Magazine magazine) throws SQLException {
 
+        PreparedStatement query = Connector.getConnection().prepareStatement(DELETE_MAGAZINE_TAG);
+        query.setInt(1, magazine.getMagazineRecord());
+        query.executeUpdate();
     }
 
     @Override
-    public void listMagazineTags(Magazine magazine) throws SQLException {
+    public List<MagazineTag> listMagazineTags(Magazine magazine) throws SQLException {
+        List<MagazineTag> list = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_MAGAZINE_TAGS);
+        query.setInt(1, magazine.getMagazineRecord());
+        ResultSet resultSet = query.executeQuery();
 
+        while (resultSet.next()){
+            list.add(new MagazineTag(resultSet.getInt("registro_revista"), resultSet.getString("nombre_etiqueta")));
+
+        }
+
+        return  list;
     }
 }

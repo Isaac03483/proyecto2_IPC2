@@ -4,6 +4,7 @@ import com.ameri.objects.classes.magazine.Magazine;
 import com.ameri.objects.classes.magazine.MagazineTag;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface DAOMagazineTag {
 
@@ -11,7 +12,7 @@ public interface DAOMagazineTag {
 
     void update(MagazineTag tag) throws SQLException;
 
-    void delete(MagazineTag tag) throws SQLException;
+    void delete(Magazine tag) throws SQLException;
 
-    void listMagazineTags(Magazine magazine) throws SQLException;
+    List<MagazineTag> listMagazineTags(Magazine magazine) throws SQLException;
 }

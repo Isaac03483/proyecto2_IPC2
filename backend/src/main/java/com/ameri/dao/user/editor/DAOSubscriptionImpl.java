@@ -11,8 +11,8 @@ import java.util.List;
 
 public class DAOSubscriptionImpl implements DAOSubscription {
 
-    private final String INSERT_SUBSCRIPTION = "INSERT INTO suscripcion (nombre_suscriptor, registro_revista, total_pago, intervalo_pago, fecha_registro,estado_suscripcion,like_suscripcion) VALUES (?,?,?,?,?,?,?)";
-    private final String UPDATE_SUBSCRIPTION = "UPDATE suscripcion SET total_pago=?, intervalo_pago=?,estado_suscripcion=?,like_suscripcion=? WHERE registro_suscripcion=?";
+    private final String INSERT_SUBSCRIPTION = "INSERT INTO suscripcion (nombre_suscriptor, registro_revista, total_pago, intervalo_pago, fecha_registro, fecha_fin,estado_suscripcion,like_suscripcion) VALUES (?,?,?,?,?,?,?,?)";
+    private final String UPDATE_SUBSCRIPTION = "UPDATE suscripcion SET total_pago=?, intervalo_pago=?,estado_suscripcion=?,like_suscripcion=?, fecha_fin=? WHERE registro_suscripcion=?";
 
     public DAOSubscriptionImpl(){
         new Connector();
@@ -26,8 +26,9 @@ public class DAOSubscriptionImpl implements DAOSubscription {
         query.setBigDecimal(3,subscription.getTotalPay());
         query.setString(4,subscription.getPaymentInterval().getInterval());
         query.setDate(5,subscription.getRecordDate());
-        query.setString(6,subscription.getSubscriptionStatus().getStatus());
-        query.setString(7,subscription.getSubscriptionLike().getStatus());
+        query.setDate(6,subscription.getEndDate());
+        query.setString(7,subscription.getSubscriptionStatus().getStatus());
+        query.setString(8,subscription.getSubscriptionLike().getStatus());
         query.executeUpdate();
     }
 
@@ -37,7 +38,8 @@ public class DAOSubscriptionImpl implements DAOSubscription {
         query.setBigDecimal(1,subscription.getTotalPay());
         query.setString(2,subscription.getPaymentInterval().getInterval());
         query.setString(3,subscription.getSubscriptionStatus().getStatus());
-        query.setString(4,subscription.getSubscriptionLike().getStatus());
+        query.setDate(4,subscription.getEndDate());
+        query.setString(5,subscription.getSubscriptionLike().getStatus());
         query.executeUpdate();
     }
 

@@ -68,6 +68,78 @@ public class Magazine {
         this.subscription = subscription;
     }
 
+    public Magazine(int magazineRecord) {
+        this.magazineRecord = magazineRecord;
+        this.editorName = null;
+        this.magazineName = null;
+        this.file = null;
+        this.publicationDate = null;
+        this.description = null;
+        this.category = null;
+        this.acceptDate = null;
+        this.updateDate = null;
+        this.dayCost = null;
+        this.subscriptionCost = null;
+        this.status = null;
+        this.like = null;
+        this.comment = null;
+        this.subscription = null;
+    }
+
+    public Magazine(String magazineName, Category category) {
+        this.magazineRecord = 0;
+        this.editorName = null;
+        this.magazineName = magazineName;
+        this.file = null;
+        this.publicationDate = null;
+        this.description = null;
+        this.category = category;
+        this.acceptDate = null;
+        this.updateDate = null;
+        this.dayCost = null;
+        this.subscriptionCost = null;
+        this.status = null;
+        this.like = null;
+        this.comment = null;
+        this.subscription = null;
+    }
+
+    public Magazine(String magazineName) {
+        this.magazineRecord = 0;
+        this.editorName = null;
+        this.magazineName = magazineName;
+        this.file = null;
+        this.publicationDate = null;
+        this.description = null;
+        this.category = null;
+        this.acceptDate = null;
+        this.updateDate = null;
+        this.dayCost = null;
+        this.subscriptionCost = null;
+        this.status = null;
+        this.like = null;
+        this.comment = null;
+        this.subscription = null;
+    }
+
+    public Magazine(int magazineRecord, String editorName, String magazineName, String publicationDate, String description, Category category, BigDecimal subscriptionCost, String acceptDate, MagazineStatus status, BigDecimal dayCost, String updateDate, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
+        this.magazineRecord = magazineRecord;
+        this.editorName = editorName;
+        this.magazineName = magazineName;
+        this.file = null;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.category = category;
+        this.subscriptionCost = subscriptionCost;
+        this.acceptDate = acceptDate;
+        this.status = status;
+        this.dayCost = dayCost;
+        this.updateDate = updateDate;
+        this.like = like;
+        this.comment = comment;
+        this.subscription = subscription;
+    }
+
     public int getMagazineRecord() {return magazineRecord;}
 
     public String getEditorName() {return editorName;}
@@ -76,7 +148,9 @@ public class Magazine {
 
     public byte[] getFile() {return file;}
 
-    public Date getPublicationDate() {return Date.valueOf(publicationDate);}
+    public Date getPublicationDate() {
+        assert publicationDate != null;
+        return Date.valueOf(publicationDate);}
 
     public String getDescription() {return description;}
 
@@ -84,13 +158,17 @@ public class Magazine {
 
     public BigDecimal getSubscriptionCost() {return subscriptionCost;}
 
-    public Date getAcceptDate() {return Date.valueOf(acceptDate);}
+    public Date getAcceptDate() {
+        assert acceptDate != null;
+        return Date.valueOf(acceptDate);}
 
     public MagazineStatus getStatus() {return status;}
 
     public BigDecimal getDayCost() {return dayCost;}
 
-    public Date getUpdateDate() {return Date.valueOf(updateDate);}
+    public Date getUpdateDate() {
+        assert updateDate != null;
+        return Date.valueOf(updateDate);}
 
     public MagazineLike getLike() {return like;}
 

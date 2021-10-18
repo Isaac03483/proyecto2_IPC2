@@ -90,6 +90,7 @@ CREATE TABLE suscripcion(
     total_pago DECIMAL(7,2),
     intervalo_pago ENUM('MENSUAL','ANUAL') NOT NULL,
     fecha_registro DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
     estado_suscripcion ENUM('VIGENTE','CANCELADO') NOT NULL,
     like_suscripcion ENUM('SI','NO') NOT NULL,
     PRIMARY KEY(registro_suscripcion,nombre_suscriptor,registro_revista),

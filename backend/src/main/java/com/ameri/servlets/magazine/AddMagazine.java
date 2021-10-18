@@ -67,8 +67,14 @@ public class AddMagazine extends HttpServlet {
         Magazine magazine = new Magazine(editorName,magazineName, bytesData,publicationDate, description,category,subscriptionCost, status, like, comment, subscription);
 
         try {
-            new DAOMagazineImpl().insert(magazine);
-            resp.getWriter().write(new MagazineConverter(Magazine.class).toJson(magazine));
+            DAOMagazineImpl daoMagazine = new DAOMagazineImpl();
+
+            if(daoMagazine.getMagazine(magazine) == null){
+                daoMagazine.insert(magazine);
+                Magazine sameMagazine = daoMagazine.getMagazine(magazine);
+                resp.getWriter().write(new MagazineConverter(Magazine.class).toJson(sameMagazine));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

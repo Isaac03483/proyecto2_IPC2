@@ -23,11 +23,13 @@ com/ameri/objects/interfaces/user/manager/DAOManager.class
 com/ameri/objects/interfaces/user/editor/DAOEditorAccount.class
 com/ameri/servlets/user/UpdateUser.class
 com/ameri/servlets/user/manager/tag/DeleteTag.class
+com/ameri/servlets/user/editor/AddEditorTag.class
 com/ameri/servlets/user/editor/ProfileServlet.class
 com/ameri/objects/interfaces/user/manager/DAOCategory.class
 com/ameri/objects/enums/ad/AdStatus.class
 com/ameri/dao/ad/DAOAdImpl.class
 com/ameri/dao/user/manager/DAOCategoryImpl.class
+com/ameri/servlets/magazine/DeleteMagazineTag.class
 com/ameri/objects/enums/magazine/MagazineComment.class
 com/ameri/database/Connector.class
 com/ameri/dao/user/manager/DAOImpuestoImpl.class
@@ -59,8 +61,10 @@ com/ameri/objects/classes/user/manager/Tag.class
 com/ameri/objects/classes/user/editor/Profile.class
 com/ameri/objects/classes/operation/Reader.class
 com/ameri/converter/ads/AdsTypeConverter.class
+com/ameri/servlets/magazine/DeleteMagazine.class
 com/ameri/converter/user/manager/CategoryConverter.class
 com/ameri/objects/classes/magazine/Magazine.class
+com/ameri/servlets/magazine/AcceptMagazine.class
 com/ameri/objects/interfaces/ad/DAOAdType.class
 com/ameri/servlets/user/manager/ManagerLog.class
 com/ameri/objects/interfaces/user/editor/DAOEditorTag.class
@@ -75,8 +79,11 @@ com/ameri/converter/ads/AdConverter.class
 com/ameri/objects/enums/magazine/MagazineStatus.class
 com/ameri/converter/magazine/MagazineConverter.class
 com/ameri/servlets/user/manager/DeleteManager.class
+com/ameri/servlets/user/editor/DeleteEditorTag.class
 com/ameri/dao/magazine/DAOMagazineTagImpl.class
+com/ameri/servlets/magazine/UpdateMagazine.class
 com/ameri/servlets/user/editor/UpdateImage.class
+com/ameri/servlets/magazine/SearchMagazine.class
 com/ameri/dao/user/editor/DAOSubscriptionImpl.class
 com/ameri/dao/user/manager/DAOManagerImpl.class
 com/ameri/converter/user/UserConverter.class

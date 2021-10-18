@@ -23,7 +23,9 @@ public interface DAOMagazine {
 
     List<Magazine> listMagazinesWhereName(Magazine magazine) throws SQLException;
 
-    List<Magazine> listMagazinesWhereCategory(Category category) throws SQLException;
+    List<Magazine> listMagazinesWhereCategory(Magazine magazine) throws SQLException;
+
+    List<Magazine> listMagazinesWhereStatus(String status) throws SQLException;
 
     Magazine getMagazine(Magazine magazine) throws SQLException;
 }

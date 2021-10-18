@@ -15,17 +15,19 @@ public class Subscription {
     private final int magazineRecord;
     private final BigDecimal totalPay;
     private final PaymentEnum paymentInterval;
-    private final Date recordDate;
+    private final String recordDate;
+    private final String endDate;
     private final SubscriptionStatus subscriptionStatus;
     private final SubscriptionLike subscriptionLike;
 
-    public Subscription(int subscriptionRecord, String subscriberName, int magazineRecord, BigDecimal totalPay, PaymentEnum paymentInterval, Date recordDate, SubscriptionStatus subscriptionStatus, SubscriptionLike subscriptionLike) {
+    public Subscription(int subscriptionRecord, String subscriberName, int magazineRecord, BigDecimal totalPay, PaymentEnum paymentInterval, String recordDate, String endDate, SubscriptionStatus subscriptionStatus, SubscriptionLike subscriptionLike) {
         this.subscriptionRecord = subscriptionRecord;
         this.subscriberName = subscriberName;
         this.magazineRecord = magazineRecord;
         this.totalPay = totalPay;
         this.paymentInterval = paymentInterval;
         this.recordDate = recordDate;
+        this.endDate = endDate;
         this.subscriptionStatus = subscriptionStatus;
         this.subscriptionLike = subscriptionLike;
     }
@@ -40,7 +42,9 @@ public class Subscription {
 
     public PaymentEnum getPaymentInterval() {return paymentInterval;}
 
-    public Date getRecordDate() {return recordDate;}
+    public Date getRecordDate() {return Date.valueOf(recordDate);}
+
+    public Date getEndDate() {return Date.valueOf(endDate);}
 
     public SubscriptionStatus getSubscriptionStatus() {return subscriptionStatus;}
 
