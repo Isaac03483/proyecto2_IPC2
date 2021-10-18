@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <h4>INFORMACIÓN</h4>
+  <div>
+    <strong><label for="magazineName">NOMBRE DE LA REVISTA:</label></strong>
+    <label id="magazineName">{{magazine.magazineName}}</label>
+  </div>
+  <div>
+    <strong><label for="magazineSubscriptionCost">COSTO DE LA SUSCRIPCIÓN:</label></strong>
+    <label id="magazineSubscriptionCost">{{magazine.subscriptionCost}}</label>
+  </div>
+  <div>
+    <strong><label for="magazineEditorName">NOMBRE DEL EDITOR:</label></strong>
+    <label id="magazineEditorName" (click)="showInformation()">{{magazine.editorName}}</label>
+  </div>
+</div>

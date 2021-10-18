@@ -70,7 +70,7 @@
 <br>
 <hr class="mb-4">
 
-<div class="container col-lg-12">
+<div class="container col-lg-12 table-style">
   <table class="table table-striped">
     <thead>
     <tr>
@@ -80,7 +80,7 @@
     </tr>
     </thead>
 
-    <tbody >
+    <tbody>
     <tr *ngFor="let category of categoryList">
       <td>{{category.categoryName}}</td>
       <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2, category.categoryName)">ACTUALIZAR</button></td>

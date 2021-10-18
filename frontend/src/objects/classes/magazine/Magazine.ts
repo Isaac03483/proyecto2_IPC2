@@ -10,7 +10,7 @@ export class Magazine{
     magazineRecord: number;
     editorName:string;
     magazineName:string;
-    file: File | null;
+    file: any;
     publicationDate: string;
     description: string;
     category: Category;

@@ -8,3 +8,8 @@
 .input-size {
   width: 650px !important;
 }
+
+.table-style{
+  overflow: scroll;
+  height: 500px;
+}

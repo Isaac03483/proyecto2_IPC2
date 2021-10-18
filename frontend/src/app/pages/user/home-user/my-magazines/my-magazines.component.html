@@ -104,35 +104,119 @@
 <div *ngIf="option == 2">
 
   <h2>MODIFICAR INFORMACIÓN DE REVISTA EXISTENTE</h2>
+  <h4><strong>NOTA: </strong></h4>
+  <h6>SI NO DESEA MODIFICAR UN CAMPO PUEDE DEJAR DICHO ESPACIO EN BLANCO.</h6>
+  <hr class="mb-4">
+  <div>
+      <div>
+        <label for="magazineUpdateName">NOMBRE DE LA REVISTA:</label>
+        <input type="text" id="magazineUpdateName" value="{{magazineSelected.magazineName}}" (keyup)="updateName()"  class="form-control">
+      </div>
+      <div>
+        <label for="descriptionToUpdate">DESCRIPCIÓN:</label><br>
+        <textarea class="form-control-lg" id="descriptionToUpdate" value="{{magazineSelected.description}}" (keyup)="updateDescription()" rows="4" cols="45" maxlength="300"></textarea>
+      </div>
+      <div>
+        <br>
+        <label for="magazineCategoryToUpdate">CAMBIAR CATEGORÍA: OPCION ANTERIOR {{magazineSelected.category.categoryName}}</label>
+        <select id="magazineCategoryToUpdate" class="form-control">
+          <option>seleccione una categoria.</option>
+          <option *ngFor="let category of categories" (click)="updateCategory(category)">{{category.categoryName}}</option>
+        </select>
+      </div>
+      <br>
+      <div>
+        <label for="magazineTagsUpdate">ETIQUETAS: (seleccione para agregar)</label>
+        <select id="magazineTagsUpdate" class="form-control">
+          <option>seleccione una etiqueta.</option>
+          <option *ngFor="let tag of tags" value="{{tag.tagName}}" (click)="updateTag(tag.tagName)">{{tag.tagName}}</option>
+        </select>
+      </div>
+      <div *ngIf="magazineTagsUpdate.length > 0">
+        <br>
+        <label for="magazineTagsSelectedToUpdate">ETIQUETAS SELECCIONADAS: (seleccione para remover)</label>
+        <select id="magazineTagsSelectedToUpdate" class="form-control">
+          <option *ngFor="let tag of magazineTagsUpdate" (click)="removeTagToUpdate(tag.tagName)">{{tag.tagName}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="costToUpdate">COSTO POR SUSCRIPCIÓN:</label>
+        <input type="number" id="costToUpdate" (keyup)="updateSubscriptionCost()" value="{{magazineSelected.subscriptionCost}}" class="form-control" placeholder="Ingrese el costo.">
+      </div>
+      <div>
+        <br>
+        <label for="magazineLikeToUpdate">ACEPTA ME GUSTA: OPCION ANTERIOR({{magazineSelected.like}})</label>
+        <select id="magazineLikeToUpdate" class="form-control">
+          <option [ngValue]="null">seleccione una opción.</option>
+          <option *ngFor="let like of magazineLikeEnum | keyvalue" [ngValue]="like.key" (click)="updateLike(like.value)">{{like.value}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="magazineCommentToUpdate">ACEPTA COMENTARIOS: OPCION ANTERIOR({{magazineSelected.comment}})</label>
+        <select id="magazineCommentToUpdate" class="form-control">
+          <option [ngValue]="null">seleccione una opción.</option>
+          <option *ngFor="let comment of magazineCommentEnum | keyvalue" [ngValue]="comment.key" (click)="updateComment(comment.value)">{{comment.value}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="magazineSubscriptionToUpdate">ACEPTA SUSCRIPCIONES: OPCION ANTERIOR({{magazineSelected.subscription}})</label>
+        <select id="magazineSubscriptionToUpdate" class="form-control">
+          <option [ngValue]="null">seleccione una opción.</option>
+          <option *ngFor="let subs of magazineSubscriptionEnum | keyvalue" [ngValue]="subs.key" (click)="updateSubscription(subs.value)">{{subs.value}}</option>
+        </select>
+      </div>
+      <hr class="mb-4">
+      <div class="d-grid gap-2">
+        <button type="submit" (click)="updateMagazine()" class="btn btn-outline-dark btn-lg">MODIFICAR REVISTA</button>
+      </div>
+  </div>
 </div>
 <div *ngIf="option == 3">
 
   <h2>ELIMINAR REVISTA EXISTENTE</h2>
+  <hr class="mb-4">
+  <div class="form-control">
+    <label for="deleteMagazineRecord">REGISTRO DE REVISTA:</label>
+    <input readonly id="deleteMagazineRecord" [value]="magazineSelected.magazineRecord" class="form-control">
+  </div>
+  <div>
+    <label for="deleteMagazineName">NOMBRE DE LA REVISTA:</label>
+    <input readonly id="deleteMagazineName" [value]="magazineSelected.magazineName" class="form-control">
+  </div>
+  <hr class="mb-4">
+  <div class="d-grid gap-2">
+    <button type="button" (click)="deleteMagazine()" class="btn btn-outline-dark btn-lg">ELIMINAR REVISTA</button>
+  </div>
 </div>
 <div *ngIf="option != 1">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">REGISTRO</th>
-      <th scope="col">NOMBRE</th>
-      <th scope="col">FECHA DE PUBLICACIÓN</th>
-      <th scope="col">ESTADO</th>
-      <th scope="col">MODIFICAR</th>
-      <th scope="col">ELIMINAR</th>
-    </tr>
-    </thead>
+  <div class="table-style">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">REGISTRO</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">FECHA DE PUBLICACIÓN</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">MODIFICAR</th>
+        <th scope="col">ELIMINAR</th>
+      </tr>
+      </thead>
 
-    <tbody>
-    <tr *ngFor="let magazine of editorMagazines">
-      <td>{{magazine.magazineRecord}}</td>
-      <td>{{magazine.magazineName}}</td>
-      <td>{{magazine.publicationDate}}</td>
-      <td>{{magazine.status}}</td>
-      <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2, magazine)">ACTUALIZAR</button></td>
-      <td><button type="button" class="btn btn-outline-danger" (click)="selectInf(3, magazine)">ELIMINAR</button></td>
-    </tr>
-    </tbody>
-  </table>
+      <tbody>
+      <tr *ngFor="let magazine of editorMagazines">
+        <td>{{magazine.magazineRecord}}</td>
+        <td>{{magazine.magazineName}}</td>
+        <td>{{magazine.publicationDate}}</td>
+        <td>{{magazine.status}}</td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2, magazine)">ACTUALIZAR</button></td>
+        <td><button type="button" class="btn btn-outline-danger" (click)="selectInf(3, magazine)">ELIMINAR</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <br>
 <br>

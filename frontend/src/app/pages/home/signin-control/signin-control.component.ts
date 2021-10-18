@@ -29,7 +29,6 @@ export class SigninControlComponent implements OnInit {
     if(this.formSign.valid){
       this.service.getUser(new User(this.formSign.value.userName, this.formSign.value.passUser, UserType.ADMIN))
       .subscribe((created: User) => {
-        console.log(created);
         if(created != null){
           if(created.userType == UserType.EDITOR){
             localStorage.setItem("editor", JSON.stringify(created.userName));

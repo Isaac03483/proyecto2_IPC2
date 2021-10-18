@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {User} from "../../../objects/classes/usuario/User";
 import {Observable} from "rxjs";
 import {Profile} from "../../../objects/classes/usuario/editor/Profile";
+import {EditorTag} from "../../../objects/classes/usuario/editor/EditorTag";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,18 @@ export class ProfileEditorService {
     let paramsInfo = new HttpParams().append("editorName", JSON.parse(<string>localStorage.getItem("editor")));
     formData.append('file', fileToUpload, "image-name");
     return this.httpClient.post<Object>(this.API_URL+"update-image", formData,{params: paramsInfo});
+  }
+
+  addTag(tag: EditorTag): Observable<EditorTag>{
+    return this.httpClient.post<EditorTag>(this.API_URL+"add-editor-tag", tag);
+  }
+
+  deleteTag(tag: EditorTag): Observable<EditorTag>{
+    return this.httpClient.post<EditorTag>(this.API_URL+"delete-editor-tag", tag);
+  }
+
+  getEditorTags(editorName: string): Observable<Array<EditorTag>>{
+    let params = new HttpParams().append("editorName", editorName);
+    return this.httpClient.get<Array<EditorTag>>(this.API_URL+"add-editor-tag", {params:params});
   }
 }

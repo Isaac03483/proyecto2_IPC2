@@ -10,6 +10,8 @@ import {MagazineService} from "../../../../services/magazine/magazine.service";
 import {Magazine} from "../../../../../objects/classes/magazine/Magazine";
 import {formatDate} from "@angular/common";
 import {MagazineStatus} from "../../../../../objects/enums/magazine/MagazineStatus";
+import {MagazineTag} from "../../../../../objects/classes/magazine/MagazineTag";
+import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: 'app-my-magazines',
@@ -25,6 +27,8 @@ export class MyMagazinesComponent implements OnInit {
   categories: Array<Category> = [];
   tags: Array<Tag> = [];
   magazineTagsSelected: Array<Tag> = [];
+  magazineTagsUpdate: Array<MagazineTag> =[];
+  magazineSelected!: Magazine;
   editorMagazines: Array<Magazine> = [];
   magazineForm!: FormGroup;
   magazineLikeEnum = MagazineLike;
@@ -47,6 +51,7 @@ export class MyMagazinesComponent implements OnInit {
       mComment: [null, Validators.required],
       mSubs: [null, Validators.required]
     });
+
     this.getCategories();
     this.getTags();
     this.getMagazines()
@@ -119,16 +124,38 @@ export class MyMagazinesComponent implements OnInit {
   addMagazine() {
     if(this.magazineForm.valid){
       if(this.selectedFile != null){
-
-        console.log(this.magazineForm.value.mCategory);
-        this.magazineService.addMagazine(new Magazine(0, this.editorName, this.magazineForm.value.magazineName, this.file,formatDate(new Date(this.magazineForm.value.mDate), "yyyy-MM-dd","en-US"),
+        this.magazineService.addMagazine(new Magazine(0, this.editorName, this.magazineForm.value.magazineName, this.file,formatDate(this.magazineForm.value.mDate, 'yyyy-MM-dd','en-US'),
           this.magazineForm.value.mDescription,new Category(this.magazineForm.value.mCategory),this.magazineForm.value.mCost,"",MagazineStatus.ENESPERA, 0,"",this.magazineForm.value.mLike,this.magazineForm.value.mComment, this.magazineForm.value.mSubs), this.selectedFile)
-          .subscribe((created:Object) =>{
+          .subscribe((created:Magazine) =>{
             if(created != null){
-              window.alert("REVISTA GUARDADA CON ÉXITO.");
+
+              for(var i = 0; i < this.magazineTagsSelected.length; i++){
+                this.magazineService.addMagazineTags(new MagazineTag(created.magazineRecord,this.magazineTagsSelected[i].tagName))
+                  .subscribe((magazineTag: MagazineTag) =>{
+                    if(magazineTag == null){
+                      window.alert("NO SE PUDO AGREGAR LA ETIQUETA: "+this.magazineTagsSelected[i].tagName);
+                    }
+                  });
+              }
+
+              window.alert("REVISTA CREADA CON ÉXITO");
+              this.magazineForm.reset({
+                "magazineName": null,
+                "mCategory":null,
+                "mDescription": null,
+                "mDate": null,
+                "mCost": null,
+                "mLike": null,
+                "mComment": null,
+                "mSubs": null
+              });
+              this.magazineTagsSelected =[];
+              this.fileView = null;
               this.getMagazines();
-              console.log(created);
+
             }
+          },(error: any)=>{
+
           })
       }
     }
@@ -137,16 +164,121 @@ export class MyMagazinesComponent implements OnInit {
   getMagazines(){
 
     this.magazineService.getMagazines()
-      .subscribe(data =>{
+      .subscribe((data:Array<Magazine>) =>{
         if(data != null){
           this.editorMagazines = data;
-          console.log(this.editorMagazines[0].magazineName);
         }
       })
   }
 
   selectInf(number: number, magazine: Magazine) {
     this.option = number;
-    console.log(magazine);
+    this.magazineSelected = magazine;
+    this.magazineService.getMagazineTags(this.magazineSelected)
+      .subscribe((created:Array<MagazineTag>) =>{
+        if(created != null){
+          this.magazineTagsUpdate = created;
+        }
+      });
+
+  }
+
+  updateTag(tagName: string) {
+    let found: boolean = false;
+
+    for(var i = 0; i < this.magazineTagsUpdate.length; i++){
+      if(this.magazineTagsUpdate[i].tagName === tagName){
+        found = true;
+        break;
+      }
+    }
+
+    if(!found){
+      this.magazineTagsUpdate.push(new MagazineTag(this.magazineSelected.magazineRecord,tagName));
+    }
+  }
+
+  removeTagToUpdate(tagName: string) {
+    this.magazineTagsUpdate = this.magazineTagsUpdate.filter(item => item.tagName !== tagName);
+    console.log(this.magazineTagsUpdate+" "+this.magazineTagsUpdate.length);
+  }
+
+  updateMagazine() {
+    if(this.magazineSelected != null){
+      console.log(this.magazineSelected.magazineRecord);
+        this.magazineService.updateMagazine(new Magazine(this.magazineSelected.magazineRecord, this.editorName, this.magazineSelected.magazineName, null,formatDate(this.magazineSelected.publicationDate, 'yyyy-MM-dd','en-US'),
+          this.magazineSelected.description,this.magazineSelected.category,this.magazineSelected.subscriptionCost,"",this.magazineSelected.status, 0,"",this.magazineSelected.like,this.magazineSelected.comment, this.magazineSelected.subscription))
+          .subscribe((created:Magazine) =>{
+            if(created != null){
+              this.magazineService.deleteAllMagazineTags(this.magazineSelected)
+                .subscribe((data:Magazine) =>{
+
+                    for(var i = 0; i < this.magazineTagsUpdate.length; i++){
+                      this.magazineService.addMagazineTags(new MagazineTag(created.magazineRecord,this.magazineTagsUpdate[i].tagName))
+                        .subscribe((magazineTag: MagazineTag) =>{
+                          if(magazineTag == null){
+                            window.alert("NO SE PUDO AGREGAR LA ETIQUETA: "+this.magazineTagsUpdate[i].tagName);
+                          }
+                        });
+                    }
+
+                });
+              window.alert("REVISTA ACTUALIZADA CON ÉXITO");
+              this.magazineTagsUpdate =[];
+              this.option = 4;
+              this.getMagazines();
+
+            }
+          },(error: any)=>{
+
+          })
+
+    }
+  }
+
+  updateCategory(category: Category) {
+    this.magazineSelected.category = category;
+  }
+
+  updateDescription() {
+    this.magazineSelected.description = (document.getElementById("descriptionToUpdate") as HTMLInputElement).value;
+    console.log(this.magazineSelected.description);
+  }
+
+  updateName() {
+    this.magazineSelected.magazineName = (document.getElementById("magazineUpdateName") as HTMLInputElement).value;
+    console.log(this.magazineSelected.magazineName);
+  }
+
+  updateSubscriptionCost() {
+    this.magazineSelected.subscriptionCost = Number(((document.getElementById("costToUpdate") as HTMLInputElement).value));
+    console.log(this.magazineSelected.subscriptionCost);
+  }
+
+  updateLike(value: MagazineLike.SI | MagazineLike.NO) {
+
+    this.magazineSelected.like = value;
+    console.log(this.magazineSelected.like);
+  }
+
+  updateSubscription(value: MagazineSubscription.SI | MagazineSubscription.NO) {
+    this.magazineSelected.subscription = value;
+  }
+
+  updateComment(value: MagazineComment.SI | MagazineComment.NO) {
+    this.magazineSelected.comment = value;
+  }
+
+  deleteMagazine() {
+    if(this.magazineSelected != null){
+
+      this.magazineService.deleteMagazine(this.magazineSelected)
+        .subscribe((created: Magazine)=>{
+          if(created != null){
+            window.alert("REVISTA ELIMINADA CON ÉXITO.");
+            this.getMagazines();
+          }
+        });
+    }
   }
 }

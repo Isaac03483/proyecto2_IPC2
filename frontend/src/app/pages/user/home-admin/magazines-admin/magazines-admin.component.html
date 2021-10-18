@@ -1,1 +1,132 @@
-<p>magazines-admin works!</p>
+<div class="container">
+  <nav class="navbar-center navbar-expand-md navbar-light bg-light" role="navigation" >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(1)">VER REVISTAS EN ESPERA.</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(2)">MODIFICAR COSTO DE REVISTAS.</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<hr class="mb-4">
+<div *ngIf="optionForm ==1">
+
+  <h2>ACEPTAR UNA REVISTA EN ESPERA.</h2>
+  <hr class="mb-4">
+
+  <div>
+    <label><strong>REGISTRO DE REVISTA:</strong></label>
+    <label>{{magazineSelected.magazineRecord}}</label>
+  </div>
+  <div>
+    <label><strong>NOMBRE DE REVISTA:</strong></label>
+    <label>{{magazineSelected.magazineName}}</label>
+  </div>
+  <form [formGroup]="acceptForm" (submit)="acceptMagazine()">
+    <div>
+      <br>
+      <label for="dayCost">COSTO POR DÍA:</label>
+      <input type="number" id="dayCost" class="form-control" formControlName="dayCost">
+    </div>
+    <div>
+      <br>
+      <label for="acceptDay">FECHA DE ACEPTACIÓN:</label>
+      <input type="date" id="acceptDay" class="form-control" formControlName="acceptDate">
+    </div>
+    <hr class="mb-4">
+    <div class="d-grid gap-2">
+      <button type="submit" [disabled]="acceptForm.invalid" class="btn btn-outline-dark btn-lg">ACEPTAR REVISTA</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="optionForm ==2">
+  <h2>MODIFICAR COSTO DE REVISTA EXISTENTE.</h2>
+  <hr class="mb-4">
+  <div>
+    <label><strong>REGISTRO DE REVISTA:</strong></label>
+    <label>{{magazineSelected.magazineRecord}}</label>
+  </div>
+  <div>
+    <label><strong>NOMBRE DE REVISTA:</strong></label>
+    <label>{{magazineSelected.magazineName}}</label>
+  </div>
+  <form [formGroup]="updateForm" (submit)="updateMagazine()">
+    <div>
+      <br>
+      <label for="updateDayCost">COSTO POR DÍA: INFORMACIÓN ANTERIOR({{magazineSelected.dayCost}})</label>
+      <input type="number" id="updateDayCost" class="form-control" formControlName="updateDayCost">
+    </div>
+    <div>
+      <br>
+      <label for="updateAcceptDay">FECHA DE MODIFICACIÓN DEL COSTO POR DÍA: ULTIMA MODIFICACIÓN({{magazineSelected.updateDate}})</label>
+      <input type="date" id="updateAcceptDay" class="form-control" formControlName="updateAcceptDate">
+    </div>
+    <hr class="mb-4">
+    <div class="d-grid gap-2">
+      <button type="submit" [disabled]="updateForm.invalid" class="btn btn-outline-dark btn-lg">MODIFICAR INFORMACIÓN</button>
+    </div>
+  </form>
+</div>
+<hr class="mb-4">
+<div *ngIf="optionNavigate==1">
+
+  <div class="table-style">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">REGISTRO</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">FECHA DE PUBLICACIÓN</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">MODIFICAR</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let magazine of magazinesWaiting">
+        <td>{{magazine.magazineRecord}}</td>
+        <td>{{magazine.magazineName}}</td>
+        <td>{{magazine.publicationDate}}</td>
+        <td>{{magazine.status}}</td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(1, magazine)">ACTUALIZAR</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="optionNavigate==2">
+
+  <div class="table-style">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">REGISTRO</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">FECHA DE PUBLICACIÓN</th>
+        <th scope="col">COSTO POR DÍA</th>
+        <th scope="col">ESTADO</th>
+        <th scope="col">MODIFICAR</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let magazine of allMagazines">
+        <td>{{magazine.magazineRecord}}</td>
+        <td>{{magazine.magazineName}}</td>
+        <td>{{magazine.publicationDate}}</td>
+        <td>{{magazine.dayCost}}</td>
+        <td>{{magazine.status}}</td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="selectInf(2, magazine)">ACTUALIZAR</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<br>

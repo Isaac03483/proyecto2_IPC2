@@ -1,1 +1,61 @@
-<p>search-magazine works!</p>
+<div class="align-content-center">
+  <h1>BUSCAR REVISTAS</h1>
+  <form [formGroup]="searchMagazineForm" (submit)="searchMagazine()">
+    <div>
+      <input type="text" class="form-control" placeholder="INGRESE EL NOMBRE DE LA REVISTA" formControlName="magazineName">
+    </div>
+    <div>
+      <br>
+      <label for="checkBox"><input type="checkbox" id="checkBox" (click)="changeOption()"> FILTRAR POR CATEGORÍA</label>
+    </div>
+    <div *ngIf="categoryFilter">
+      <br>
+      <label>SELECCIONE UNA CATEGORIA</label>
+      <select class="form-control">
+        <option>Seleccione una categoria</option>
+        <option *ngFor="let category of categoryList" (click)="changeCategory(category.categoryName)">{{category.categoryName}}</option>
+      </select>
+    </div>
+    <hr class="mb-4">
+    <div class="gap-2 d-grid">
+      <button type="submit" [disabled]="searchMagazineForm.invalid" class="btn btn-outline-dark btn-lg" (click)="option = 1">BUSCAR REVISTA</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="magazinesFound.length > 0 && option == 1">
+
+  <br>
+  <label>REVISTAS ENCONTRADAS</label>
+  <div class="table-style">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">REGISTRO</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">CATEGORIA</th>
+        <th scope="col">FECHA DE PUBLICACIÓN</th>
+        <th scope="col">VISUALIZAR</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let magazine of magazinesFound">
+        <td>{{magazine.magazineRecord}}</td>
+        <td>{{magazine.magazineName}}</td>
+        <td>{{magazine.category.categoryName}}</td>
+        <td>{{magazine.publicationDate}}</td>
+        <td><button type="button" class="btn btn-outline-secondary" (click)="selectMagazine(magazine)">VISUALIZAR</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="option ==2">
+  <br>
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-outline-dark btn-lg" (click)="option =1">VOLVER</button>
+    <br>
+    <app-magazine-details [magazine]="magazineSelected"></app-magazine-details>
+  </div>
+</div>

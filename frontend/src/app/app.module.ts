@@ -24,6 +24,7 @@ import { TagComponent } from './pages/user/home-admin/profile-admin/tag/tag.comp
 import {PdfViewerModule} from "ng2-pdf-viewer";
 import { MyMagazinesComponent } from './pages/user/home-user/my-magazines/my-magazines.component';
 import {AlifeFileToBase64Module} from "alife-file-to-base64";
+import { MagazineDetailsComponent } from './pages/user/home-user/search-magazine/magazine-details/magazine-details.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {AlifeFileToBase64Module} from "alife-file-to-base64";
     ImpuestoComponent,
     TagComponent,
     MyMagazinesComponent,
+    MagazineDetailsComponent,
   ],
     imports: [
       BrowserModule,
@@ -54,7 +56,7 @@ import {AlifeFileToBase64Module} from "alife-file-to-base64";
       ReactiveFormsModule,
       HttpClientModule,
       PdfViewerModule,
-      AlifeFileToBase64Module
+      AlifeFileToBase64Module,
     ],
   providers: [],
   bootstrap: [AppComponent]

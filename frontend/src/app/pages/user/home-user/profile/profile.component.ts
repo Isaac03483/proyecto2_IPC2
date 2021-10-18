@@ -5,6 +5,9 @@ import {User} from "../../../../../objects/classes/usuario/User";
 import {UserType} from "../../../../../objects/enums/user/UserType";
 import {Profile} from "../../../../../objects/classes/usuario/editor/Profile";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Tag} from "../../../../../objects/classes/usuario/administrador/Tag";
+import {ProfileAdminService} from "../../../../services/user/profile-admin.service";
+import {EditorTag} from "../../../../../objects/classes/usuario/editor/EditorTag";
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +24,11 @@ export class ProfileComponent implements OnInit {
   description: string ="";
   hobbies: string= "";
   likes: string = "";
-  constructor(private formBuilder: FormBuilder, private service: ProfileEditorService, private sanitizer: DomSanitizer) { }
+  optionNav: number = 1;
+  tags: Array<Tag> = [];
+  editorTags: Array<Tag> =[];
+  tagForm!: FormGroup;
+  constructor(private formBuilder: FormBuilder, private service: ProfileEditorService, private sanitizer: DomSanitizer, private tagService: ProfileAdminService) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -31,7 +38,12 @@ export class ProfileComponent implements OnInit {
       userLikes: [null, Validators.required]
     });
 
+    this.tagForm = this.formBuilder.group({
+      tag: [null, Validators.required]
+    })
     this.reLoad();
+    this.getTags();
+    this.getEditorTags()
   }
 
   fileUploadInAngular(event: Event) {
@@ -48,6 +60,16 @@ export class ProfileComponent implements OnInit {
       this.file = files;
       console.log(this.file);
     }
+  }
+
+  getTags(){
+
+    this.tagService.getTags()
+      .subscribe((data: Array<Tag>) =>{
+        if(data != null){
+          this.tags = data;
+        }
+      })
   }
 
   reLoad(){
@@ -104,6 +126,50 @@ export class ProfileComponent implements OnInit {
             window.alert("ERROR CAPA 8.");
           })
       }
+    }
+  }
+
+  setOption(number: number) {
+    this.optionNav= number;
+  }
+
+  getEditorTags(){
+    this.service.getEditorTags(this.editorName)
+      .subscribe((data:Array<EditorTag>) =>{
+        if(data != null){
+          this.editorTags =data;
+        }
+      })
+  }
+
+  deleteTag(tagName: string) {
+
+    this.service.deleteTag(new EditorTag(this.editorName, tagName))
+      .subscribe((data: EditorTag)=>{
+        if(data != null){
+          window.alert("ETIQUETA ELIMINADA CON ÉXITO.");
+          this.getEditorTags();
+        }
+      })
+  }
+
+  addTag() {
+
+    if(this.tagForm.valid){
+      this.service.addTag(new EditorTag(this.editorName, this.tagForm.value.tag))
+        .subscribe((data: EditorTag)=>{
+          if(data != null){
+            window.alert("ETIQUETA AGREGADA CON ÉXITO.");
+            this.getEditorTags();
+            this.tagForm.reset({
+              "tag": null
+            });
+          } else{
+            window.alert("ERROR AL INTENTAR AGREGAR UNA ETIQUETA QUE YA POSEE.")
+          }
+        }, (error: any)=>{
+
+        });
     }
   }
 }

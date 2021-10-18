@@ -1,4 +1,4 @@
-export enum MagazineSubscription{
-    SI="SI",
-    NO="NO"
+export enum MagazineSubscription {
+  SI = "SI",
+  NO = "NO"
 }
