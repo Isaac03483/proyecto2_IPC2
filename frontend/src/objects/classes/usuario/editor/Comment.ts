@@ -4,9 +4,9 @@ export class Comment{
     magazineRecord: number;
     subscriberName: string;
     text: string;
-    commentDate: Date;
+    commentDate: string;
 
-    constructor(commentRecord:number, magazineRecord: number, subscriberName: string, text: string, commentDate: Date){
+    constructor(commentRecord:number, magazineRecord: number, subscriberName: string, text: string, commentDate: string){
         this.commentRecord=commentRecord;
         this.magazineRecord = magazineRecord;
         this.subscriberName=subscriberName;

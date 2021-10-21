@@ -8,6 +8,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {Tag} from "../../../../../objects/classes/usuario/administrador/Tag";
 import {ProfileAdminService} from "../../../../services/user/profile-admin.service";
 import {EditorTag} from "../../../../../objects/classes/usuario/editor/EditorTag";
+import {UpdateImage} from "../../../../../objects/classes/usuario/editor/UpdateImage";
 
 @Component({
   selector: 'app-profile',
@@ -46,20 +47,14 @@ export class ProfileComponent implements OnInit {
     this.getEditorTags()
   }
 
-  fileUploadInAngular(event: Event) {
-    const files = (event.target as  HTMLInputElement).files;
-    if (files != null) {
-      this.selectedFile = files.item(0);
-      const reader = new FileReader();
-      reader.readAsDataURL(this.selectedFile);
+  fileUploadInAngular(event: any) {
+    const file = event.target.files[0];
+    this.getBase64(file).then((image: any) =>{
+      this.selectedFile = file;
+      this.image = image.base;
+      console.log(this.image);
+    })
 
-      reader.onload = function load(this: any){
-        this.image = reader.result;
-        console.log(this.image)
-      }.bind(this);
-      this.file = files;
-      console.log(this.file);
-    }
   }
 
   getTags(){
@@ -76,8 +71,8 @@ export class ProfileComponent implements OnInit {
     this.service.getProfile(new User(this.editorName, "", UserType.EDITOR))
       .subscribe((created:Profile) => {
         if(created != null){
-          let objectURL = 'data:image/png;base64,' + created.image;
-          this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          this.image = created.image;
+          console.log(this.image);
           this.description = created.description;
           this.hobbies = created.hobby;
           this.likes = created.likes;
@@ -89,15 +84,39 @@ export class ProfileComponent implements OnInit {
 
   updateImage(){
 
-    if(this.file != null){
-      this.service.updateImage(this.selectedFile)
-        .subscribe((data) =>{
-          console.log("es")
+    if(this.selectedFile   != null){
+      this.service.updateImage(new UpdateImage(this.editorName, this.image))
+        .subscribe((data:UpdateImage) =>{
+          if(data != null){
+            window.alert("SE HA CAMBIADO LA IMAGEN.");
+          }
         }, (error) =>{
-          console.log(error);
+          window.alert("ERROR AL INTENTAR CAMBIAR DE IMAGEN, PRUEBE CON OTRA.");
         })
     }
   }
+
+  getBase64 = async ($event: any) => new Promise((resolve, reject) => {
+    try {
+      const unsafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        resolve({
+          base: reader.result
+        });
+      };
+      reader.onerror = _error => {
+        resolve({
+          base: null
+        });
+      };
+      return;
+    } catch (e) {
+      return null;
+    }
+  })
 
   updateProfile() {
 
@@ -107,7 +126,7 @@ export class ProfileComponent implements OnInit {
       && this.likes === this.formGroup.value.userLikes){
         window.alert("NO SE HA MODIFICADO LA INFORMACIÓN.");
       } else {
-        this.service.updateProfile(new Profile(this.editorName, null, this.formGroup.value.userHobbies, this.formGroup.value.userDescription, this.formGroup.value.userLikes))
+        this.service.updateProfile(new Profile(this.editorName, "", this.formGroup.value.userHobbies, this.formGroup.value.userDescription, this.formGroup.value.userLikes))
           .subscribe((created:Profile) =>{
             if(created!= null){
               window.alert("INFORMACIÓN ACTUALIZADA CON ÉXITO.");

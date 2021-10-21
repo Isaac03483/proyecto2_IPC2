@@ -1,0 +1,114 @@
+<header class="text-center">
+  <h1>MIS SUSCRIPCIONES</h1>
+</header>
+<hr class="mb-4">
+<div class="table-style" *ngIf="getOption() == 0">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">REGISTRO DE SUSCRIPCIÓN</th>
+      <th scope="col">NOMBRE DE LA REVISTA</th>
+      <th scope="col">FECHA DE SUSCRIPCIÓN</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">OPCIÓN</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let subscription of editorSubscriptions">
+      <td>{{subscription.subscriptionRecord}}</td>
+      <td>{{subscription.magazineName}}</td>
+      <td>{{subscription.recordDate}}</td>
+      <td>{{subscription.subscriptionStatus}}</td>
+      <td *ngIf="subscription.subscriptionStatus == subscriptionStatus.CANCELADO"><button type="button" class="btn btn-outline-primary" (click)="setOption(1, subscription)">ACTUALIZAR</button><button type="button" class="btn btn-outline-danger" (click)="deleteSubscription(subscription)">ELIMINAR</button></td>
+      <td *ngIf="subscription.subscriptionStatus == subscriptionStatus.VIGENTE"><button type="button" class="btn btn-outline-secondary" (click)="viewSubscription(2, subscription)">VISUALIZAR</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="getOption() == 1">
+  <div>
+    <hr class="mb-4">
+    <br>
+    <h4>ACTUALIZAR SUSCRIPCIÓN:</h4>
+    <div>
+      <form [formGroup]="updateSubscriptionForm" (submit)="updateSubscription()">
+        <div>
+          <label for="payInterval">INTERVALO DE PAGO:</label>
+          <select id="payInterval" class="form-control" formControlName="intervalOption">
+            <option *ngFor="let interval of payInterval | keyvalue" [ngValue]="interval.key">{{interval.value}}</option>
+          </select>
+        </div>
+        <div>
+          <br>
+          <label for="startDate">FECHA DE INICIO:</label>
+          <input type="date" id="startDate" class="form-control" formControlName="startDate">
+        </div>
+        <div *ngIf="updateSubscriptionForm.value.intervalOption != null && updateSubscriptionForm.value.startDate != null">
+          <br>
+          <label for="time">INGRESE LA CANTIDAD DE TIEMPO QUE ESTARÁ SUSCRITO A ESTA REVISTA (EN BASE A LA SELECCIÓN ANTERIOR: {{updateSubscriptionForm.value.intervalOption}})</label>
+          <input type="number" min="1" class="form-control" id="time" (keyup)="updateEndDate()" formControlName="time">
+        </div>
+        <div *ngIf="endDate != null">
+          <br>
+          <label for="endDate">SU SUSCRIPCIÓN ESTARÁ VIGENTE HASTA LA FECHA:</label>
+          <input type="text" readonly [value]="endDate" id="endDate" class="form-control">
+        </div>
+        <hr class="mb-4">
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-outline-dark btn-lg" [disabled]="updateSubscriptionForm.invalid">ACTUALIZAR SUSCRIPCIÓN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="magazine!=null">
+  <div *ngIf="getOption() == 2">
+    <h3>REVISTA: {{magazine.magazineName}}</h3>
+    <strong><label>CATEGORIA: {{magazine.category.categoryName}}</label></strong><br>
+    <strong><label>CANTIDAD DE ME GUSTA: {{subscriptionLikesCount}}</label></strong>
+    <div class="container" *ngIf="fileView">
+      <pdf-viewer class="subscription-pdf-viewer" [src]="fileView" [show-borders]="true" [zoom]="0.6"></pdf-viewer>
+    </div>
+    <br>
+    <br>
+    <div class="table-style comment-stack">
+
+      <table class="table table-striped">
+
+        <tbody>
+        <tr *ngFor="let comment of commentList">
+          <td>
+            <strong>{{comment.subscriberName}}:</strong><br>
+            {{comment.commentDate}}
+          </td>
+          <td>
+            {{comment.text}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="comment-stack">
+
+      <form [formGroup]="commentForm" (submit)="addComment()">
+        <textarea class="form-control" formControlName="text" placeholder="AGREGA UN COMENTARIO."></textarea><br>
+        <label for="commentDate">AGREGUE LA FECHA DEL COMENTARIO:</label>
+        <input id="commentDate" type="date" class="form-control" formControlName="commentDate"><br>
+        <div class="d-grid gap-2">
+          <button type="submit" [disabled]="commentForm.invalid || magazine.comment == magazineCommentEnum.NO" class="btn btn-outline-dark btn-lg">COMENTAR</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment-stack">
+      <div class="gap-2 d-grid" *ngIf="subscriptionSelected.subscriptionLike == subscriptionLikeEnum.SI">
+        <button type="button" class="btn btn-outline-dark btn-lg" [disabled]="magazine.like == magazineLikeEnum.NO"  (click)="changeLike(subscriptionLikeEnum.NO)">NO ME GUSTA</button>
+      </div>
+      <div class="gap-2 d-grid" *ngIf="subscriptionSelected.subscriptionLike == subscriptionLikeEnum.NO">
+        <button type="button" [disabled]="magazine.like == magazineLikeEnum.NO" class="btn btn-outline-dark btn-lg" (click)="changeLike(subscriptionLikeEnum.SI)">ME GUSTA</button>
+      </div>
+    </div>
+  </div>
+
+</div>

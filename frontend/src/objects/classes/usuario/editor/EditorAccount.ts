@@ -7,9 +7,9 @@ export class EditorAccount{
     totalPay: number;
     descuento: number;
     ganancia: number;
-    payDate: Date;
+    payDate: string;
 
-    constructor(accountRecord:number, editorName:string, subscriberName: string, magazineRecord: number, totalPay:number, descuento:number, ganancia: number, payDate:Date){
+    constructor(accountRecord:number, editorName:string, subscriberName: string, magazineRecord: number, totalPay:number, descuento:number, ganancia: number, payDate:string){
         this.accountRecord = accountRecord;
         this.editorName = editorName;
         this.subscriberName = subscriberName;

@@ -4,6 +4,8 @@ import {User} from "../../../objects/classes/usuario/User";
 import {Observable} from "rxjs";
 import {Profile} from "../../../objects/classes/usuario/editor/Profile";
 import {EditorTag} from "../../../objects/classes/usuario/editor/EditorTag";
+import {UpdateImage} from "../../../objects/classes/usuario/editor/UpdateImage";
+import {UserType} from "../../../objects/enums/user/UserType";
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +24,8 @@ export class ProfileEditorService {
     return this.httpClient.post<Profile>(this.API_URL+"update-profile", profile );
   }
 
-  updateImage(fileToUpload: File): Observable<Object>{
-    const formData: FormData = new FormData();
-    let paramsInfo = new HttpParams().append("editorName", JSON.parse(<string>localStorage.getItem("editor")));
-    formData.append('file', fileToUpload, "image-name");
-    return this.httpClient.post<Object>(this.API_URL+"update-image", formData,{params: paramsInfo});
+  updateImage(updateImage: UpdateImage): Observable<UpdateImage>{
+    return this.httpClient.post<UpdateImage>(this.API_URL+"update-image",updateImage);
   }
 
   addTag(tag: EditorTag): Observable<EditorTag>{
@@ -40,5 +39,18 @@ export class ProfileEditorService {
   getEditorTags(editorName: string): Observable<Array<EditorTag>>{
     let params = new HttpParams().append("editorName", editorName);
     return this.httpClient.get<Array<EditorTag>>(this.API_URL+"add-editor-tag", {params:params});
+  }
+
+  showInformation(){
+    this.getProfile(new User(JSON.parse(<string>localStorage.getItem("editor")), "", UserType.EDITOR))
+      .subscribe((created: Profile) =>{
+        if(created != null){
+          window.alert("\t\t\t\t\t.:INFORMACIÓN DEL EDITOR:.\n\n" +
+            "NOMBRE: "+created.editorName+".\n\n" +
+            "DESCRIPCIÓN: "+created.description+".\n\n" +
+            "PASATIEMPOS: "+created.hobby+".\n\n" +
+            "GUSTOS: "+created.likes);
+        }
+      })
   }
 }

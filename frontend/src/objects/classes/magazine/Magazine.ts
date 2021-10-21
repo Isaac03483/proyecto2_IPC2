@@ -10,7 +10,7 @@ export class Magazine{
     magazineRecord: number;
     editorName:string;
     magazineName:string;
-    file: any;
+    file: string;
     publicationDate: string;
     description: string;
     category: Category;
@@ -24,7 +24,7 @@ export class Magazine{
     subscription!: MagazineSubscription;
 
 
-  constructor(magazineRecord: number, editorName: string, magazineName: string, file: File | null, publicationDate: string, description: string, category: Category, subscriptionCost: number, acceptDate: string, status: MagazineStatus, dayCost: number, updateDate: string, like: MagazineLike, comment: MagazineComment, subscription: MagazineSubscription) {
+  constructor(magazineRecord: number, editorName: string, magazineName: string, file: string, publicationDate: string, description: string, category: Category, subscriptionCost: number, acceptDate: string, status: MagazineStatus, dayCost: number, updateDate: string, like: MagazineLike, comment: MagazineComment, subscription: MagazineSubscription) {
     this.magazineRecord = magazineRecord;
     this.editorName = editorName;
     this.magazineName = magazineName;

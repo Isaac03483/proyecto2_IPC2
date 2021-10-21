@@ -5,6 +5,20 @@
   left: 350px;
 }
 
+.subscription-pdf-viewer {
+  width: 500px !important;
+  height: 550px !important;
+  position: relative;
+  left: 250px;
+}
+
+.comment-stack {
+  width: 500px !important;
+  height: 300px !important;
+  position: relative;
+  right: 10px;
+}
+
 .input-size {
   width: 650px !important;
 }
@@ -12,4 +26,8 @@
 .table-style{
   overflow: scroll;
   height: 500px;
+}
+
+.image-format{
+  width:500px;
 }

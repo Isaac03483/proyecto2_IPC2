@@ -1,8 +1,12 @@
-<div class="container-fluid">
+<div>
   <h4>INFORMACIÓN</h4>
   <div>
     <strong><label for="magazineName">NOMBRE DE LA REVISTA:</label></strong>
     <label id="magazineName">{{magazine.magazineName}}</label>
+  </div>
+  <div>
+    <strong><label for="magazineDescription">DESCRIPCIÓN DE LA REVISTA:</label></strong>
+    <label id="magazineDescription">{{magazine.description}}</label>
   </div>
   <div>
     <strong><label for="magazineSubscriptionCost">COSTO DE LA SUSCRIPCIÓN:</label></strong>
@@ -10,6 +14,22 @@
   </div>
   <div>
     <strong><label for="magazineEditorName">NOMBRE DEL EDITOR:</label></strong>
-    <label id="magazineEditorName" (click)="showInformation()">{{magazine.editorName}}</label>
+    <label id="magazineEditorName">{{magazine.editorName}}</label>
+  </div>
+  <div>
+    <br>
+    <h5>INFORMACIÓN EXTRA:</h5>
+    <strong><label  for="magazineLike">ACEPTA ME GUSTA:</label></strong>
+    <label id="magazineLike">{{magazine.like}}</label>
+    <br>
+    <strong><label  for="magazineComment">ACEPTA COMENTARIOS:</label></strong>
+    <label id="magazineComment">{{magazine.comment}}</label>
+    <br>
+    <strong><label  for="magazineSubscription">ACEPTA SUSCRIPCIONES:</label></strong>
+    <label id="magazineSubscription">{{magazine.subscription}}</label>
+  </div>
+  <hr class="mb-4">
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-outline-dark btn-lg" [disabled]="magazine.subscription == magazineSubscription.NO" (click)="showSubscriptionForm(3)">SUSCRIBIRSE</button>
   </div>
 </div>

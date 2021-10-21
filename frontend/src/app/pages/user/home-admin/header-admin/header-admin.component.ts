@@ -45,6 +45,7 @@ export class HeaderAdminComponent implements OnInit {
 
   close(){
     localStorage.removeItem("manager");
+    this.service.option =1;
     this.router.navigate(["/"]);
   }
 

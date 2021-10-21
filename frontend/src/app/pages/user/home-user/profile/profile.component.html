@@ -1,6 +1,7 @@
 <header class="text-center">
     <div class="container">
-        <h1><strong>PERFIL DE USUARIO</strong></h1>
+      <h1><strong>PERFIL DE USUARIO</strong></h1>
+      <h5>{{editorName}}</h5>
     </div>
 </header>
 <div class="container">
@@ -24,7 +25,7 @@
 <div *ngIf="optionNav ==1">
   <div>
     <div class="text-center">
-      <img *ngIf="image"  class="img-fluid" src="{{image}}" alt="tu foto"/>
+      <img *ngIf="image"  class="img-fluid image-format" src="{{image}}" alt="tu foto"/>
       <br><br>
       <input class="form-control" (change)="fileUploadInAngular($event)" type="file" accept="image/*">
       <br>

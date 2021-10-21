@@ -1,0 +1,33 @@
+<div>
+  <br>
+  <h4>SUSCRIBIRSE:</h4>
+  <div>
+    <form [formGroup]="subscriptionForm" (submit)="addSubscription()">
+      <div>
+        <label for="payInterval">INTERVALO DE PAGO:</label>
+        <select id="payInterval" class="form-control" formControlName="intervalOption">
+          <option *ngFor="let interval of payInterval | keyvalue" [ngValue]="interval.key">{{interval.value}}</option>
+        </select>
+      </div>
+      <div>
+        <br>
+        <label for="startDate">FECHA DE INICIO:</label>
+        <input type="date" id="startDate" class="form-control" formControlName="startDate">
+      </div>
+      <div *ngIf="subscriptionForm.value.intervalOption != null && subscriptionForm.value.startDate != null">
+        <br>
+        <label for="time">INGRESE LA CANTIDAD DE TIEMPO QUE ESTARÁ SUSCRITO A ESTA REVISTA (EN BASE A LA SELECCIÓN ANTERIOR: {{subscriptionForm.value.intervalOption}})</label>
+        <input type="number" min="1" class="form-control" id="time" (keyup)="updateEndDate()" formControlName="time">
+      </div>
+      <div *ngIf="endDate != null">
+        <br>
+        <label for="endDate">SU SUSCRIPCIÓN ESTARÁ VIGENTE HASTA LA FECHA:</label>
+        <input type="text" readonly [value]="endDate" id="endDate" class="form-control">
+      </div>
+      <hr class="mb-4">
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-outline-dark btn-lg" [disabled]="subscriptionForm.invalid">SUSCRIBIRSE</button>
+      </div>
+    </form>
+  </div>
+</div>

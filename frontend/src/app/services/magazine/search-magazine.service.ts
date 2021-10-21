@@ -10,11 +10,14 @@ import {Magazine} from "../../../objects/classes/magazine/Magazine";
 export class SearchMagazineService {
 
   readonly API_URL = "http://localhost:8080/backend/";
+  public option =1;
+  public showSubscriptionForm = 0;
   constructor(private httpClient:HttpClient) { }
 
   searchMagazine(magazineName: string, categoryName: string): Observable<Array<Magazine>>{
     let params = new HttpParams().append("magazineName", magazineName)
-      .append("categoryName", categoryName);
+      .append("categoryName", categoryName)
+      .append("editorName", JSON.parse(<string>localStorage.getItem("editor")));
     return this.httpClient.get<Array<Magazine>>(this.API_URL+"search-magazine", {params: params});
   }
 }

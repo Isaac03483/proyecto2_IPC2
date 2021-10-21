@@ -25,6 +25,8 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
 import { MyMagazinesComponent } from './pages/user/home-user/my-magazines/my-magazines.component';
 import {AlifeFileToBase64Module} from "alife-file-to-base64";
 import { MagazineDetailsComponent } from './pages/user/home-user/search-magazine/magazine-details/magazine-details.component';
+import { GenerateSubscriptionComponent } from './pages/user/home-user/search-magazine/generate-subscription/generate-subscription.component';
+import { MySubscriptionsComponent } from './pages/user/home-user/my-subscriptions/my-subscriptions.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { MagazineDetailsComponent } from './pages/user/home-user/search-magazine
     TagComponent,
     MyMagazinesComponent,
     MagazineDetailsComponent,
+    GenerateSubscriptionComponent,
+    MySubscriptionsComponent,
   ],
     imports: [
       BrowserModule,

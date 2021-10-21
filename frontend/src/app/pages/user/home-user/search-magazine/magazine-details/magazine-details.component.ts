@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Magazine} from "../../../../../../objects/classes/magazine/Magazine";
-import {map} from "rxjs/operators";
+import {MagazineSubscription} from "../../../../../../objects/enums/magazine/MagazineSubscription";
+import {SearchMagazineService} from "../../../../../services/magazine/search-magazine.service";
 
 @Component({
   selector: 'app-magazine-details',
@@ -10,12 +11,14 @@ import {map} from "rxjs/operators";
 export class MagazineDetailsComponent implements OnInit {
 
   @Input() magazine!: Magazine;
-  constructor() { }
+  magazineSubscription = MagazineSubscription;
+  constructor(private service: SearchMagazineService) { }
 
   ngOnInit(): void {
   }
 
-  showInformation() {
-    window.alert("INFORMACIÓN DEL EDITOR.");
+  showSubscriptionForm(number: number) {
+
+    this.service.option = number;
   }
 }

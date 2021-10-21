@@ -18,11 +18,11 @@ export class SearchMagazineComponent implements OnInit {
   categoryNameSelected: string = "";
   searchMagazineForm!: FormGroup;
   magazineSelected!: Magazine;
-  option: number = 1;
+
   constructor(private categoryService: ProfileAdminService, private formBuilder: FormBuilder, private searchService: SearchMagazineService) { }
 
   ngOnInit(): void {
-    this.option = 1;
+    this.searchService.option = 1;
     this.getAllCategories();
     this.searchMagazineForm = this.formBuilder.group({
       magazineName: [null, Validators.required]
@@ -78,6 +78,14 @@ export class SearchMagazineComponent implements OnInit {
 
   selectMagazine(magazine: Magazine) {
     this.magazineSelected = magazine;
-    this.option = 2;
+    this.searchService.option = 2;
+  }
+
+  getOptionService(){
+    return this.searchService.option;
+  }
+
+  setOption(number: number) {
+    this.searchService.option = number;
   }
 }

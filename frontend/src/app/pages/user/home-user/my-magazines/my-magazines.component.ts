@@ -12,6 +12,7 @@ import {formatDate} from "@angular/common";
 import {MagazineStatus} from "../../../../../objects/enums/magazine/MagazineStatus";
 import {MagazineTag} from "../../../../../objects/classes/magazine/MagazineTag";
 import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-my-magazines',
@@ -36,7 +37,7 @@ export class MyMagazinesComponent implements OnInit {
   magazineSubscriptionEnum = MagazineSubscription;
   editorName: string = JSON.parse(<string>localStorage.getItem("editor"));
 
-  constructor(private categoryTagService: ProfileAdminService, private formBuilder: FormBuilder, private magazineService: MagazineService) { }
+  constructor(private categoryTagService: ProfileAdminService, private formBuilder: FormBuilder, private magazineService: MagazineService,  private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
 
@@ -83,23 +84,36 @@ export class MyMagazinesComponent implements OnInit {
       });
   }
 
-  changeFile($event: Event) {
-    const files = ($event.target as HTMLInputElement).files;
-
-    if(files != null){
-      this.selectedFile = files.item(0);
-      const reader = new FileReader();
-      reader.readAsDataURL(this.selectedFile);
-
-      reader.onload = function load(this: any){
-        this.fileView = reader.result;
-      }.bind(this);
-      this.file = files;
-
-      console.log(this.selectedFile);
-      console.log(this.file);
-    }
+  changeFile(event: any) {
+    const file = event.target.files[0];
+    this.getBase64(file).then((image: any) =>{
+      this.selectedFile = file;
+      this.fileView = image.base;
+      console.log(this.fileView);
+    })
   }
+
+  getBase64 = async ($event: any) => new Promise((resolve, reject) => {
+    try {
+      const unsafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        resolve({
+          base: reader.result
+        });
+      };
+      reader.onerror = _error => {
+        resolve({
+          base: null
+        });
+      };
+      return;
+    } catch (e) {
+      return null;
+    }
+  })
 
   addTag(tagName: string) {
     let found: boolean = false;
@@ -124,8 +138,8 @@ export class MyMagazinesComponent implements OnInit {
   addMagazine() {
     if(this.magazineForm.valid){
       if(this.selectedFile != null){
-        this.magazineService.addMagazine(new Magazine(0, this.editorName, this.magazineForm.value.magazineName, this.file,formatDate(this.magazineForm.value.mDate, 'yyyy-MM-dd','en-US'),
-          this.magazineForm.value.mDescription,new Category(this.magazineForm.value.mCategory),this.magazineForm.value.mCost,"",MagazineStatus.ENESPERA, 0,"",this.magazineForm.value.mLike,this.magazineForm.value.mComment, this.magazineForm.value.mSubs), this.selectedFile)
+        this.magazineService.addMagazine(new Magazine(0, this.editorName, this.magazineForm.value.magazineName, this.fileView,formatDate(this.magazineForm.value.mDate, 'yyyy-MM-dd','en-US'),
+          this.magazineForm.value.mDescription,new Category(this.magazineForm.value.mCategory),this.magazineForm.value.mCost,"",MagazineStatus.ENESPERA, 0,"",this.magazineForm.value.mLike,this.magazineForm.value.mComment, this.magazineForm.value.mSubs))
           .subscribe((created:Magazine) =>{
             if(created != null){
 
@@ -156,6 +170,7 @@ export class MyMagazinesComponent implements OnInit {
             }
           },(error: any)=>{
 
+            console.log("ERROR CAPA 8")
           })
       }
     }
@@ -206,7 +221,7 @@ export class MyMagazinesComponent implements OnInit {
   updateMagazine() {
     if(this.magazineSelected != null){
       console.log(this.magazineSelected.magazineRecord);
-        this.magazineService.updateMagazine(new Magazine(this.magazineSelected.magazineRecord, this.editorName, this.magazineSelected.magazineName, null,formatDate(this.magazineSelected.publicationDate, 'yyyy-MM-dd','en-US'),
+        this.magazineService.updateMagazine(new Magazine(this.magazineSelected.magazineRecord, this.editorName, this.magazineSelected.magazineName, "",formatDate(this.magazineSelected.publicationDate, 'yyyy-MM-dd','en-US'),
           this.magazineSelected.description,this.magazineSelected.category,this.magazineSelected.subscriptionCost,"",this.magazineSelected.status, 0,"",this.magazineSelected.like,this.magazineSelected.comment, this.magazineSelected.subscription))
           .subscribe((created:Magazine) =>{
             if(created != null){

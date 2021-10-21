@@ -18,11 +18,11 @@
     </div>
     <hr class="mb-4">
     <div class="gap-2 d-grid">
-      <button type="submit" [disabled]="searchMagazineForm.invalid" class="btn btn-outline-dark btn-lg" (click)="option = 1">BUSCAR REVISTA</button>
+      <button type="submit" [disabled]="searchMagazineForm.invalid" class="btn btn-outline-dark btn-lg" (click)="setOption(1)">BUSCAR REVISTA</button>
     </div>
   </form>
 </div>
-<div *ngIf="magazinesFound.length > 0 && option == 1">
+<div *ngIf="magazinesFound.length > 0 && getOptionService() == 1">
 
   <br>
   <label>REVISTAS ENCONTRADAS</label>
@@ -50,12 +50,13 @@
     </table>
   </div>
 </div>
-
-<div *ngIf="option ==2">
-  <br>
-  <div class="d-grid gap-2">
-    <button type="button" class="btn btn-outline-dark btn-lg" (click)="option =1">VOLVER</button>
-    <br>
-    <app-magazine-details [magazine]="magazineSelected"></app-magazine-details>
-  </div>
+<hr class="mb-4">
+<div *ngIf="getOptionService() != 1" class="d-grid gap-2">
+  <button type="button" class="btn btn-outline-dark btn-lg" (click)="setOption(1)">VOLVER A VER LISTA DE REVISTAS ENCONTRADAS</button>
+</div>
+<div *ngIf="getOptionService() ==2">
+  <app-magazine-details [magazine]="magazineSelected"></app-magazine-details>
+</div>
+<div *ngIf="getOptionService() == 3">
+  <app-generate-subscription [magazine]="magazineSelected"></app-generate-subscription>
 </div>
