@@ -28,4 +28,6 @@ public interface DAOMagazine {
     List<Magazine> listMagazinesWhereStatus(String status) throws SQLException;
 
     Magazine getMagazine(Magazine magazine) throws SQLException;
+
+    Magazine getMagazineWithRecord(Magazine magazine) throws SQLException;
 }

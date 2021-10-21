@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DAOEditorAccountImpl implements DAOEditorAccount {
 
-    private final String INSERT_ACCOUNT = "INSERT INTO cuenta_editor (nombre_editor, nombre_suscriptor,nombre_revista, total_pagar, costo_descuento, ganancia, fecha_pago) VALUES (?,?,?,?,?,?,?)";
+    private final String INSERT_ACCOUNT = "INSERT INTO cuenta_editor (nombre_editor, nombre_suscriptor,registro_revista, total_pagar, costo_descuento, ganancia, fecha_pago) VALUES (?,?,?,?,?,?,?)";
 
     public DAOEditorAccountImpl(){
         new Connector();

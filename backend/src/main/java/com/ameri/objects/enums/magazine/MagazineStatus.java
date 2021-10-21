@@ -3,7 +3,7 @@ package com.ameri.objects.enums.magazine;
 public enum MagazineStatus {
 
     ACEPTADA("ACEPTADA"),
-    ENESPERA("EN ESPERA");
+    ENESPERA("ENESPERA");
 
     private final String status;
 

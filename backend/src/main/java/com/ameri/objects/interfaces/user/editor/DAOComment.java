@@ -17,4 +17,5 @@ public interface DAOComment {
     List<Comment> listAllComments() throws SQLException;
 
     List<Comment> listMagazineComments(int magazineRecord) throws SQLException;
+
 }

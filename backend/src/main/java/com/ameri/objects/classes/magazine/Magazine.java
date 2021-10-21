@@ -19,7 +19,7 @@ public class Magazine {
     private final int magazineRecord;
     private final String editorName;
     private final String magazineName;
-    private final byte[] file;
+    private final String file;
     private final String publicationDate;
     private final String description;
     private final Category category;
@@ -32,7 +32,7 @@ public class Magazine {
     private final MagazineComment comment;
     private final MagazineSubscription subscription;
 
-    public Magazine(int magazineRecord, String editorName, String magazineName,byte[] file, String publicationDate, String description, Category category, BigDecimal subscriptionCost, MagazineStatus status,String acceptDate, BigDecimal dayCost, String updateDate, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
+    public Magazine(int magazineRecord, String editorName, String magazineName,String file, String publicationDate, String description, Category category, BigDecimal subscriptionCost, MagazineStatus status,String acceptDate, BigDecimal dayCost, String updateDate, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
         this.magazineRecord = magazineRecord;
         this.editorName = editorName;
         this.magazineName = magazineName;
@@ -50,7 +50,7 @@ public class Magazine {
         this.subscription = subscription;
     }
 
-    public Magazine(String editorName, String magazineName, byte[] file, String publicationDate, String description, Category category, BigDecimal subscriptionCost, MagazineStatus status, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
+    public Magazine(String editorName, String magazineName, String file, String publicationDate, String description, Category category, BigDecimal subscriptionCost, MagazineStatus status, MagazineLike like, MagazineComment comment, MagazineSubscription subscription) {
         this.magazineRecord = 0;
         this.editorName = editorName;
         this.magazineName = magazineName;
@@ -86,9 +86,9 @@ public class Magazine {
         this.subscription = null;
     }
 
-    public Magazine(String magazineName, Category category) {
+    public Magazine(String magazineName, Category category, String editorName) {
         this.magazineRecord = 0;
-        this.editorName = null;
+        this.editorName = editorName;
         this.magazineName = magazineName;
         this.file = null;
         this.publicationDate = null;
@@ -104,9 +104,9 @@ public class Magazine {
         this.subscription = null;
     }
 
-    public Magazine(String magazineName) {
+    public Magazine(String magazineName, String editorName) {
         this.magazineRecord = 0;
-        this.editorName = null;
+        this.editorName = editorName;
         this.magazineName = magazineName;
         this.file = null;
         this.publicationDate = null;
@@ -146,7 +146,7 @@ public class Magazine {
 
     public String getMagazineName() {return magazineName;}
 
-    public byte[] getFile() {return file;}
+    public String getFile() {return file;}
 
     public Date getPublicationDate() {
         assert publicationDate != null;

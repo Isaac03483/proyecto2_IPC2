@@ -19,16 +19,17 @@ public class SearchMagazine extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String magazineName = "%"+req.getParameter("magazineName")+"%";
+        String editorName = req.getParameter("editorName");
         String categoryName = req.getParameter("categoryName");
         List<Magazine> list;
         try {
             if(!categoryName.equals("")){
                 Category category = new Category(categoryName);
-                Magazine searchMagazine = new Magazine(magazineName, category);
+                Magazine searchMagazine = new Magazine(magazineName, category, editorName);
 
                 list = new DAOMagazineImpl().listMagazinesWhereCategory(searchMagazine);
             } else{
-                Magazine searchMagazine = new Magazine(magazineName);
+                Magazine searchMagazine = new Magazine(magazineName, editorName);
                 list = new DAOMagazineImpl().listMagazinesWhereName(searchMagazine);
             }
             resp.getWriter().write(new MagazineConverter(Magazine.class).toJson(list));

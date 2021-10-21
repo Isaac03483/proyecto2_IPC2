@@ -31,7 +31,7 @@ public class DAOProfileImpl implements DAOProfile {
     @Override
     public void updateImage(Profile profile) throws SQLException {
         PreparedStatement query = Connector.getConnection().prepareStatement(UPDATE_IMAGE);
-        query.setBytes(1, profile.getImage());
+        query.setString(1, profile.getImage());
         query.setString(2, profile.getEditorName());
         query.executeUpdate();
     }
@@ -63,7 +63,7 @@ public class DAOProfileImpl implements DAOProfile {
         ResultSet resultSet = query.executeQuery();
 
         if(resultSet.next()){
-            return new Profile(resultSet.getString("nombre_editor"), resultSet.getBytes("foto"), resultSet.getString("hobby"), resultSet.getString("descripcion"), resultSet.getString("gustos"));
+            return new Profile(resultSet.getString("nombre_editor"), resultSet.getString("foto"), resultSet.getString("hobby"), resultSet.getString("descripcion"), resultSet.getString("gustos"));
         }
         return null;
     }

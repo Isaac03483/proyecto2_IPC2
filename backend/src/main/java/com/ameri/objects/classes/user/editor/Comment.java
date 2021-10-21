@@ -9,9 +9,9 @@ public class Comment {
     private final int magazineRecord;
     private final String subscriberName;
     private final String text;
-    private final Date commentDate;
+    private final String commentDate;
 
-    public Comment(int commentRecord, int magazineRecord, String subscriberName, String text, Date commentDate) {
+    public Comment(int commentRecord, int magazineRecord, String subscriberName, String text, String commentDate) {
         this.commentRecord = commentRecord;
         this.magazineRecord = magazineRecord;
         this.subscriberName = subscriberName;
@@ -27,5 +27,5 @@ public class Comment {
 
     public String getText() {return text;}
 
-    public Date getCommentDate() {return commentDate;}
+    public Date getCommentDate() {return Date.valueOf(commentDate);}
 }

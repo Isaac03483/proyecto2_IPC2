@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Magazine} from "../../../objects/classes/magazine/Magazine";
 import {Observable} from "rxjs";
 import {MagazineTag} from "../../../objects/classes/magazine/MagazineTag";
+import {Comment} from "../../../objects/classes/usuario/editor/Comment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,9 @@ export class MagazineService {
 
   constructor(private httpClient: HttpClient) { }
 
-  addMagazine(magazine: Magazine, file: File): Observable<Magazine>{
-    const formData: FormData = new FormData();
-    let editorParam = new HttpParams().append("editorName", magazine.editorName)
-      .append("magazineName", magazine.magazineName)
-      .append("publicationDate", (magazine.publicationDate).toString())
-      .append("description", magazine.description)
-      .append("categoryName", magazine.category.categoryName)
-      .append("subscriptionCost", magazine.subscriptionCost)
-      .append("magazineStatus", magazine.status)
-      .append("magazineLike", magazine.like)
-      .append("magazineComment", magazine.comment)
-      .append("magazineSubscription", magazine.subscription);
-    formData.append('file',file , "magazine");
-    return this.httpClient.post<Magazine>(this.API_URL+"add-magazine", formData, {params: editorParam});
+  addMagazine(magazine: Magazine): Observable<Magazine>{
+
+    return this.httpClient.post<Magazine>(this.API_URL+"add-magazine", magazine);
   }
 
   updateMagazine(magazine:Magazine): Observable<Magazine>{
@@ -45,6 +35,7 @@ export class MagazineService {
   deleteMagazine(magazine: Magazine): Observable<Magazine>{
     return this.httpClient.post<Magazine>(this.API_URL+"delete-magazine", magazine);
   }
+
   getMagazines(): Observable<Array<Magazine>>{
     let param = new HttpParams().append("editorName", JSON.parse(<string>localStorage.getItem("editor")));
     return this.httpClient.get<Array<Magazine>>(this.API_URL+"add-magazine", {params: param});
@@ -67,5 +58,19 @@ export class MagazineService {
 
   getAllMagazines(): Observable<Array<Magazine>>{
     return this.httpClient.get<Array<Magazine>>(this.API_URL+"update-magazine");
+  }
+
+  getMagazineWithRecord(magazineRecord: number): Observable<Magazine>{
+    let params = new HttpParams().append("magazineRecord", magazineRecord);
+    return this.httpClient.get<Magazine>(this.API_URL+"get-magazine-with-record", {params: params});
+  }
+
+  getMagazineComment(magazineRecord: number): Observable<Array<Comment>>{
+    let param = new HttpParams().append("magazineRecord", magazineRecord);
+    return this.httpClient.get<Array<Comment>>(this.API_URL+"add-subscriber-comment", {params: param});
+  }
+
+  addMagazineComment(comment: Comment): Observable<Comment>{
+    return this.httpClient.post<Comment>(this.API_URL+"add-subscriber-comment", comment);
   }
 }
