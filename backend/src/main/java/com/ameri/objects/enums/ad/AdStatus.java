@@ -2,7 +2,8 @@ package com.ameri.objects.enums.ad;
 
 public enum AdStatus {
     ACTIVO("ACTIVO"),
-    INACTIVO("INACTIVO");
+    INACTIVO("INACTIVO"),
+    VENCIDO("VENCIDO");
 
     private final String status;
 

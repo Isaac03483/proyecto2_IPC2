@@ -3,6 +3,7 @@ package com.ameri.objects.interfaces.user.editor;
 import com.ameri.objects.classes.user.editor.Comment;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DAOComment {
@@ -17,5 +18,7 @@ public interface DAOComment {
     List<Comment> listAllComments() throws SQLException;
 
     List<Comment> listMagazineComments(int magazineRecord) throws SQLException;
+
+    List<Comment> listMagazineCommentsBetween(int magazineRecord, LocalDate startDate, LocalDate endDate) throws SQLException;
 
 }

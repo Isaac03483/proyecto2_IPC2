@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="commentsSubReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3735ac69-313c-42b4-a54d-faf0275e3ba5">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="commentRecord" class="java.lang.Integer">
+		<fieldDescription><![CDATA[commentRecord]]></fieldDescription>
+	</field>
+	<field name="commentDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[commentDate]]></fieldDescription>
+	</field>
+	<field name="subscriberName" class="java.lang.String">
+		<fieldDescription><![CDATA[subscriberName]]></fieldDescription>
+	</field>
+	<field name="text" class="java.lang.String">
+		<fieldDescription><![CDATA[text]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="30" uuid="b9803479-f5fc-434e-97cd-cc586d019c2b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9bbcff49-8d8c-41b0-a49b-52b7425fecb9"/>
+				</reportElement>
+				<text><![CDATA[registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="138" height="30" uuid="b6ffc8b5-15aa-4c76-9983-f7c5aed8c759">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b08684ad-102d-4cce-b955-7adeba427808"/>
+				</reportElement>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="138" height="30" uuid="decc46f3-8a90-4b6f-b14a-666468349a90">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f9dd685e-5e3e-4be5-ba7a-aa72809c00f4"/>
+				</reportElement>
+				<text><![CDATA[suscriptor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="138" height="30" uuid="2725f881-cd2c-401b-a52b-fbba006c7173">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63912434-c40c-447e-990c-27c43cca7f07"/>
+				</reportElement>
+				<text><![CDATA[contenido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="141" height="30" uuid="aba7a7d4-30b9-4583-b93d-1d73321d0505">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9bbcff49-8d8c-41b0-a49b-52b7425fecb9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{commentRecord}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="138" height="30" uuid="a9f64192-5803-4af9-bb9b-b32cd84c373b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b08684ad-102d-4cce-b955-7adeba427808"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{commentDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="138" height="30" uuid="b2a0d5a6-2df7-4bfe-8a06-e2ddf47673fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f9dd685e-5e3e-4be5-ba7a-aa72809c00f4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{subscriberName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="138" height="30" uuid="1f4b739e-82e3-4fe2-b75e-721e699a9a6a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63912434-c40c-447e-990c-27c43cca7f07"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{text}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

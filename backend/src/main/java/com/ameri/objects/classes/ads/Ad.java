@@ -17,10 +17,10 @@ public class Ad {
     private final BigDecimal totalCost;
     private final AdStatus adStatus;
     private final String url;
-    private final Date startDate;
-    private final Date endDate;
+    private final String startDate;
+    private final String endDate;
 
-    public Ad(int adRecord, AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, Date startDate, Date endDate) {
+    public Ad(int adRecord, AdType adsType, String adName, String clientName, String adText, String adContent, int views, BigDecimal totalCost, AdStatus adsStatus, String url, String startDate, String endDate) {
         this.adRecord = adRecord;
         this.adType = adsType;
         this.adName = adName;
@@ -55,8 +55,8 @@ public class Ad {
 
     public String getUrl() {return url;}
 
-    public Date getStartDate() {return startDate;}
+    public Date getStartDate() {return Date.valueOf(startDate);}
 
-    public Date getEndDate() {return endDate;}
+    public Date getEndDate() {return Date.valueOf(endDate);}
 
 }

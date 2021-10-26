@@ -2,7 +2,7 @@ package com.ameri.servlets.user.manager.impuesto;
 
 import com.ameri.converter.user.manager.ImpuestoConverter;
 import com.ameri.dao.user.manager.DAOImpuestoImpl;
-import com.ameri.objects.classes.operation.Reader;
+import com.ameri.operation.Reader;
 import com.ameri.objects.classes.user.manager.Impuesto;
 
 import javax.servlet.ServletException;

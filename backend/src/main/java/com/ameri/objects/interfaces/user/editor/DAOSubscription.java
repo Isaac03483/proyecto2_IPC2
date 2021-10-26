@@ -5,6 +5,7 @@ import com.ameri.objects.classes.user.editor.Profile;
 import com.ameri.objects.classes.user.editor.Subscription;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DAOSubscription {
@@ -26,4 +27,17 @@ public interface DAOSubscription {
     Subscription getSubscription(Subscription subscription) throws SQLException;
 
     Subscription getSubscriptionLikes(int magazineRecord) throws SQLException;
+
+    int getSubscriptionNumberLikes(int magazineRecord) throws SQLException;
+
+    int getSubscriptionNumberLikesBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException;
+
+    List<Subscription> getListSubscriptionsBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException;
+
+    List<Subscription> getListSubscriptionsLikesBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException;
+
+    List<Subscription> getListSubscriptions(int magazineRecord) throws SQLException;
+
+
+    List<Subscription> listWhereSubscriptionLike(int magazineRecord) throws SQLException;
 }

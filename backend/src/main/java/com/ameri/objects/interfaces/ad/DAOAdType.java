@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface DAOAdType {
 
-    void insert(AdType adsType) throws SQLException;
-
     void update(AdType adsType) throws  SQLException;
 
     void delete(AdType adsType) throws  SQLException;

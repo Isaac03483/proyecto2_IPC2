@@ -1,4 +1,4 @@
-package com.ameri.objects.classes.operation;
+package com.ameri.operation;
 
 import java.io.BufferedReader;
 import java.io.IOException;

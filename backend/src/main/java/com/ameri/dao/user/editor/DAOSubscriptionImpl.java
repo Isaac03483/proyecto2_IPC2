@@ -12,6 +12,7 @@ import com.ameri.objects.interfaces.user.editor.DAOSubscription;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,12 @@ public class DAOSubscriptionImpl implements DAOSubscription {
     private final String GET_MAGAZINE_SUBSCRIPTIONS = "SELECT * FROM suscripcion WHERE registro_revista=?";
     private final String DELETE_SUBSCRIPTION = "DELETE FROM suscripcion WHERE registro_suscripcion =?";
     private final String GET_SUBSCRIPTION_LIKES = "SELECT COUNT(*) as likes FROM suscripcion WHERE registro_revista=? AND like_suscripcion='SI'";
+    private final String GET_SUBSCRIPTION_LIKES_BETWEEN = "SELECT COUNT(*) as likes FROM suscripcion WHERE registro_revista=? AND like_suscripcion='SI' AND fecha_registro BETWEEN ? AND ?";
+    private final String GET_SUBSCRIPTION_WHERE_LIKE = "SELECT * FROM suscripcion WHERE registro_revista=? AND like_suscripcion='SI'";
+    private final String GET_SUBSCRIPTION_WHERE_LIKES_BETWEEN = "SELECT * FROM suscripcion WHERE registro_revista=? AND like_suscripcion ='SI' AND fecha_registro BETWEEN ? AND ?";
+    private final String GET_SUBSCRIPTIONS_BETWEEN = "SELECT * FROM suscripcion WHERE registro_revista=? AND fecha_registro BETWEEN ? AND ? AND estado_suscripcion = 'VIGENTE'";
+    private final String GET_SUBSCRIPTIONS = "SELECT * FROM suscripcion WHERE registro_revista=? AND estado_suscripcion = 'VIGENTE'";
+
 
     public DAOSubscriptionImpl(){
         new Connector();
@@ -137,5 +144,75 @@ public class DAOSubscriptionImpl implements DAOSubscription {
             return subscription;
         }
         return null;
+    }
+
+    @Override
+    public int getSubscriptionNumberLikes(int magazineRecord) throws SQLException {
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_SUBSCRIPTION_LIKES);
+        query.setInt(1, magazineRecord);
+        ResultSet resultSet = query.executeQuery();
+
+        if(resultSet.next()){
+            return resultSet.getInt("likes");
+        }
+        return 0;
+    }
+
+    @Override
+    public int getSubscriptionNumberLikesBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException {
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_SUBSCRIPTION_LIKES_BETWEEN);
+        query.setInt(1, magazineRecord);
+        query.setString(2, start.toString());
+        query.setString(3, end.toString());
+        ResultSet resultSet = query.executeQuery();
+
+        if(resultSet.next()){
+            return resultSet.getInt("likes");
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Subscription> getListSubscriptionsBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException {
+        List<Subscription> list = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_SUBSCRIPTIONS_BETWEEN);
+        query.setInt(1, magazineRecord);
+        query.setString(2, start.toString());
+        query.setString(3, end.toString());
+        ResultSet resultSet = query.executeQuery();
+
+        return getSubscriptions(list, resultSet);
+    }
+
+    @Override
+    public List<Subscription> getListSubscriptionsLikesBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException {
+        List<Subscription> list = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_SUBSCRIPTION_WHERE_LIKES_BETWEEN);
+        query.setInt(1, magazineRecord);
+        query.setString(2, start.toString());
+        query.setString(3, end.toString());
+        ResultSet resultSet = query.executeQuery();
+
+        return getSubscriptions(list, resultSet);
+    }
+
+    @Override
+    public List<Subscription> getListSubscriptions(int magazineRecord) throws SQLException {
+        List<Subscription> list = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_SUBSCRIPTIONS);
+        query.setInt(1, magazineRecord);
+        ResultSet resultSet = query.executeQuery();
+
+        return getSubscriptions(list, resultSet);
+    }
+
+    @Override
+    public List<Subscription> listWhereSubscriptionLike(int magazineRecord) throws SQLException {
+        List<Subscription> list = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_SUBSCRIPTION_WHERE_LIKE);
+        query.setInt(1, magazineRecord);
+        ResultSet resultSet = query.executeQuery();
+
+        return getSubscriptions(list, resultSet);
     }
 }

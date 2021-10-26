@@ -4,6 +4,7 @@ import com.ameri.objects.classes.user.editor.EditorAccount;
 import com.ameri.objects.classes.user.editor.Profile;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DAOEditorAccount {
@@ -14,8 +15,8 @@ public interface DAOEditorAccount {
 
     void delete(EditorAccount editorAccount) throws SQLException;
 
-    List<EditorAccount> list() throws SQLException;
+    List<EditorAccount> listWhereMagazineRecord(int magazineRecord) throws SQLException;
 
-    List<EditorAccount> listWhereEditorName(Profile profile) throws SQLException;
+    List<EditorAccount> listWhereMagazineRecordBetween(int magazineRecord, LocalDate start, LocalDate end) throws SQLException;
 
 }

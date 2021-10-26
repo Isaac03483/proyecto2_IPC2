@@ -1,10 +1,7 @@
 package com.ameri.servlets.magazine;
 
-import com.ameri.converter.magazine.MagazineTagConverter;
 import com.ameri.dao.magazine.DAOMagazineTagImpl;
 import com.ameri.objects.classes.magazine.Magazine;
-import com.ameri.objects.classes.magazine.MagazineTag;
-import com.ameri.objects.classes.operation.Reader;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

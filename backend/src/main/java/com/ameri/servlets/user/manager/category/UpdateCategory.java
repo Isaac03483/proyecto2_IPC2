@@ -2,7 +2,7 @@ package com.ameri.servlets.user.manager.category;
 
 import com.ameri.converter.user.manager.CategoryConverter;
 import com.ameri.dao.user.manager.DAOCategoryImpl;
-import com.ameri.objects.classes.operation.Reader;
+import com.ameri.operation.Reader;
 import com.ameri.objects.classes.user.manager.Category;
 
 import javax.servlet.ServletException;

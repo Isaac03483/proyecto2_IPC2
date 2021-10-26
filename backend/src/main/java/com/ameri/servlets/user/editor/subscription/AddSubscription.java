@@ -2,7 +2,7 @@ package com.ameri.servlets.user.editor.subscription;
 
 import com.ameri.converter.user.editor.SubscriptionConverter;
 import com.ameri.dao.user.editor.DAOSubscriptionImpl;
-import com.ameri.objects.classes.operation.Reader;
+import com.ameri.operation.Reader;
 import com.ameri.objects.classes.user.editor.Profile;
 import com.ameri.objects.classes.user.editor.Subscription;
 
