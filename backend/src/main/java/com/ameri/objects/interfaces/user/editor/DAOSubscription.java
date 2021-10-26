@@ -1,5 +1,6 @@
 package com.ameri.objects.interfaces.user.editor;
 
+import com.ameri.objects.Beans.AdminBeans;
 import com.ameri.objects.classes.magazine.Magazine;
 import com.ameri.objects.classes.user.editor.Profile;
 import com.ameri.objects.classes.user.editor.Subscription;
@@ -38,6 +39,10 @@ public interface DAOSubscription {
 
     List<Subscription> getListSubscriptions(int magazineRecord) throws SQLException;
 
-
     List<Subscription> listWhereSubscriptionLike(int magazineRecord) throws SQLException;
+
+    List<AdminBeans> listTopSubscriptions() throws SQLException;
+
+    List<AdminBeans> listTopSubscriptionsBetween(LocalDate start, LocalDate end) throws SQLException;
+
 }

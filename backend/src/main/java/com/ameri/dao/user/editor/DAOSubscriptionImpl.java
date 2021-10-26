@@ -1,6 +1,7 @@
 package com.ameri.dao.user.editor;
 
 import com.ameri.database.Connector;
+import com.ameri.objects.Beans.AdminBeans;
 import com.ameri.objects.classes.magazine.Magazine;
 import com.ameri.objects.classes.user.editor.Profile;
 import com.ameri.objects.classes.user.editor.Subscription;
@@ -32,6 +33,8 @@ public class DAOSubscriptionImpl implements DAOSubscription {
     private final String GET_SUBSCRIPTION_WHERE_LIKES_BETWEEN = "SELECT * FROM suscripcion WHERE registro_revista=? AND like_suscripcion ='SI' AND fecha_registro BETWEEN ? AND ?";
     private final String GET_SUBSCRIPTIONS_BETWEEN = "SELECT * FROM suscripcion WHERE registro_revista=? AND fecha_registro BETWEEN ? AND ? AND estado_suscripcion = 'VIGENTE'";
     private final String GET_SUBSCRIPTIONS = "SELECT * FROM suscripcion WHERE registro_revista=? AND estado_suscripcion = 'VIGENTE'";
+    private final String GET_MAGAZINE_SUBSCRIPTIONS_COUNT = "SELECT registro_revista, count(*) as contador FROM suscripcion WHERE estado_suscripcion='VIGENTE' GROUP BY registro_revista ORDER BY registro_revista DESC LIMIT 5";
+    private final String GET_MAGAZINE_SUBSCRIPTIONS_COUNT_BETWEEN = "SELECT registro_revista, count(*) as contador FROM suscripcion WHERE estado_suscripcion='VIGENTE' AND fecha_registro BETWEEN ? AND ? GROUP BY registro_revista ORDER BY registro_revista DESC LIMIT 5";
 
 
     public DAOSubscriptionImpl(){
@@ -214,5 +217,33 @@ public class DAOSubscriptionImpl implements DAOSubscription {
         ResultSet resultSet = query.executeQuery();
 
         return getSubscriptions(list, resultSet);
+    }
+
+    @Override
+    public List<AdminBeans> listTopSubscriptions() throws SQLException {
+        List<AdminBeans> adminBeans = new ArrayList<>();
+        PreparedStatement query =Connector.getConnection().prepareStatement(GET_MAGAZINE_SUBSCRIPTIONS_COUNT);
+        ResultSet resultSet = query.executeQuery();
+
+        while(resultSet.next()){
+            adminBeans.add(new AdminBeans(resultSet.getInt("contador"), resultSet.getInt("registro_revista")));
+        }
+        
+        return adminBeans;
+    }
+
+    @Override
+    public List<AdminBeans> listTopSubscriptionsBetween(LocalDate start, LocalDate end) throws SQLException {
+        List<AdminBeans> adminBeans = new ArrayList<>();
+        PreparedStatement query =Connector.getConnection().prepareStatement(GET_MAGAZINE_SUBSCRIPTIONS_COUNT_BETWEEN);
+        query.setString(1, start.toString());
+        query.setString(2,end.toString());
+        ResultSet resultSet = query.executeQuery();
+
+        while(resultSet.next()){
+            adminBeans.add(new AdminBeans(resultSet.getInt("contador"), resultSet.getInt("registro_revista")));
+        }
+
+        return adminBeans;
     }
 }

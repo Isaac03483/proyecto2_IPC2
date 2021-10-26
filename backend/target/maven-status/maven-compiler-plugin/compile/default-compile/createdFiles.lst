@@ -1,4 +1,5 @@
 com/ameri/objects/interfaces/user/DAOUser.class
+com/ameri/objects/Beans/OtherMagazineBeans.class
 com/ameri/objects/classes/user/User.class
 com/ameri/converter/Converter.class
 com/ameri/servlets/user/editor/profile/UpdateImage.class
@@ -16,6 +17,7 @@ com/ameri/objects/interfaces/user/manager/DAOCategory.class
 com/ameri/objects/enums/ad/AdStatus.class
 com/ameri/dao/ad/DAOAdImpl.class
 com/ameri/dao/user/manager/DAOCategoryImpl.class
+com/ameri/servlets/user/manager/ManagerReport.class
 com/ameri/servlets/magazine/GetMagazineWithRecord.class
 com/ameri/objects/enums/magazine/MagazineSubscription.class
 com/ameri/servlets/ads/AddNewAdServlet.class
@@ -24,6 +26,7 @@ com/ameri/objects/interfaces/user/manager/DAOImpuesto.class
 com/ameri/converter/magazine/MagazineTagConverter.class
 com/ameri/servlets/user/manager/tag/UpdateTag.class
 com/ameri/servlets/user/manager/category/DeleteCategory.class
+com/ameri/operation/services/ManagerReportService.class
 com/ameri/objects/interfaces/user/editor/DAOProfile.class
 com/ameri/servlets/user/UserLogServlet.class
 com/ameri/dao/user/manager/DAOTagImpl.class
@@ -66,13 +69,13 @@ com/ameri/servlets/magazine/DeleteMagazineTag.class
 com/ameri/objects/enums/magazine/MagazineComment.class
 com/ameri/database/Connector.class
 com/ameri/dao/user/manager/DAOImpuestoImpl.class
+com/ameri/objects/Beans/AdminBeans.class
 com/ameri/objects/enums/user/UserType.class
 com/ameri/operation/services/EditorReportService.class
 com/ameri/objects/interfaces/user/editor/DAOSubscription.class
 com/ameri/dao/magazine/DAOMagazineImpl.class
 com/ameri/servlets/magazine/AddMagazine.class
 com/ameri/dao/user/editor/DAOProfileImpl.class
-com/ameri/operation/other/Response.class
 com/ameri/dao/user/editor/DAOEditorAccountImpl.class
 com/ameri/servlets/user/editor/editorReport/EditorReportServlet.class
 com/ameri/converter/user/manager/ManagerConverter.class
@@ -86,6 +89,7 @@ com/ameri/objects/classes/user/editor/Profile.class
 com/ameri/converter/ads/AdsTypeConverter.class
 com/ameri/servlets/magazine/DeleteMagazine.class
 com/ameri/converter/user/manager/CategoryConverter.class
+com/ameri/objects/Beans/GananciaBeans.class
 com/ameri/servlets/magazine/AcceptMagazine.class
 com/ameri/objects/interfaces/ad/DAOAdType.class
 com/ameri/servlets/user/manager/ManagerLog.class
@@ -110,4 +114,3 @@ com/ameri/servlets/user/manager/AddManager.class
 com/ameri/objects/classes/user/editor/Comment.class
 com/ameri/servlets/user/editor/profile/DeleteEditorTag.class
 com/ameri/converter/user/manager/ImpuestoConverter.class
-com/ameri/converter/other/ResponseConverter.class

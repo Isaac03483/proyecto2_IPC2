@@ -1,6 +1,7 @@
 package com.ameri.dao.user.editor;
 
 import com.ameri.database.Connector;
+import com.ameri.objects.Beans.AdminBeans;
 import com.ameri.objects.classes.user.editor.Comment;
 import com.ameri.objects.interfaces.user.editor.DAOComment;
 
@@ -20,6 +21,8 @@ public class DAOCommentImpl implements DAOComment {
     private final String DELETE_COMMENT="DELETE FROM comentario WHERE registro_comentario=?";
     private final String LIST_MAGAZINE_COMMENTS ="SELECT * FROM comentario WHERE registro_revista=? ORDER BY fecha_comentario DESC";
     private final String LIST_MAGAZINE_COMMENTS_BETWEEN_FILTER = "SELECT * FROM comentario WHERE registro_revista=? AND fecha_comentario BETWEEN ? AND ? ORDER BY fecha_comentario DESC";
+    private final String GET_MAGAZINE_COMMENT_COUNT = "SELECT registro_revista, count(*) as contador FROM comentario GROUP BY registro_revista ORDER BY registro_revista DESC LIMIT 5";
+    private final String GET_MAGAZINE_COMMENT_COUNT_BETWEEN = "SELECT registro_revista, count(*) as contador FROM comentario WHERE fecha_comentario BETWEEN ? AND ? GROUP BY registro_revista ORDER BY registro_revista DESC LIMIT 5";
 
 
     public DAOCommentImpl(){
@@ -86,6 +89,34 @@ public class DAOCommentImpl implements DAOComment {
             list.add(new Comment(resultSet.getInt("registro_comentario"), resultSet.getInt("registro_revista"), resultSet.getString("nombre_suscriptor"),resultSet.getString("texto"), String.valueOf(resultSet.getDate("fecha_comentario"))));
         }
         return list;
+    }
+
+    @Override
+    public List<AdminBeans> listTopComments() throws SQLException {
+        List<AdminBeans> adminBeans = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_MAGAZINE_COMMENT_COUNT);
+        ResultSet resultSet = query.executeQuery();
+
+        while(resultSet.next()){
+            adminBeans.add(new AdminBeans(resultSet.getInt("contador"), resultSet.getInt("registro_revista")));
+        }
+
+        return adminBeans;
+    }
+
+    @Override
+    public List<AdminBeans> listTopCommentsBetween(LocalDate start, LocalDate end) throws SQLException {
+        List<AdminBeans> adminBeans = new ArrayList<>();
+        PreparedStatement query = Connector.getConnection().prepareStatement(GET_MAGAZINE_COMMENT_COUNT_BETWEEN);
+        query.setString(1, start.toString());
+        query.setString(2,end.toString());
+        ResultSet resultSet = query.executeQuery();
+
+        while(resultSet.next()){
+            adminBeans.add(new AdminBeans(resultSet.getInt("contador"), resultSet.getInt("registro_revista")));
+        }
+
+        return adminBeans;
     }
 
 }

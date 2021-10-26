@@ -1,10 +1,8 @@
 package com.ameri.objects.Beans;
 
-    import com.ameri.objects.classes.user.editor.Comment;
+import com.ameri.objects.classes.user.editor.Comment;
 import com.ameri.objects.classes.user.editor.EditorAccount;
 import com.ameri.objects.classes.user.editor.Subscription;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 public class MagazineBeans{
