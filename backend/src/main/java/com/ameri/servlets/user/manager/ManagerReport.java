@@ -37,7 +37,7 @@ public class ManagerReport extends HttpServlet {
                     case "comments":
                         reportService = new ManagerReportService();
                         reportService.printMagazineTopComments(resp.getOutputStream(), startDateStr, endDateStr);
-                             break;
+                        break;
                     case "subscriptions":
                         reportService = new ManagerReportService();
                         reportService.printMagazineTopSubscriptions(resp.getOutputStream(), startDateStr, endDateStr);
