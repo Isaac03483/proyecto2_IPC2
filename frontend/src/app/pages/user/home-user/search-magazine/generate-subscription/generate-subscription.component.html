@@ -24,6 +24,9 @@
         <label for="endDate">SU SUSCRIPCIÓN ESTARÁ VIGENTE HASTA LA FECHA:</label>
         <input type="text" readonly [value]="endDate" id="endDate" class="form-control">
       </div>
+      <div>
+        <label>EL COSTO TOTAL A PAGAR ES DE: {{this.magazine.subscriptionCost * this.subscriptionForm.value.time}}</label>
+      </div>
       <hr class="mb-4">
       <div class="d-grid gap-2">
         <button type="submit" class="btn btn-outline-dark btn-lg" [disabled]="subscriptionForm.invalid">SUSCRIBIRSE</button>

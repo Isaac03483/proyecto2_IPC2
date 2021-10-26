@@ -28,8 +28,8 @@
         <label for="magazineFile">ARCHIVO:</label>
         <input type="file" id="magazineFile" (change)="changeFile($event)" class="form-control" placeholder="Suba un archivo PDF.">
         <br>
-        <div class="container" *ngIf="fileView">
-          <pdf-viewer class="ng2-pdf-viewer-container" [src]="fileView" [show-borders]="true" [zoom]="0.5"></pdf-viewer>
+        <div class="ng2-pdf-viewer-container" *ngIf="fileView">
+          <ngx-extended-pdf-viewer [src]="fileView" ></ngx-extended-pdf-viewer>
         </div>
       </div>
       <div>

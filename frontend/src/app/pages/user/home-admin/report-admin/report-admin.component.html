@@ -1,1 +1,24 @@
-<p>report-admin works!</p>
+<div class="text-center">
+  <h1>REPORTES DEL ADMINISTRADOR</h1>
+</div>
+<div>
+  <form [formGroup]="reportForm">
+    <strong><label for="startDate">FECHA INICIAL:</label></strong>
+    <input type="date" class="form-control" id="startDate" formControlName="startDate"><br>
+    <strong><label for="endDate">FECHA FINAL:</label></strong>
+    <input type="date" class="form-control" id="endDate" formControlName="endDate"><br>
+    <strong><label for="reportType">TIPO DE REPORTE</label></strong>
+    <select formControlName="reportType" id="reportType" class="form-control">
+      <option [ngValue]="null">SELECCIONE EL TIPO DE REPORTE.</option>
+      <option value="comments" (click)="getReport(2)">REPORTE DE LAS 5 REVISTAS MÁS COMENTADAS</option>
+      <option value="subscriptions" (click)="getReport(2)">REPORTE DE LAS 5 REVISTAS MÁS POPULARES</option>
+      <option value="gains" (click)="getReport(2)">REPORTE DE GANANCIAS POR REVISTA</option>
+    </select>
+  </form>
+</div>
+<br><br>
+<div *ngIf="reportViewer">
+  <ngx-extended-pdf-viewer [src]="reportViewer"></ngx-extended-pdf-viewer>
+</div>
+
+<br><br>

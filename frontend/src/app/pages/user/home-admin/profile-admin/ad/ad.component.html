@@ -1,0 +1,120 @@
+<div class="container">
+  <nav class="navbar-center navbar-expand-md navbar-light bg-light" role="navigation" >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(1)">AGREGAR UN NUEVO ANUNCIO</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(2)">VER ANUNCIOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn nav-link active" (click)="setOption(3)">MODIFICAR COSTO DEL TIPO DE ANUNCIO</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div *ngIf="option == 1">
+
+  <h2>AGREGAR UN NUEVO ANUNCIO</h2>
+  <div>
+    <form [formGroup]="addNewAdForm" (submit)="addNewAd()">
+      <div>
+        <label for="adType">TIPO DE ANUNCIO A ESCOGER:</label>
+        <select id="adType" class="form-control" formControlName="adType">
+          <option>seleccione el tipo de anuncio.</option>
+          <option *ngFor="let adType of adTypeList" (click)="updateAdTypeSelected(adType)">{{adType.typeName}}</option>
+        </select>
+      </div>
+      <div>
+        <label for="adName">NOMBRE DEL ANUNCIO</label>
+        <input type="text" id="adName" class="form-control" formControlName="adName">
+        <label for="clientName">NOMBRE DEL ANUNCIANTE</label>
+        <input type="text" id="clientName" class="form-control" formControlName="clientName">
+      </div>
+      <div>
+        <label for="adText">INFORMACIÓN DEL ANUNCIO (ESTO ES LO QUE SERÁ MOSTRADO EN LA PÁGINA WEB)</label>
+        <input type="text" id="adText" class="form-control" formControlName="adText">
+      </div>
+      <div>
+        <label for="adContent">CONTENIDO DEL ANUNCIO (LA REFERENCIA A LA QUE SERÁ REDIRIGIDO EL USUARIO AL DARLE CLICK AL ANUNCIO)</label>
+        <input type="text" id="adContent" class="form-control" formControlName="adContent">
+      </div>
+      <div>
+        <br>
+        <label for="startDate">FECHA DE INICIO:</label>
+        <input type="date" id="startDate" class="form-control" formControlName="startDate">
+      </div>
+      <div *ngIf="addNewAdForm.value.startDate != null">
+        <br>
+        <label for="time">INGRESE LA CANTIDAD DE TIEMPO QUE ESTARÁ SUSCRITO A ESTA REVISTA (EL COSTO POR DÍA DE ESTE ANUNCIO ES DE: {{adTypeSelected.dayCost}})</label>
+        <input type="number" min="1" class="form-control" id="time" (keyup)="updateEndDate()" formControlName="time">
+      </div>
+      <div *ngIf="endDate != null">
+        <br>
+        <label for="endDate">SU SUSCRIPCIÓN ESTARÁ VIGENTE HASTA LA FECHA:</label>
+        <input type="text" readonly [value]="endDate" id="endDate" class="form-control">
+      </div>
+      <div *ngIf="adTypeSelected != null">
+        <label>EL COSTO TOTAL A PAGAR ES DE: {{this.adTypeSelected.dayCost * this.addNewAdForm.value.time}}</label>
+      </div>
+      <hr class="mb-4">
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-outline-dark btn-lg" [disabled]="addNewAdForm.invalid">AGREGAR ANUNCIO</button>
+      </div>
+    </form>
+    <br>
+    <br>
+  </div>
+</div>
+<div *ngIf="option == 2">
+  <app-ad-viewer></app-ad-viewer>
+</div>
+<div *ngIf="option == 3">
+
+  <h2>MODIFICAR COSTO DEL TIPO DE ANUNCIO</h2>
+  <div *ngIf="adTypeToUpdate != null">
+    <hr class="mb-4">
+    <form [formGroup]="updateAdTypeCostForm" (submit)="updateAdTypeCost()">
+      <div>
+        <strong><label for="adTypeName">NOMBRE DEL TIPO DE ANUNCIO:</label></strong>
+        <input type="text" readonly id="adTypeName" class="form-control" [value]="adTypeToUpdate.typeName">
+      </div>
+      <div>
+        <strong><label for="adTypeCost">INGRESE EL NUEVO COSTO POR DÍA: (COSTO ANTERIOR: {{adTypeToUpdate.dayCost}})</label></strong>
+        <input type="number" id="adTypeCost" class="form-control" min="1" formControlName="dayCost">
+      </div>
+      <hr class="mb-4">
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-outline-dark btn-lg" [disabled]="updateAdTypeCostForm.invalid">MODIFICAR COSTO POR DIA</button>
+      </div>
+    </form>
+  </div>
+  <hr class="mb-4">
+
+  <div class="container col-lg-12 table-style">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">COSTO POR DÍA</th>
+        <th scope="col">MODIFICAR COSTO</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let adType of adTypeList">
+        <td>{{adType.typeName}}</td>
+        <td>{{adType.dayCost}}</td>
+        <td><button type="button" class="btn btn-outline-primary" (click)="selectAdTypeToUpdate(adType)">ACTUALIZAR</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <br>
+</div>

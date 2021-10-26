@@ -13,11 +13,11 @@ export class Ad{
     totalCost!: number;
     adStatus!: AdStatus;
     url!: string;
-    startDate!: Date;
-    endDate!: Date;
+    startDate!: string;
+    endDate!: string;
 
-    constructor(adRecord: number, adType: AdType, adName: string, clientName: string, adText: string, adContent: string, 
-        views: number, totalCost: number, adStatus: AdStatus, url: string, startDate: Date, endDate: Date){
+    constructor(adRecord: number, adType: AdType, adName: string, clientName: string, adText: string, adContent: string,
+        views: number, totalCost: number, adStatus: AdStatus, url: string, startDate: string, endDate: string){
 
             this.adRecord = adRecord;
             this.adType = adType;

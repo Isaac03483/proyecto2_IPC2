@@ -1,0 +1,31 @@
+<div class="text-center">
+  <h1>REPORTES DEL EDITOR</h1>
+</div>
+<div>
+  <form [formGroup]="reportForm">
+    <strong><label for="startDate">FECHA INICIAL:</label></strong>
+    <input type="date" class="form-control" id="startDate" formControlName="startDate"><br>
+    <strong><label for="endDate">FECHA FINAL:</label></strong>
+    <input type="date" class="form-control" id="endDate" formControlName="endDate"><br>
+    <strong><label for="reportType">TIPO DE REPORTE</label></strong>
+    <select formControlName="reportType" id="reportType" class="form-control">
+      <option [ngValue]="null">SELECCIONE EL TIPO DE REPORTE.</option>
+      <option value="comments">REPORTE DE COMETARIOS</option>
+      <option value="subscriptions">REPORTE DE SUSCRIPCIONES</option>
+      <option value="gains">REPORTE DE GANANCIAS</option>
+      <option value="likes" (click)="getReport(2)">REPORTE DE REVISTAS MÁS GUSTADAS</option>
+    </select>
+    <strong><label for="optionReport">OBTENER REPORTE</label></strong>
+    <select [disabled]="reportForm.invalid" id="optionReport" class="form-control">
+      <option>SELECCIONE EL TIPO DE REPORTE.</option>
+      <option (click)="getReport(1)">REPORTE GENERAL</option>
+      <option (click)="getReport(2)">FILTRAR POR REVISTA</option>
+    </select>
+  </form>
+</div>
+<br><br>
+<div *ngIf="reportViewer">
+  <ngx-extended-pdf-viewer [src]="reportViewer"></ngx-extended-pdf-viewer>
+</div>
+
+<br><br>

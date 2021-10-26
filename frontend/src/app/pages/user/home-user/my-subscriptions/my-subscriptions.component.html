@@ -68,8 +68,8 @@
     <h3>REVISTA: {{magazine.magazineName}}</h3>
     <strong><label>CATEGORIA: {{magazine.category.categoryName}}</label></strong><br>
     <strong><label>CANTIDAD DE ME GUSTA: {{subscriptionLikesCount}}</label></strong>
-    <div class="container" *ngIf="fileView">
-      <pdf-viewer class="subscription-pdf-viewer" [src]="fileView" [show-borders]="true" [zoom]="0.6"></pdf-viewer>
+    <div class="subscription-pdf-viewer"  *ngIf="fileView">
+      <ngx-extended-pdf-viewer [src]="fileView"></ngx-extended-pdf-viewer>
     </div>
     <br>
     <br>

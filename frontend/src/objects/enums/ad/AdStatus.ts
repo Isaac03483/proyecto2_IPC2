@@ -1,4 +1,5 @@
 export enum AdStatus{
     ACTIVO="ACTIVO",
-    INACTIVO="INACTIVO"
+    INACTIVO="INACTIVO",
+    VENCIDO="VENCIDO"
 }

@@ -1,15 +1,16 @@
 .ng2-pdf-viewer-container {
-  width: 500px !important;
-  height: 550px !important;
-  position: relative;
-  left: 350px;
+  position: absolute;
+  width: 650px !important;
+  height: 800px !important;
+  left: 1000px;
+
 }
 
 .subscription-pdf-viewer {
-  width: 500px !important;
-  height: 550px !important;
-  position: relative;
-  left: 250px;
+  width: 650px !important;
+  height: 800px !important;
+  position: absolute;
+  left: 1000px;
 }
 
 .comment-stack {

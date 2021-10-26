@@ -27,6 +27,10 @@ import {AlifeFileToBase64Module} from "alife-file-to-base64";
 import { MagazineDetailsComponent } from './pages/user/home-user/search-magazine/magazine-details/magazine-details.component';
 import { GenerateSubscriptionComponent } from './pages/user/home-user/search-magazine/generate-subscription/generate-subscription.component';
 import { MySubscriptionsComponent } from './pages/user/home-user/my-subscriptions/my-subscriptions.component';
+import { AdComponent } from './pages/user/home-admin/profile-admin/ad/ad.component';
+import { AdViewerComponent } from './pages/user/home-admin/profile-admin/ad/ad-viewer/ad-viewer.component';
+import { EditorReportsComponent } from './pages/user/home-user/editor-reports/editor-reports.component';
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 
 @NgModule({
   declarations: [
@@ -52,6 +56,9 @@ import { MySubscriptionsComponent } from './pages/user/home-user/my-subscription
     MagazineDetailsComponent,
     GenerateSubscriptionComponent,
     MySubscriptionsComponent,
+    AdComponent,
+    AdViewerComponent,
+    EditorReportsComponent
   ],
     imports: [
       BrowserModule,
@@ -61,6 +68,7 @@ import { MySubscriptionsComponent } from './pages/user/home-user/my-subscription
       HttpClientModule,
       PdfViewerModule,
       AlifeFileToBase64Module,
+      NgxExtendedPdfViewerModule
     ],
   providers: [],
   bootstrap: [AppComponent]

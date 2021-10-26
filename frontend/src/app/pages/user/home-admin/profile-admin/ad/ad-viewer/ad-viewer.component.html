@@ -1,0 +1,25 @@
+<h2>ANUNCIOS REGISTRADOS</h2>
+<div class="container col-lg-12 table-style">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">COSTO TOTAL</th>
+      <th scope="col">ESTADO DEL ANUNCIO</th>
+      <th scope="col">OPCIÓN</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let ad of adList">
+      <td>{{ad.adName}}</td>
+      <td>{{ad.totalCost}}</td>
+      <td>{{ad.adStatus}}</td>
+      <td><button type="button" *ngIf="ad.adStatus == adStatusEnum.INACTIVO" class="btn btn-outline-primary" (click)="activateAd(ad)">ACTIVAR</button></td>
+      <td><button type="button" *ngIf="ad.adStatus == adStatusEnum.VENCIDO" class="btn btn-outline-primary" (click)="updateAd(ad)">RENOVAR</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
