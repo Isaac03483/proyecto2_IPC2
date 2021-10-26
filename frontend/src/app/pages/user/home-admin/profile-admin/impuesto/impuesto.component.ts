@@ -28,7 +28,13 @@ export class ImpuestoComponent implements OnInit {
 
   updateImp() {
     console.log(this.impForm.value.impData+" "+this.impForm.value.updateDate);
-    let date = formatDate(this.impForm.value.updateDate, 'yyyy-MM-dd', 'en-US');
+    let date;
+    if(this.impForm.value.updateDate == null){
+      date = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+    } else{
+      date = formatDate(this.impForm.value.updateDate, 'yyyy-MM-dd', 'en-US');
+
+    }
     console.log(date);
     this.service.updateImp(new Impuesto(1, this.impForm.value.impData, date))
       .subscribe((created: Impuesto) => {
