@@ -2,7 +2,7 @@ package com.ameri.servlets.user.manager.tag;
 
 import com.ameri.converter.user.manager.TagConverter;
 import com.ameri.dao.user.manager.DAOTagImpl;
-import com.ameri.operation.Reader;
+import com.ameri.operation.provisional.Reader;
 import com.ameri.objects.classes.user.manager.Tag;
 
 import javax.servlet.ServletException;

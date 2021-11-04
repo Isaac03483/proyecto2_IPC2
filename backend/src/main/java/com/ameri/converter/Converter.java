@@ -23,6 +23,7 @@ public abstract class Converter<T> {
         return gson.fromJson(json, typeConverter);
     }
 
+
     public String toJson(T object) {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(object, typeConverter);

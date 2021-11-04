@@ -1,6 +1,6 @@
 package com.ameri.objects.interfaces.user.editor;
 
-import com.ameri.objects.Beans.AdminBeans;
+import com.ameri.objects.beans.adminBeans.AdminBeans;
 import com.ameri.objects.classes.user.editor.Comment;
 
 import java.sql.SQLException;

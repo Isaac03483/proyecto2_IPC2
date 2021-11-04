@@ -28,4 +28,5 @@ public class Comment {
     public String getText() {return text;}
 
     public Date getCommentDate() {return Date.valueOf(commentDate);}
+
 }

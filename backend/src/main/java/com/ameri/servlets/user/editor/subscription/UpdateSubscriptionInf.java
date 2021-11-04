@@ -2,7 +2,7 @@ package com.ameri.servlets.user.editor.subscription;
 
 import com.ameri.converter.user.editor.SubscriptionConverter;
 import com.ameri.dao.user.editor.DAOSubscriptionImpl;
-import com.ameri.operation.Reader;
+import com.ameri.operation.provisional.Reader;
 import com.ameri.objects.classes.user.editor.Subscription;
 import com.ameri.objects.enums.user.editor.SubscriptionLike;
 import javax.servlet.ServletException;

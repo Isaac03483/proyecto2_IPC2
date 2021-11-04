@@ -2,7 +2,7 @@ package com.ameri.servlets.user.manager;
 
 import com.ameri.converter.user.manager.ManagerConverter;
 import com.ameri.dao.user.manager.DAOManagerImpl;
-import com.ameri.operation.Reader;
+import com.ameri.operation.provisional.Reader;
 import com.ameri.objects.classes.user.manager.Manager;
 
 import javax.servlet.ServletException;

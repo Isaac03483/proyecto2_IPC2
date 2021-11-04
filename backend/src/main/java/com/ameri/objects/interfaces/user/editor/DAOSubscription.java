@@ -1,6 +1,6 @@
 package com.ameri.objects.interfaces.user.editor;
 
-import com.ameri.objects.Beans.AdminBeans;
+import com.ameri.objects.beans.adminBeans.AdminBeans;
 import com.ameri.objects.classes.magazine.Magazine;
 import com.ameri.objects.classes.user.editor.Profile;
 import com.ameri.objects.classes.user.editor.Subscription;

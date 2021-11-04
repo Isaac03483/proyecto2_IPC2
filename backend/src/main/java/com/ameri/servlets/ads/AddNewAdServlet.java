@@ -3,7 +3,7 @@ package com.ameri.servlets.ads;
 import com.ameri.converter.ads.AdConverter;
 import com.ameri.dao.ad.DAOAdImpl;
 import com.ameri.objects.classes.ads.Ad;
-import com.ameri.operation.Reader;
+import com.ameri.operation.provisional.Reader;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

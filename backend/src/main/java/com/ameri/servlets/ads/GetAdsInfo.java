@@ -19,6 +19,7 @@ public class GetAdsInfo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            new DAOAdImpl().desactivateAd();
             List<Ad> list = new DAOAdImpl().listAllAds();
             resp.getWriter().write(new AdConverter(Ad.class).toJson(list));
         } catch (SQLException e) {

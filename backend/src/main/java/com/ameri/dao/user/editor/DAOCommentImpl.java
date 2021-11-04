@@ -1,17 +1,15 @@
 package com.ameri.dao.user.editor;
 
 import com.ameri.database.Connector;
-import com.ameri.objects.Beans.AdminBeans;
+import com.ameri.objects.beans.adminBeans.AdminBeans;
 import com.ameri.objects.classes.user.editor.Comment;
 import com.ameri.objects.interfaces.user.editor.DAOComment;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DAOCommentImpl implements DAOComment {
@@ -21,8 +19,8 @@ public class DAOCommentImpl implements DAOComment {
     private final String DELETE_COMMENT="DELETE FROM comentario WHERE registro_comentario=?";
     private final String LIST_MAGAZINE_COMMENTS ="SELECT * FROM comentario WHERE registro_revista=? ORDER BY fecha_comentario DESC";
     private final String LIST_MAGAZINE_COMMENTS_BETWEEN_FILTER = "SELECT * FROM comentario WHERE registro_revista=? AND fecha_comentario BETWEEN ? AND ? ORDER BY fecha_comentario DESC";
-    private final String GET_MAGAZINE_COMMENT_COUNT = "SELECT registro_revista, count(*) as contador FROM comentario GROUP BY registro_revista ORDER BY registro_revista DESC LIMIT 5";
-    private final String GET_MAGAZINE_COMMENT_COUNT_BETWEEN = "SELECT registro_revista, count(*) as contador FROM comentario WHERE fecha_comentario BETWEEN ? AND ? GROUP BY registro_revista ORDER BY registro_revista DESC LIMIT 5";
+    private final String GET_MAGAZINE_COMMENT_COUNT = "SELECT registro_revista, count(*) as contador FROM comentario GROUP BY registro_revista ORDER BY contador DESC LIMIT 5";
+    private final String GET_MAGAZINE_COMMENT_COUNT_BETWEEN = "SELECT registro_revista, count(*) as contador FROM comentario WHERE fecha_comentario BETWEEN ? AND ? GROUP BY registro_revista ORDER BY contador DESC LIMIT 5";
 
 
     public DAOCommentImpl(){

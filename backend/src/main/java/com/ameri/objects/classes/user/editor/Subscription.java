@@ -23,6 +23,10 @@ public class Subscription {
     private final SubscriptionLike subscriptionLike;
     private int likes;
 
+    {
+        this.likes = 0;
+    }
+
     public Subscription(int subscriptionRecord, String subscriberName, int magazineRecord, String magazineName, BigDecimal totalPay, PaymentEnum paymentInterval, String recordDate, String endDate, SubscriptionStatus subscriptionStatus, SubscriptionLike subscriptionLike) {
         this.subscriptionRecord = subscriptionRecord;
         this.subscriberName = subscriberName;
@@ -34,7 +38,6 @@ public class Subscription {
         this.endDate = endDate;
         this.subscriptionStatus = subscriptionStatus;
         this.subscriptionLike = subscriptionLike;
-        this.likes=0;
     }
 
     public Subscription(){
@@ -48,7 +51,6 @@ public class Subscription {
         this.recordDate = null;
         this.endDate = null;
         this.subscriptionStatus = null;
-        this.likes=0;
     }
     public Subscription(int subscriptionRecord, SubscriptionLike subscriptionLike) {
         this.subscriptionRecord = subscriptionRecord;
@@ -61,7 +63,6 @@ public class Subscription {
         this.recordDate = null;
         this.endDate = null;
         this.subscriptionStatus = null;
-        this.likes=0;
     }
 
     public Subscription(int subscriptionRecord) {
@@ -75,7 +76,6 @@ public class Subscription {
         this.recordDate = null;
         this.endDate = null;
         this.subscriptionStatus = null;
-        this.likes=0;
     }
 
     public Subscription(int subscriptionRecord, BigDecimal totalPay, PaymentEnum paymentInterval, String endDate, SubscriptionStatus subscriptionStatus) {
@@ -89,7 +89,6 @@ public class Subscription {
         this.recordDate = null;
         this.endDate = endDate;
         this.subscriptionStatus = subscriptionStatus;
-        this.likes=0;
     }
 
 
