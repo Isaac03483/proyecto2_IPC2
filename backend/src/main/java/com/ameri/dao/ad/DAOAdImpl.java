@@ -20,7 +20,7 @@ public class DAOAdImpl implements DAOAd {
     private final String UPDATE_AD_INFO = "UPDATE anuncio SET tipo_anuncio=?, nombre_anuncio=?, nombre_anunciante=?, texto_anuncio=?, contenido_anuncio=?, total_pagar=total_pagar + ?, estado_anuncio =?, fecha_fin=?";
     private final String GET_ALL_ADS = "SELECT * FROM anuncio";
     private final String GET_ADS_WHERE_STATUS ="SELET * FROM anuncio WHERE estado_anuncio=?";
-    private final String DESACTIVATE_AD = "UPDATE anuncio SET estado_anuncio='VENCIDO' WHERE fecha_fin < CURDDATE()";
+    private final String DESACTIVATE_AD = "UPDATE anuncio SET estado_anuncio='VENCIDO' WHERE fecha_fin < CURDATE()";
 
     public DAOAdImpl(){
         new Connector();

@@ -21,6 +21,7 @@ public class GetAdsInfo extends HttpServlet {
         try {
             new DAOAdImpl().desactivateAd();
             List<Ad> list = new DAOAdImpl().listAllAds();
+            list.forEach(t -> System.out.println(t.getAdStatus().getStatus()));
             resp.getWriter().write(new AdConverter(Ad.class).toJson(list));
         } catch (SQLException e) {
             e.printStackTrace();

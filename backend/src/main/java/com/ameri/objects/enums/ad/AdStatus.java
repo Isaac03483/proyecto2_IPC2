@@ -18,6 +18,8 @@ public enum AdStatus {
             return ACTIVO;
         } else if(string.equalsIgnoreCase(INACTIVO.getStatus())){
             return INACTIVO;
+        } else if(string.equalsIgnoreCase(VENCIDO.getStatus())){
+            return VENCIDO;
         }
 
         return null;
