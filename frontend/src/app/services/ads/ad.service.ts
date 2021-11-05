@@ -24,4 +24,11 @@ export class AdService {
   addNewAd(ad: Ad): Observable<Ad>{
     return this.httpClient.post<Ad>(this.API_URL+"add-new-ad",ad);
   }
+  getAdsInfo(): Observable<Array<Ad>>{
+    return this.httpClient.get<Array<Ad>>(this.API_URL+"get-ads-info");
+  }
+
+  activateAd(ad: Ad): Observable<Ad>{
+    return this.httpClient.post<Ad>(this.API_URL+"activate-ad",ad);
+  }
 }

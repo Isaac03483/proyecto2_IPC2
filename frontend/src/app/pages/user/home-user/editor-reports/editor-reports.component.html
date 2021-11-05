@@ -23,8 +23,294 @@
     </select>
   </form>
 </div>
-<br><br>
-<div *ngIf="reportViewer">
+<br>
+<div class="d-grid gap-2" *ngIf="!getExportReport">
+  <button type="button" [disabled]="reportType === ''" class="btn btn-outline-dark btn-lg" (click)="exportReport()">EXPORTAR REPORTE</button>
+</div>
+<br>
+<div *ngIf="!getExportReport">
+  <div *ngIf="reportWithFilter">
+    <div *ngIf="reportType === 'comments'">
+      <div *ngIf="number == 1">
+        <label>CANTIDAD TOTAL DE COMENTARIOS: {{reportWithFilter.total}}</label>
+        <div class="table-style">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">REGISTRO DE COMENTARIO</th>
+              <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+              <th scope="col">FECHA DEL COMENTARIO</th>
+              <th scope="col">TEXTO</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let subscriptionInfo of reportWithFilter.commentList">
+              <td>{{subscriptionInfo.commentRecord}}</td>
+              <td>{{subscriptionInfo.subscriberName}}</td>
+              <td>{{dateFormat(subscriptionInfo.commentDate)}}</td>
+              <td>{{subscriptionInfo.text}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="number == 2">
+        <label>CANTIDAD TOTAL DE COMENTARIOS: {{reportWithFilter.total}}</label>
+        <div class = "table-style">
+          <table class="table table-striped" *ngFor="let subscriptionReport of reportWithFilter.magazineBeansList">
+            <thead>
+            <tr>
+              <th scope="col">
+                Registro de Revista: {{subscriptionReport.magazineRecord}}<br>
+                Nombre de la revista: {{subscriptionReport.magazineName}}<br>
+                Cantidad de comentarios de la revista: {{subscriptionReport.totalCount}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="table-style">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">REGISTRO DE COMENTARIO</th>
+                  <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+                  <th scope="col">FECHA DEL COMENTARIO</th>
+                  <th scope="col">TEXTO</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subscriptionInfo of subscriptionReport.commentList">
+                  <td>{{subscriptionInfo.commentRecord}}</td>
+                  <td>{{subscriptionInfo.subscriberName}}</td>
+                  <td>{{dateFormat(subscriptionInfo.commentDate)}}</td>
+                  <td>{{subscriptionInfo.text}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="reportType === 'subscriptions'">
+      <div *ngIf="number == 1">
+        <label>CANTIDAD TOTAL DE PAGO POR SUSCRIPCIONES: {{reportWithFilter.total}}</label>
+        <div class="table-style">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">REGISTRO DE SUSCRIPCIÓN</th>
+              <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+              <th scope="col">INTERVALO DE PAGO</th>
+              <th scope="col">PAGO TOTAL</th>
+              <th scope="col">FECHA DE SUSCRIPCIÓN</th>
+              <th scope="col">LE GUSTA TU REVISTA?</th>
+              <th scope="col">NOMBRE DE LA REVISTA</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let subscriptionInfo of reportWithFilter.subscriptionList">
+              <td>{{subscriptionInfo.subscriptionRecord}}</td>
+              <td>{{subscriptionInfo.subscriberName}}</td>
+              <td>{{subscriptionInfo.paymentInterval}}</td>
+              <td>{{subscriptionInfo.totalPay}}</td>
+              <td>{{dateFormat(subscriptionInfo.recordDate)}}</td>
+              <td>{{subscriptionInfo.subscriptionLike}}
+              <td>{{subscriptionInfo.magazineName}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="number == 2">
+        <label>CANTIDAD TOTAL DE PAGO POR SUSCRIPCIONES: {{reportWithFilter.total}}</label>
+        <div class = "table-style">
+          <table class="table table-striped" *ngFor="let subscriptionReport of reportWithFilter.magazineBeansList">
+            <thead>
+            <tr>
+              <th scope="col">
+                Registro de Revista: {{subscriptionReport.magazineRecord}}<br>
+                Nombre de la revista: {{subscriptionReport.magazineName}}<br>
+                Total ganado por la revista: {{subscriptionReport.totalCount}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="table-style">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">REGISTRO DE SUSCRIPCIÓN</th>
+                  <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+                  <th scope="col">INTERVALO DE PAGO</th>
+                  <th scope="col">PAGO TOTAL</th>
+                  <th scope="col">FECHA DE SUSCRIPCIÓN</th>
+                  <th scope="col">LE GUSTA TU REVISTA?</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subscriptionInfo of subscriptionReport.subscriptionList">
+                  <td>{{subscriptionInfo.subscriptionRecord}}</td>
+                  <td>{{subscriptionInfo.subscriberName}}</td>
+                  <td>{{subscriptionInfo.paymentInterval}}</td>
+                  <td>{{subscriptionInfo.totalPay}}</td>
+                  <td>{{dateFormat(subscriptionInfo.recordDate)}}</td>
+                  <td>{{subscriptionInfo.subscriptionLike}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="reportType === 'likes'">
+      <div *ngIf="number == 1">
+        <label>CANTIDAD TOTAL DE LIKES: {{reportWithFilter.total}}</label>
+        <div class = "table-style">
+          <table class="table table-striped" *ngFor="let subscriptionReport of reportWithFilter.magazineBeansList">
+            <thead>
+            <tr>
+              <th scope="col">
+                Registro de Revista: {{subscriptionReport.magazineRecord}}<br>
+                Nombre de la revista: {{subscriptionReport.magazineName}}<br>
+                Total de likes por la revista: {{subscriptionReport.magazineLikes}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="table-style">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">REGISTRO DE SUSCRIPCIÓN</th>
+                  <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+                  <th scope="col">LE GUSTA TU REVISTA?</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subscriptionInfo of subscriptionReport.subscriptionList">
+                  <td>{{subscriptionInfo.subscriptionRecord}}</td>
+                  <td>{{subscriptionInfo.subscriberName}}</td>
+                  <td>{{subscriptionInfo.subscriptionLike}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="number == 2">
+        <label>CANTIDAD TOTAL DE LIKES: {{reportWithFilter.total}}</label>
+
+        <div class = "table-style">
+          <table class="table table-striped" *ngFor="let subscriptionReport of reportWithFilter.magazineBeansList">
+            <thead>
+            <tr>
+              <th scope="col">
+                Registro de Revista: {{subscriptionReport.magazineRecord}}<br>
+                Nombre de la revista: {{subscriptionReport.magazineName}}<br>
+                Total de likes por la revista: {{subscriptionReport.magazineLikes}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="table-style">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">REGISTRO DE SUSCRIPCIÓN</th>
+                  <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+                  <th scope="col">LE GUSTA TU REVISTA?</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subscriptionInfo of subscriptionReport.subscriptionList">
+                  <td>{{subscriptionInfo.subscriptionRecord}}</td>
+                  <td>{{subscriptionInfo.subscriberName}}</td>
+                  <td>{{subscriptionInfo.subscriptionLike}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="reportType === 'gains'">
+      <div *ngIf="number == 1">
+        <label>CANTIDAD TOTAL DE GANANCIAS: {{reportWithFilter.total}}</label>
+        <div class="table-style">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">REGISTRO DE PAGO</th>
+              <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+              <th scope="col">PAGO TOTAL</th>
+              <th scope="col">PERDIDA</th>
+              <th scope="col">GANANCIA</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let subscriptionInfo of reportWithFilter.editorAccountList">
+              <td>{{subscriptionInfo.accountRecord}}</td>
+              <td>{{subscriptionInfo.subscriberName}}</td>
+              <td>{{subscriptionInfo.totalPay}}</td>
+              <td>{{subscriptionInfo.descuento}}</td>
+              <td>{{subscriptionInfo.ganancia}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="number == 2">
+        <label>CANTIDAD TOTAL DE GANANCIAS: {{reportWithFilter.total}}</label>
+        <div class = "table-style">
+          <table class="table table-striped" *ngFor="let subscriptionReport of reportWithFilter.magazineBeansList">
+            <thead>
+            <tr>
+              <th scope="col">
+                Registro de Revista: {{subscriptionReport.magazineRecord}}<br>
+                Nombre de la revista: {{subscriptionReport.magazineName}}<br>
+                Total ganado por la revista: {{subscriptionReport.totalCount}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="table-style">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">REGISTRO DE PAGO</th>
+                  <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+                  <th scope="col">PAGO TOTAL</th>
+                  <th scope="col">PERDIDA</th>
+                  <th scope="col">GANANCIA</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subscriptionInfo of subscriptionReport.editorAccountList">
+                  <td>{{subscriptionInfo.accountRecord}}</td>
+                  <td>{{subscriptionInfo.subscriberName}}</td>
+                  <td>{{subscriptionInfo.totalPay}}</td>
+                  <td>{{subscriptionInfo.descuento}}</td>
+                  <td>{{subscriptionInfo.ganancia}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="getExportReport" class="report-pdf-viewer">
   <ngx-extended-pdf-viewer [src]="reportViewer"></ngx-extended-pdf-viewer>
 </div>
 

@@ -13,6 +13,12 @@
   left: 1000px;
 }
 
+.report-pdf-viewer {
+  width: 850px !important;
+  height: 1000px !important;
+  position: absolute;
+}
+
 .comment-stack {
   width: 500px !important;
   height: 300px !important;

@@ -165,6 +165,7 @@ export class MyMagazinesComponent implements OnInit {
               });
               this.magazineTagsSelected =[];
               this.fileView = null;
+              this.selectedFile = null;
               this.getMagazines();
 
             }

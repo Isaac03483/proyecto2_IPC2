@@ -24,6 +24,7 @@ export class GenerateSubscriptionComponent implements OnInit {
   subscriptionForm!: FormGroup;
   endDate: any = null;
   impPercentage: number = 0;
+  totalPay: number = 0;
   constructor(private formBuilder: FormBuilder, private subscriptionService: SubscriptionService, private impService: ProfileAdminService,private searchService: SearchMagazineService) { }
 
   ngOnInit(): void {
@@ -50,8 +51,11 @@ export class GenerateSubscriptionComponent implements OnInit {
       console.log(startDate);
       if(this.subscriptionForm.value.intervalOption == PaymentEnum.MENSUAL){
         this.endDate = formatDate(new Date(startDate.getUTCFullYear(), startDate.getUTCMonth()+this.subscriptionForm.value.time, startDate.getUTCDate()),'yyyy-MM-dd', 'en-US');
+        this.totalPay = this.magazine.subscriptionCost * this.subscriptionForm.value.time;
       } else if(this.subscriptionForm.value.intervalOption == PaymentEnum.ANUAL) {
         this.endDate = formatDate(new Date(startDate.getUTCFullYear() +this.subscriptionForm.value.time, startDate.getUTCMonth(), startDate.getUTCDate()),'yyyy-MM-dd', 'en-US');
+        this.totalPay = this.magazine.subscriptionCost * (this.subscriptionForm.value.time * 12) - ((this.magazine.subscriptionCost * (this.subscriptionForm.value.time * 12)) * 0.15);
+        console.log("entra");
       } else {
         console.log("error")
       }
@@ -63,15 +67,15 @@ export class GenerateSubscriptionComponent implements OnInit {
 
   addSubscription() {
     if(this.subscriptionForm.valid){
-      let totalPay = this.magazine.subscriptionCost * this.subscriptionForm.value.time;
-      this.subscriptionService.addSubscription(new Subscription(0, JSON.parse(<string>localStorage.getItem("editor")),this.magazine.magazineRecord, this.magazine.magazineName,totalPay,this.subscriptionForm.value.intervalOption,formatDate(this.subscriptionForm.value.startDate, 'yyyy-MM-dd', 'en-US'),this.endDate,
+
+      this.subscriptionService.addSubscription(new Subscription(0, JSON.parse(<string>localStorage.getItem("editor")),this.magazine.magazineRecord, this.magazine.magazineName,this.totalPay,this.subscriptionForm.value.intervalOption,formatDate(this.subscriptionForm.value.startDate, 'yyyy-MM-dd', 'en-US'),this.endDate,
         SubscriptionStatus.VIGENTE, SubscriptionLike.NO))
         .subscribe((created: Subscription)=>{
           if(created != null){
 
-            let perdida = totalPay * (this.impPercentage/100);
-            let ganancia = totalPay - perdida;
-            this.subscriptionService.addEditorAccount(new EditorAccount(0,this.magazine.editorName,JSON.parse(<string>localStorage.getItem("editor")),this.magazine.magazineRecord,totalPay,perdida,ganancia,formatDate(this.subscriptionForm.value.startDate, 'yyyy-MM-dd', 'en-US')))
+            let perdida = this.totalPay * (this.impPercentage/100);
+            let ganancia = this.totalPay - perdida;
+            this.subscriptionService.addEditorAccount(new EditorAccount(0,this.magazine.editorName,JSON.parse(<string>localStorage.getItem("editor")),this.magazine.magazineRecord,this.totalPay,perdida,ganancia,formatDate(this.subscriptionForm.value.startDate, 'yyyy-MM-dd', 'en-US')))
               .subscribe((created:EditorAccount)=>{
                 window.alert("SUSCRIPCIÓN REALIZADA CON ÉXITO. REVISE EN EL APARTADO DE 'MIS SUSCRIPCIONES' PARA VISUALIZAR ESTA REVISTA.");
                 this.endDate = null;

@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EditorReportsService} from "../../../../services/reports/editorReports/editor-reports.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Subscription} from "../../../../../objects/classes/usuario/editor/Subscription";
+import {Comment} from "../../../../../objects/classes/usuario/editor/Comment";
+import {MagazineBeans} from "../../../../../objects/classes/beans/editorBeans/MagazineBeans";
+import {EditorAccount} from "../../../../../objects/classes/usuario/editor/EditorAccount";
+import {formatDate} from "@angular/common";
+import {EditorBeans} from "../../../../../objects/classes/beans/editorBeans/EditorBeans";
 
 @Component({
   selector: 'app-editor-reports',
@@ -12,6 +18,10 @@ export class EditorReportsComponent implements OnInit {
 
   reportForm!: FormGroup;
   reportViewer: any = null;
+  number: number = 0;
+  reportType: string = "";
+  reportWithFilter!: EditorBeans;
+  getExportReport: boolean = false;
   constructor(private formBuilder: FormBuilder, private editorReportsService: EditorReportsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -22,15 +32,31 @@ export class EditorReportsComponent implements OnInit {
     })
   }
 
-  getReport(number: number) {
-    console.log(this.reportForm.value.startDate)
+  getReport(number: number){
+    this.number = number;
+    this.reportType = this.reportForm.value.reportType;
+    console.log(this.reportType);
+    this.getExportReport = false;
 
-    this.editorReportsService.getMagazineCommentsReport(this.reportForm.value.reportType, number, this.reportForm.value.startDate, this.reportForm.value.endDate)
+    this.editorReportsService.getEditorReport(this.reportForm.value.reportType, this.number, this.reportForm.value.startDate, this.reportForm.value.endDate)
+      .subscribe((data: EditorBeans) =>{
+        if(data != null){
+          this.reportWithFilter =data;
+          console.log(data);
+          this.reportForm.reset({
+            "reportType": null
+          })
+        }
+      })
+  }
+
+  exportReport() {
+    this.editorReportsService.getEditorExportReport( this.reportWithFilter,this.reportType, this.number)
       .subscribe((data:any)=>{
         if(data !=null){
           this.getBase64(data).then((image: any) =>{
             this.reportViewer = image.base;
-            console.log(this.reportViewer)
+            this.getExportReport = true;
             this.reportForm.reset({
               "reportType": null
             })
@@ -60,4 +86,8 @@ export class EditorReportsComponent implements OnInit {
       return null;
     }
   })
+
+  dateFormat(recordDate: any) {
+    return formatDate(recordDate, 'dd-MM-yyyy', 'en-US');
+  }
 }

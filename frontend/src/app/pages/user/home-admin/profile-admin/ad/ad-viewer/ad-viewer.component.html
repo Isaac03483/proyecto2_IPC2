@@ -15,8 +15,7 @@
       <td>{{ad.adName}}</td>
       <td>{{ad.totalCost}}</td>
       <td>{{ad.adStatus}}</td>
-      <td><button type="button" *ngIf="ad.adStatus == adStatusEnum.INACTIVO" class="btn btn-outline-primary" (click)="activateAd(ad)">ACTIVAR</button></td>
-      <td><button type="button" *ngIf="ad.adStatus == adStatusEnum.VENCIDO" class="btn btn-outline-primary" (click)="updateAd(ad)">RENOVAR</button></td>
+      <td><button type="button" *ngIf="ad.adStatus == adStatusEnum.INACTIVO" class="btn btn-outline-primary" (click)="activateAd(ad)">ACTIVAR</button><button type="button" *ngIf="ad.adStatus == adStatusEnum.VENCIDO" class="btn btn-outline-secondary" (click)="updateAd(ad)">RENOVAR</button></td>
     </tr>
     </tbody>
   </table>

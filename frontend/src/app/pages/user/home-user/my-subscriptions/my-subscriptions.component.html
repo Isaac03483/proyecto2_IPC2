@@ -66,8 +66,31 @@
 <div *ngIf="magazine!=null">
   <div *ngIf="getOption() == 2">
     <h3>REVISTA: {{magazine.magazineName}}</h3>
+    <strong><label (mouseenter)="setProfileVisibility(true)" (mouseleave)="setProfileVisibility(false)">EDITOR: {{magazine.editorName}} (COLOQUE EL MOUSE SOBRE EL NOMBRE PARA VER EL PERFIL DEL EDITOR).</label></strong><br>
     <strong><label>CATEGORIA: {{magazine.category.categoryName}}</label></strong><br>
     <strong><label>CANTIDAD DE ME GUSTA: {{subscriptionLikesCount}}</label></strong>
+
+    <div *ngIf="viewProfile" class="text-center">
+      <h5>PERFIL DEL EDITOR:</h5>
+      <div>
+        <img *ngIf="editorProfile.image"  class="img-fluid image-format" src="{{editorProfile.image}}" alt="tu foto"/>
+      </div>
+      <div>
+        <p>
+          <strong><label>DESCRIPCIÓN:</label></strong><br>
+          {{editorProfile.description}}
+        </p>
+        <p>
+          <strong><label>PASATIEMPOS:</label></strong><br>
+          {{editorProfile.hobby}}
+        </p>
+        <p>
+          <strong><label>GUSTOS:</label></strong><br>
+          {{editorProfile.likes}}
+        </p>
+      </div>
+      <br>
+    </div>
     <div class="subscription-pdf-viewer"  *ngIf="fileView">
       <ngx-extended-pdf-viewer [src]="fileView"></ngx-extended-pdf-viewer>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubscriptionService} from "../../../../services/subscription/subscription.service";
 import {Subscription} from "../../../../../objects/classes/usuario/editor/Subscription";
 import {SubscriptionStatus} from "../../../../../objects/enums/user/editor/SubscriptionStatus";
@@ -18,6 +18,10 @@ import {SubscriptionLikesCount} from "../../../../../objects/classes/usuario/edi
 import {UpdateSubscriptionLike} from "../../../../../objects/classes/usuario/editor/UpdateSubscriptionLike";
 import {MagazineComment} from "../../../../../objects/enums/magazine/MagazineComment";
 import {MagazineLike} from "../../../../../objects/enums/magazine/MagazineLike";
+import {ProfileEditorService} from "../../../../services/user/profile-editor.service";
+import {Profile} from "../../../../../objects/classes/usuario/editor/Profile";
+import {User} from "../../../../../objects/classes/usuario/User";
+import {UserType} from "../../../../../objects/enums/user/UserType";
 
 @Component({
   selector: 'app-my-subscriptions',
@@ -31,6 +35,8 @@ export class MySubscriptionsComponent implements OnInit {
   impPercentage: number = 0;
   payInterval= PaymentEnum;
   magazine!: Magazine;
+  editorProfile!: Profile;
+  viewProfile: boolean = false;
   fileView: any = null;
   subscriptionLikeEnum = SubscriptionLike;
   magazineCommentEnum = MagazineComment;
@@ -38,7 +44,7 @@ export class MySubscriptionsComponent implements OnInit {
   commentList: Array<Comment> = [];
   commentForm!: FormGroup;
   subscriptionLikesCount: number = 0;
-  constructor(private subscriptionService: SubscriptionService,private magazineService: MagazineService, private impService: ProfileAdminService, private formBuilder: FormBuilder) { }
+  constructor(private subscriptionService: SubscriptionService,private magazineService: MagazineService, private impService: ProfileAdminService, private formBuilder: FormBuilder, private profileService: ProfileEditorService) { }
 
   editorSubscriptions: Array<Subscription> =[];
   subscriptionStatus = SubscriptionStatus;
@@ -112,9 +118,11 @@ export class MySubscriptionsComponent implements OnInit {
     this.magazineService.getMagazineWithRecord(this.subscriptionSelected.magazineRecord)
       .subscribe((data: Magazine)=>{
         if(data != null){
+          this.viewProfile = false;
           this.magazine = data;
           this.getMagazineComments();
           this.getSubscriptionLikesCount();
+          this.getEditorProfile();
           this.fileView = this.magazine.file;
           console.log(this.magazine)
         } else {
@@ -210,5 +218,18 @@ export class MySubscriptionsComponent implements OnInit {
           }
         })
     }
+  }
+
+  private getEditorProfile() {
+    this.profileService.getProfile(new User(this.magazine.editorName, "", UserType.EDITOR))
+        .subscribe((data: Profile)=>{
+          if(data != null){
+            this.editorProfile = data;
+          }
+        })
+  }
+
+  setProfileVisibility(b: boolean) {
+    this.viewProfile = b;
   }
 }

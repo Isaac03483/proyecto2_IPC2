@@ -9,16 +9,138 @@
     <input type="date" class="form-control" id="endDate" formControlName="endDate"><br>
     <strong><label for="reportType">TIPO DE REPORTE</label></strong>
     <select formControlName="reportType" id="reportType" class="form-control">
-      <option [ngValue]="null">SELECCIONE EL TIPO DE REPORTE.</option>
+      <option [ngValue]="null" (click)="resetReport()">SELECCIONE EL TIPO DE REPORTE.</option>
       <option value="comments" (click)="getReport(2)">REPORTE DE LAS 5 REVISTAS MÁS COMENTADAS</option>
       <option value="subscriptions" (click)="getReport(2)">REPORTE DE LAS 5 REVISTAS MÁS POPULARES</option>
       <option value="gains" (click)="getReport(2)">REPORTE DE GANANCIAS POR REVISTA</option>
     </select>
   </form>
 </div>
-<br><br>
-<div *ngIf="reportViewer">
+<br>
+<div class="d-grid gap-2" *ngIf="!getExportReport">
+  <button type="button" [disabled]="reportType === ''" class="btn btn-outline-dark btn-lg" (click)="exportReport()">EXPORTAR REPORTE</button>
+</div>
+<br>
+<div *ngIf="!getExportReport">
+  <div *ngIf="reportType === 'comments'">
+    <div class="table-style">
+      <table class="table table-striped" *ngFor="let commentList of reportList">
+        <thead>
+        <tr>
+          <th scope="col">
+            REGISTRO DE LA REVISTA: {{commentList.magazineRecord}}<br>
+            CANTIDAD DE COMENTARIOS: {{commentList.count}}
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <div class="table-style">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">REGISTRO DEL COMENTARIO</th>
+              <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+              <th scope="col">FECHA</th>
+              <th scope="col">CONTENIDO</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let comments of commentList.commentList">
+              <td>{{comments.commentRecord}}</td>
+              <td>{{comments.subscriberName}}</td>
+              <td>{{getFormat(comments.commentDate)}}</td>
+              <td>{{comments.text}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="reportType === 'subscriptions'">
+    <div class="table-style">
+      <table class="table table-striped" *ngFor="let subscriptionsArray of reportList">
+        <thead>
+        <tr>
+          <th scope="col">
+            REGISTRO DE LA REVISTA: {{subscriptionsArray.magazineRecord}}<br>
+            CANTIDAD TOTAL DE SUSCRIPCIONES: {{subscriptionsArray.count}}
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <div class="table-style">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">REGISTRO DE LA SUSCRIPCIÓN</th>
+              <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+              <th scope="col">FECHA DEL PAGO</th>
+              <th scope="col">INTERVALO DE PAGO</th>
+              <th scope="col">PAGO TOTAL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let subscription of subscriptionsArray.subscriptionList">
+              <td>{{subscription.subscriptionRecord}}</td>
+              <td>{{subscription.subscriberName}}</td>
+              <td>{{getFormat(subscription.recordDate)}}</td>
+              <td>{{subscription.paymentInterval}}</td>
+              <td>{{subscription.totalPay}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="reportType === 'gains'">
+    <div class="table-style" *ngFor="let list of reportList">
+      <label>GANANCIAS TOTALES: {{list.total}}</label>
+      <table class="table table-striped" *ngFor="let gainsList of list.otherMagazineBeans">
+        <thead>
+        <tr>
+          <th scope="col">
+            REGISTRO DE LA REVISTA: {{gainsList.magazineRecord}}<br>
+            COSTO POR DIA: {{gainsList.dayCost}}<br>
+            PERDIDA GENERADA POR EL TOTAL DE DIAS: {{gainsList.totalDayCost}}<br>
+            GANANCIA GENERADA POR LA REVISTA: {{gainsList.gananciaTotal}}
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <div class="table-style">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">REGISTRO DEL PAGO</th>
+              <th scope="col">NOMBRE DEL SUSCRIPTOR</th>
+              <th scope="col">FECHA DEL PAGO</th>
+              <th scope="col">PAGO</th>
+              <th scope="col">CANTIDAD GANADA (ADMINISTRADOR)</th>
+              <th scope="col">CANTIDAD GANADA (EDITOR)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let subscription of gainsList.subscriptionList">
+              <td>{{subscription.accountRecord}}</td>
+              <td>{{subscription.subscriberName}}</td>
+              <td>{{getFormat(subscription.payDate)}}</td>
+              <td>{{subscription.totalPay}}</td>
+              <td>{{subscription.descuento}}</td>
+              <td>{{subscription.ganancia}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        </tbody>
+      </table>
+    </div>
+  </div>-
+</div>
+<div *ngIf="getExportReport" class ="report-pdf-viewer">
   <ngx-extended-pdf-viewer [src]="reportViewer"></ngx-extended-pdf-viewer>
 </div>
-
 <br><br>

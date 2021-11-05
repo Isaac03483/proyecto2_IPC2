@@ -4,7 +4,7 @@
   <div>
     <form [formGroup]="subscriptionForm" (submit)="addSubscription()">
       <div>
-        <label for="payInterval">INTERVALO DE PAGO:</label>
+        <label for="payInterval">INTERVALO DE PAGO: (ANUAL CON DESCUENTO DE 15%)</label>
         <select id="payInterval" class="form-control" formControlName="intervalOption">
           <option *ngFor="let interval of payInterval | keyvalue" [ngValue]="interval.key">{{interval.value}}</option>
         </select>
@@ -25,7 +25,7 @@
         <input type="text" readonly [value]="endDate" id="endDate" class="form-control">
       </div>
       <div>
-        <label>EL COSTO TOTAL A PAGAR ES DE: {{this.magazine.subscriptionCost * this.subscriptionForm.value.time}}</label>
+        <label>EL COSTO TOTAL A PAGAR ES DE: {{totalPay}}</label>
       </div>
       <hr class="mb-4">
       <div class="d-grid gap-2">
